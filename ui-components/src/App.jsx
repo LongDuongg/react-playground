@@ -1,5 +1,5 @@
-import MenuDropdown from "./components/menu-dropdown/menu-dropdown";
-import "./App.css";
+import { MenuDropdown } from "./components/menu-dropdown/menu-dropdown";
+import "./App.scss";
 
 function App() {
   return (
