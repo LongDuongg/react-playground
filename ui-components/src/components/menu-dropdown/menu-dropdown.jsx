@@ -1,26 +1,17 @@
 import React, { useRef, useState } from "react";
 import "./menu-dropdown.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAngleDown,
-  faAngleUp,
-  faPenToSquare,
-  faClone,
-  faBoxArchive,
-  faArrowUpRightFromSquare,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
 
 export const MenuDropdown = () => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
-  window.addEventListener("click", (e) => {
-    // if (e.target !== menuRef.current) {
-    //   setShow(false);
-    // }
-    console.log(e.target === menuRef.current);
-  });
+  // TODO : close on clicking outside
+  // window.addEventListener("click", (e) => {
+  // if (e.target !== menuRef.current) {
+  //   setShow(false);
+  // }
+  // console.log(e.target === menuRef.current);
+  // });
 
   return (
     <div className="menu-dropdown-lkj">
@@ -47,7 +38,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <FontAwesomeIcon className="edit-bnm" icon={faPenToSquare} />
+              <i class="fa-regular fa-pen-to-square"></i>
               Edit
             </li>
 
@@ -56,7 +47,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <FontAwesomeIcon className="duplicate-aaa" icon={faClone} />
+              <i class="fa-regular fa-clone"></i>
               Duplicate
             </li>
 
@@ -65,7 +56,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <FontAwesomeIcon className="archive-bbb" icon={faBoxArchive} />
+              <i class="fa-regular fa-box-archive"></i>
               Archive
             </li>
 
@@ -74,10 +65,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <FontAwesomeIcon
-                className="move-ccc"
-                icon={faArrowUpRightFromSquare}
-              />
+              <i class="fa-regular fa-arrow-up-right-from-square"></i>
               Move
             </li>
 
@@ -86,7 +74,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <FontAwesomeIcon className="delete-ddd" icon={faTrash} />
+              <i class="fa-regular fa-trash"></i>
               Delete
             </li>
           </ul>
