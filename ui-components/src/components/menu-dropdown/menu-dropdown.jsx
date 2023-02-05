@@ -16,7 +16,7 @@ export const MenuDropdown = () => {
   return (
     <div className="menu-dropdown-lkj">
       <button
-        className="options-btn-hjk"
+        className="options-btn"
         onClick={() => {
           setShow(!show);
         }}
@@ -31,7 +31,7 @@ export const MenuDropdown = () => {
         </div>
       </button>
       {show && (
-        <div ref={menuRef} className="options-value-ghf">
+        <div ref={menuRef} className="options-value">
           <ul>
             <li
               onClick={() => {

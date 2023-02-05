@@ -1,5 +1,5 @@
 .menu-dropdown-lkj {
-  & > .options-btn-hjk {
+  & > .options-btn {
     background-color: #7630e6;
     color: #fff;
     font-weight: bold;
@@ -13,7 +13,7 @@
 
     & > .icon {
       display: inline-block;
-      margin-left: 5px;
+      margin-left: 10px;
       i {
         font-size: 16px;
       }
@@ -24,7 +24,7 @@
     }
   }
 
-  & > .options-value-ghf {
+  & > .options-value {
     background-color: #f242f5;
     margin-left: 400px;
     width: 25.6%;
