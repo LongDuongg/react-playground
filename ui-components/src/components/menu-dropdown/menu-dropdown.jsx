@@ -31,11 +31,13 @@ export const MenuDropdown = () => {
         }}
       >
         Options
-        {show ? (
-          <FontAwesomeIcon className="arrow-down-bnm" icon={faAngleUp} />
-        ) : (
-          <FontAwesomeIcon className="arrow-down-bnm" icon={faAngleDown} />
-        )}
+        <div className="icon">
+          {show ? (
+            <i className="fa-solid fa-angle-up"></i>
+          ) : (
+            <i className="fa-solid fa-angle-down"></i>
+          )}
+        </div>
       </button>
       {show && (
         <div ref={menuRef} className="options-value-ghf">
