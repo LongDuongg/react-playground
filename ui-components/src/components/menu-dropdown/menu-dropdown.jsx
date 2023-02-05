@@ -15,71 +15,68 @@ export const MenuDropdown = () => {
 
   return (
     <div className="menu-dropdown-lkj">
-      <button
-        className="options-btn"
-        onClick={() => {
-          setShow(!show);
-        }}
-      >
-        Options
-        <div className="icon">
-          {show ? (
-            <i className="fa-solid fa-angle-up"></i>
-          ) : (
-            <i className="fa-solid fa-angle-down"></i>
-          )}
-        </div>
-      </button>
+      <div className="toggle">
+        <button
+          className="options-btn"
+          onClick={() => {
+            setShow(!show);
+          }}
+        >
+          Options
+          <div className="icon">
+            {show ? (
+              <i className="fa-solid fa-angle-up"></i>
+            ) : (
+              <i className="fa-solid fa-angle-down"></i>
+            )}
+          </div>
+        </button>
+      </div>
+
       {show && (
-        <div ref={menuRef} className="options-value">
-          <ul>
-            <li
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <i class="fa-regular fa-pen-to-square icons"></i>
-              Edit
-            </li>
-
-            <li
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <i class="fa-regular fa-clone icons"></i>
-              Duplicate
-            </li>
-
-            <li
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <i class="fa-regular fa-box-archive icons"></i>
-              Archive
-            </li>
-
-            <li
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <i class="fa-regular fa-arrow-up-right-from-square icons"></i>
-              Move
-            </li>
-
-            <li
-              onClick={() => {
-                setShow(!show);
-              }}
-            >
-              <i class="fa-regular fa-trash icons"></i>
-              Delete
-            </li>
-          </ul>
+        <div className="expand">
+          <div ref={menuRef} className="options-value">
+            {options.map((option, i) => {
+              return (
+                <div
+                  key={i}
+                  className="option"
+                  onClick={() => {
+                    setShow(!show);
+                    alert(option.text);
+                  }}
+                >
+                  <i className={option.iconClass} />
+                  {option.text}
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
   );
 };
+
+const options = [
+  {
+    iconClass: "fa-regular fa-pen-to-square",
+    text: "Edit",
+  },
+  {
+    iconClass: "fa-regular fa-clone",
+    text: "Duplicate",
+  },
+  {
+    iconClass: "fa-regular fa-box-archive",
+    text: "Archive",
+  },
+  {
+    iconClass: "fa-regular fa-arrow-up-right-from-square",
+    text: "Move",
+  },
+  {
+    iconClass: "fa-regular fa-trash",
+    text: "Delete",
+  },
+];

@@ -1,10 +1,10 @@
-import { MenuDropdown } from "./components/menu-dropdown/menu-dropdown";
 import "./App.scss";
+import Samples from "./components/samples";
 
 function App() {
   return (
     <div className="App">
-      <MenuDropdown />
+      <Samples />
     </div>
   );
 }
