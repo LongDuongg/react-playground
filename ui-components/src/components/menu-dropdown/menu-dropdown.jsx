@@ -38,7 +38,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <i class="fa-regular fa-pen-to-square"></i>
+              <i class="fa-regular fa-pen-to-square icons"></i>
               Edit
             </li>
 
@@ -47,7 +47,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <i class="fa-regular fa-clone"></i>
+              <i class="fa-regular fa-clone icons"></i>
               Duplicate
             </li>
 
@@ -56,7 +56,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <i class="fa-regular fa-box-archive"></i>
+              <i class="fa-regular fa-box-archive icons"></i>
               Archive
             </li>
 
@@ -65,7 +65,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <i class="fa-regular fa-arrow-up-right-from-square"></i>
+              <i class="fa-regular fa-arrow-up-right-from-square icons"></i>
               Move
             </li>
 
@@ -74,7 +74,7 @@ export const MenuDropdown = () => {
                 setShow(!show);
               }}
             >
-              <i class="fa-regular fa-trash"></i>
+              <i class="fa-regular fa-trash icons"></i>
               Delete
             </li>
           </ul>

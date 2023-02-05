@@ -42,13 +42,10 @@
         margin: 0px 10px;
         padding: 15px 15px;
 
-        & > .edit-bnm,
-        .duplicate-aaa,
-        .archive-bbb,
-        .move-ccc,
-        .delete-ddd {
+        & > .icons {
           margin-right: 10px;
           color: #7630e6;
+          font-weight: bold;
         }
 
         &:hover {
