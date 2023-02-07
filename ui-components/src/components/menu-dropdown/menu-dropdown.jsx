@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./menu-dropdown.scss";
 
-export const MenuDropdown = () => {
+export const MenuDropdown = ({options}) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
@@ -22,7 +22,7 @@ export const MenuDropdown = () => {
             setShow(!show);
           }}
         >
-          Options
+          {options.title}
           <div className="icon">
             {show ? (
               <i className="fa-solid fa-angle-up"></i>
@@ -36,7 +36,7 @@ export const MenuDropdown = () => {
       {show && (
         <div className="expand">
           <div ref={menuRef} className="options-value">
-            {options.map((option, i) => {
+            {options.subOptions.map((option, i) => {
               return (
                 <div
                   key={i}
@@ -58,25 +58,4 @@ export const MenuDropdown = () => {
   );
 };
 
-const options = [
-  {
-    iconClass: "fa-regular fa-pen-to-square",
-    text: "Edit",
-  },
-  {
-    iconClass: "fa-regular fa-clone",
-    text: "Duplicate",
-  },
-  {
-    iconClass: "fa-regular fa-box-archive",
-    text: "Archive",
-  },
-  {
-    iconClass: "fa-regular fa-arrow-up-right-from-square",
-    text: "Move",
-  },
-  {
-    iconClass: "fa-regular fa-trash",
-    text: "Delete",
-  },
-];
+

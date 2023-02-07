@@ -1,3 +1,4 @@
+import { options, profile, more } from "../api/sample-data";
 import { MenuDropdown } from "./menu-dropdown/menu-dropdown";
 import "./samples.scss";
 
@@ -6,16 +7,16 @@ export default function Samples() {
     <div className="samples-90f">
       <div className="test-menu-dropdown">
         <MenuDropdown
-        // options={}
+         options={profile}
+         />
+        <MenuDropdown
+         options={more}
         />
         <MenuDropdown
-        // options={}
-        />
-        <MenuDropdown
-        // options={}
+         options={options}
         />
       </div>
-      <div className="">abc</div>
+      {/* <div className="">abc</div> */}
     </div>
   );
 }
