@@ -32,7 +32,7 @@
     top: calc(100% + 10px);
     right: 0;
 
-    width: 300px;
+    width: 250px;
 
     & > .options-value {
       background-color: #f242f5;
@@ -40,22 +40,22 @@
       padding: 10px;
 
       & > .option {
-          cursor: pointer;
-          color: #fff;
-          font-size: 17px;
-          border-radius: 10px;
-          padding: 15px 15px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 17px;
+        border-radius: 10px;
+        padding: 15px 15px;
 
-          & > i {
-            margin-right: 10px;
-            color: #7630e6;
-            font-weight: bold;
-          }
-
-          &:hover {
-            background-color: #5e27b8;
-          }
+        & > i {
+          margin-right: 10px;
+          color: #7630e6;
+          font-weight: bold;
         }
+
+        &:hover {
+          background-color: #5e27b8;
+        }
+      }
     }
   }
 }
