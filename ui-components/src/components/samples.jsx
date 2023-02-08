@@ -1,5 +1,5 @@
-import { options, profile, more } from "../api/sample-data";
-import { MenuDropdown } from "./menu-dropdown/menu-dropdown";
+import { MoreMenu } from "./menu-dropdown/more-menu";
+import { OptionsMenu } from "./menu-dropdown/options-menu";
 import ProfileMenu from "./menu-dropdown/profile-menu";
 import "./samples.scss";
 
@@ -8,14 +8,9 @@ export default function Samples() {
     <div className="samples-90f">
       <div className="test-menu-dropdown">
         <ProfileMenu />
-        {/* <MenuDropdown
-         options={more}
-        />
-        <MenuDropdown
-         options={options}
-        /> */}
+        <OptionsMenu/>
+        <MoreMenu/>
       </div>
-      {/* <div className="">abc</div> */}
     </div>
   );
 }
