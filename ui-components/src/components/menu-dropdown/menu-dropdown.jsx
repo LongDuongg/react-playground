@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "./menu-dropdown.scss";
 
-export const MenuDropdown = ({options}) => {
+export const MenuDropdown = ({ title, options }) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
@@ -22,7 +22,7 @@ export const MenuDropdown = ({options}) => {
             setShow(!show);
           }}
         >
-          {options.title}
+          {title}
           <div className="icon">
             {show ? (
               <i className="fa-solid fa-angle-up"></i>
@@ -36,7 +36,7 @@ export const MenuDropdown = ({options}) => {
       {show && (
         <div className="expand">
           <div ref={menuRef} className="options-value">
-            {options.subOptions.map((option, i) => {
+            {options.map((option, i) => {
               return (
                 <div
                   key={i}
