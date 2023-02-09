@@ -8,8 +8,8 @@ export const MenuDropdown = ({ title, options }) => {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!menuRef.current.contains(e.target)) {
-        setShow(show);
-        console.log("Click outside");
+        setShow(false);
+        // console.log("Click outside");
       }
     };
 
