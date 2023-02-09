@@ -1,20 +1,27 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./menu-dropdown.scss";
 
 export const MenuDropdown = ({ title, options }) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
-  // TODO : close on clicking outside
-  // window.addEventListener("click", (e) => {
-  // if (e.target !== menuRef.current) {
-  //   setShow(false);
-  // }
-  // console.log(e.target === menuRef.current);
-  // });
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setShow(show);
+        console.log("Click outside");
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-    <div className="menu-dropdown-lkj">
+    <div ref={menuRef} className="menu-dropdown-lkj">
       <div className="toggle">
         <button
           className="options-btn"
@@ -35,7 +42,7 @@ export const MenuDropdown = ({ title, options }) => {
 
       {show && (
         <div className="expand">
-          <div ref={menuRef} className="options-value">
+          <div className="options-value">
             {options.map((option, i) => {
               return (
                 <div
@@ -57,5 +64,3 @@ export const MenuDropdown = ({ title, options }) => {
     </div>
   );
 };
-
-

@@ -8,8 +8,8 @@ export default function Samples() {
     <div className="samples-90f">
       <div className="test-menu-dropdown">
         <ProfileMenu />
-        <OptionsMenu/>
-        <MoreMenu/>
+        {/* <OptionsMenu />
+        <MoreMenu /> */}
       </div>
     </div>
   );
