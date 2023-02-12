@@ -9,6 +9,7 @@ export default function Counter() {
     const handleClickOutside = (e) => {
       if (!ref.current.contains(e.target)) {
         setCount(count - 1);
+        // console.log(`Count : ${count}`);
       }
     };
 
@@ -17,7 +18,7 @@ export default function Counter() {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [count]);
 
   return (
     <div
