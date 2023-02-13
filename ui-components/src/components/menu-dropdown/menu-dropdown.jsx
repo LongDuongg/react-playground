@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useClickOutside } from "../useClickOutside/useClickOutside";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import "./menu-dropdown.scss";
 
 export const MenuDropdown = ({ title, options }) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
-  useClickOutside(menuRef, () => setShow(false));
+  useClickOutside({ ref: menuRef, handler: () => setShow(false) });
 
   return (
     <div ref={menuRef} className="menu-dropdown-lkj">

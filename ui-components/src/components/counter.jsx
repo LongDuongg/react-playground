@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useClickOutside } from "./useClickOutside/useClickOutside";
+import { useClickOutside } from "../hooks/useClickOutside";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
@@ -22,7 +22,8 @@ export default function Counter() {
 
   // }, [count]);
 
-  useClickOutside(ref, () => setCount(count - 1));
+  useClickOutside({ ref, handler: () => setCount(count - 1) });
+
   return (
     <div
       className=""
