@@ -1,25 +1,28 @@
 import { useState, useRef, useEffect } from "react";
+import { useClickOutside } from "./useClickOutside/useClickOutside";
 
 export default function Counter() {
   const [count, setCount] = useState(0);
 
   const ref = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!ref.current.contains(e.target)) {
-        setCount(count - 1);
-        // console.log(`Count : ${count}`);
-      }
-    };
+  // useEffect(() => {
+  // const handleClickOutside = (e) => {
+  //   if (!ref.current.contains(e.target)) {
+  //     setCount(count - 1);
+  //     // console.log(`Count : ${count}`);
+  //   }
+  // };
 
-    document.addEventListener("mousedown", handleClickOutside);
+  // document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [count]);
+  // return () => {
+  //   document.removeEventListener("mousedown", handleClickOutside);
+  // };
 
+  // }, [count]);
+
+  useClickOutside(ref, () => setCount(count - 1));
   return (
     <div
       className=""

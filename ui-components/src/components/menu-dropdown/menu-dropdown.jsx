@@ -1,46 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useClickOutside } from "../useClickOutside/useClickOutside";
 import "./menu-dropdown.scss";
 
 export const MenuDropdown = ({ title, options }) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      // if (menuRef.current.contains(e.target)) {
-      //   // setShow(false);
-      //   // console.log("Click inside");
-      //   // console.log(menuRef.current);
-      //   console.log(e);
-      // }
-      // if (
-      //   !menuRef.current.contains(e.target) &&
-      //   e.target.localName !== "button" &&
-      //   e.target.className !== "icon"
-      // ) {
-      //   // setShow(false);
-      //   console.log("Click outside");
-      //   // console.log(menuRef.current);
-      //   // console.log(e);
-      // }
-      if (
-        !menuRef.current.contains(e.target) &&
-        e.target.className !== "options-btn" &&
-        e.target.localName !== "i"
-      ) {
-        setShow(false);
-        console.log("Click outside");
-        // console.log(menuRef.current);
-        // console.log(e);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  useClickOutside(menuRef, () => setShow(false));
 
   return (
     <div ref={menuRef} className="menu-dropdown-lkj">
