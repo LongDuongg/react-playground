@@ -7,9 +7,31 @@ export const MenuDropdown = ({ title, options }) => {
 
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      // if (menuRef.current.contains(e.target)) {
+      //   // setShow(false);
+      //   // console.log("Click inside");
+      //   // console.log(menuRef.current);
+      //   console.log(e);
+      // }
+      // if (
+      //   !menuRef.current.contains(e.target) &&
+      //   e.target.localName !== "button" &&
+      //   e.target.className !== "icon"
+      // ) {
+      //   // setShow(false);
+      //   console.log("Click outside");
+      //   // console.log(menuRef.current);
+      //   // console.log(e);
+      // }
+      if (
+        !menuRef.current.contains(e.target) &&
+        e.target.className !== "options-btn" &&
+        e.target.localName !== "i"
+      ) {
         setShow(false);
-        // console.log("Click outside");
+        console.log("Click outside");
+        // console.log(menuRef.current);
+        // console.log(e);
       }
     };
 
