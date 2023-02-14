@@ -2,13 +2,13 @@ import React, { useRef, useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import "./listbox.scss";
 
-export const Listbox = () => {
+export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
   const [show, setShow] = useState();
-  const [check, setCheck] = useState();
-  const [value, setValue] = useState(people[0].name);
   const listboxRef = useRef();
 
   useClickOutside({ ref: listboxRef, handler: () => setShow(false) });
+
+  const selected = list.find((item) => isSelected(item));
 
   return (
     <div ref={listboxRef} className="listbox-select-asd">
@@ -19,7 +19,7 @@ export const Listbox = () => {
           }}
           className="options-btn"
         >
-          {value}
+          {selected && getLabel(selected)}
           <i className="fa-solid fa-list icon"></i>
         </button>
       </div>
@@ -27,18 +27,20 @@ export const Listbox = () => {
       {show && (
         <div className="expand">
           <div className="options-value">
-            {people.map((person) => {
+            {list.map((item, i) => {
               return (
                 <div
-                  key={person.id}
+                  key={i}
                   className="option"
                   onClick={() => {
                     setShow(!show);
-                    setValue(person.name);
+                    onChange(item);
                   }}
                 >
-                  <i className="fa-solid fa-check check-icon"></i>
-                  {person.name}
+                  {isSelected(item) && (
+                    <i className="fa-solid fa-check check-icon"></i>
+                  )}
+                  {getLabel(item)}
                 </div>
               );
             })}
@@ -49,13 +51,3 @@ export const Listbox = () => {
   );
 };
 
-//
-
-const people = [
-  { id: 1, name: "Wade Cooper", selected: false },
-  { id: 2, name: "Kenton Towne", selected: false },
-  { id: 3, name: "Therese Wunsch", selected: false },
-  { id: 4, name: "Benedict Kessler", selected: false },
-  { id: 5, name: "Katelyn Rohan", selected: false },
-  { id: 6, name: "Durward Reynolds", selected: true },
-];
