@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 export default function Counter() {
