@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
-import "./Listbox-Select.scss";
+import "./listbox.scss";
 
 export const ListboxSelect = () => {
   const [show, setShow] = useState();

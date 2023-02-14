@@ -1,5 +1,5 @@
 import Counter from "./counter";
-import { ListboxSelect } from "./Listbox-Select/Listbox-Select";
+import { ListboxSelect } from "./listbox/listbox";
 import { MoreMenu } from "./menu-dropdown/more-menu";
 import { OptionsMenu } from "./menu-dropdown/options-menu";
 import ProfileMenu from "./menu-dropdown/profile-menu";
