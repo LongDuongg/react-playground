@@ -1,13 +1,15 @@
 .samples-90f {
-  .test-menu-dropdown {
-    padding-left: 130px;
-    padding-top: 50px;
+  .line {
     display: flex;
     justify-content: space-between;
   }
 
-  .test-listbox-select {
-    display: flex;
+  .menu-dropdown {
+    padding-left: 130px;
+    padding-top: 50px;  
+  }
+
+  .listbox-select {
     justify-content: center;
     padding-top: 100px;
 

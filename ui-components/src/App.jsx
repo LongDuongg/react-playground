@@ -1,5 +1,5 @@
 import "./App.scss";
-import Samples from "./components/samples";
+import Samples from "./pages/samples";
 
 function App() {
   return (
