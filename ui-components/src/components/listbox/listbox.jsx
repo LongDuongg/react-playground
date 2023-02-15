@@ -37,9 +37,13 @@ export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
                     onChange(item);
                   }}
                 >
-                  {isSelected(item) && (
-                    <i className="fa-solid fa-check check-icon"></i>
-                  )}
+                  <i
+                    className="fa-solid fa-check "
+                    style={{
+                      visibility: `${isSelected(item) ? "visible" : "hidden"}`,
+                      paddingRight: "12px",
+                    }}
+                  ></i>
                   {getLabel(item)}
                 </div>
               );
@@ -50,4 +54,4 @@ export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
     </div>
   );
 };
-
+//

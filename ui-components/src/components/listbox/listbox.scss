@@ -1,6 +1,5 @@
 .listbox-select-asd {
     position: relative;
-    
     width: max-content;
 
     &>.toggle {
@@ -31,23 +30,18 @@
             border-radius: 14px;
             background-color: #0e0b5e;
             padding: 13px 17px 13px 17px;
+
             &>.option {
                 font-size: 17px;
                 color: #fff;
                 padding: 12px 10px;
                 cursor: pointer;
-                
+
                 &:hover {
                     border-radius: 14px;
                     background-color:#3734a0
                 }
-
-                &>.check-icon {
-                    margin-right: 12px;
-                    // visibility: hidden;
-                }
             }
-
         }
     }
 }
