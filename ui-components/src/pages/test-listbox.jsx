@@ -9,29 +9,33 @@ export default function TestListbox() {
 
   return (
     <>
-      <Listbox
-        list={[
-          { name: "Wade Cooper" },
-          { name: "Kenton Towne" },
-          { name: "Therese Wunsch" },
-          { name: "Benedict Kessler" },
-          { name: "Katelyn Rohan" },
-          { name: "Durward Reynolds" },
-        ]}
-        getLabel={(item) => item.name}
-        onChange={(item) => setState({ ...state, name: item.name })}
-        isSelected={(item) => item.name === state.name}
-      />
+      <div className="" style={{ width: 200 }}>
+        <Listbox
+          list={[
+            { name: "Wade Cooper" },
+            { name: "Kenton Towne" },
+            { name: "Therese Wunsch" },
+            { name: "Benedict Kessler" },
+            { name: "Katelyn Rohan" },
+            { name: "Durward Reynolds Durward Reynolds" },
+          ]}
+          getLabel={(item) => item.name}
+          onChange={(item) => setState({ ...state, name: item.name })}
+          isSelected={(item) => item.name === state.name}
+        />
+      </div>
 
-      <Listbox
-        list={[
-          { value: 0, label: "Female" },
-          { value: 1, label: "Male" },
-        ]}
-        getLabel={(item) => item.label}
-        onChange={(item) => setState({ ...state, gender: item.value })}
-        isSelected={(item) => item.value === state.gender}
-      />
+      <div className="" style={{ width: 200 }}>
+        <Listbox
+          list={[
+            { value: 0, label: "Female" },
+            { value: 1, label: "Male" },
+          ]}
+          getLabel={(item) => item.label}
+          onChange={(item) => setState({ ...state, gender: item.value })}
+          isSelected={(item) => item.value === state.gender}
+        />
+      </div>
     </>
   );
 }

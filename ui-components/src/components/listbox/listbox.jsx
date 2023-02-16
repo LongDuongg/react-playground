@@ -13,15 +13,15 @@ export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
   return (
     <div ref={listboxRef} className="listbox-select-asd">
       <div className="toggle">
-        <button
+        <div
           onClick={() => {
             setShow(!show);
           }}
           className="options-btn"
         >
           {selected && getLabel(selected)}
-          <i className="fa-solid fa-list icon"></i>
-        </button>
+          {/* <i className="fa-solid fa-list icon"></i> */}
+        </div>
       </div>
 
       {show && (

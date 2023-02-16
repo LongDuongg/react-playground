@@ -1,10 +1,12 @@
 .listbox-select-asd {
     position: relative;
-    width: max-content;
+    width: 100%;
 
     &>.toggle {
+      width: 100%;
         
         &>.options-btn{
+            width: 100%;
             cursor: pointer;
             padding: 13px 17px 13px 17px;
             border: none;
@@ -13,10 +15,10 @@
             color: #fff;
             background-color: #0e0b5e;
 
-            &>.icon {
-                display: inline-block;
-                margin-left: 150px;
-            }
+            // &>.icon {
+            //     display: inline-block;
+            //     margin-left: 150px;
+            // }
         }
 
     }
