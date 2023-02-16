@@ -34,12 +34,19 @@
             &>.option {
                 font-size: 17px;
                 color: #fff;
-                padding: 12px 10px;
+                padding: 12px 10px 12px 30px;
                 cursor: pointer;
+                position: relative;
 
                 &:hover {
                     border-radius: 14px;
                     background-color:#3734a0
+                }
+
+                & > i {
+                  position: absolute;
+                  top: 13px;
+                  left: 5px;
                 }
             }
         }
