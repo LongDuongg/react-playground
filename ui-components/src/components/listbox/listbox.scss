@@ -14,11 +14,13 @@
             font-size: 17px;
             color: #fff;
             background-color: #0e0b5e;
+            position: relative;
 
-            // &>.icon {
-            //     display: inline-block;
-            //     margin-left: 150px;
-            // }
+            &>.icon {
+                position: absolute;
+                top: 14px;
+                right: 19px;
+            }
         }
 
     }

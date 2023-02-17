@@ -20,7 +20,7 @@ export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
           className="options-btn"
         >
           {selected && getLabel(selected)}
-          {/* <i className="fa-solid fa-list icon"></i> */}
+          <i className="fa-solid fa-list icon"></i>
         </div>
       </div>
 

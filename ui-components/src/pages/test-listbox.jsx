@@ -9,7 +9,7 @@ export default function TestListbox() {
 
   return (
     <>
-      <div className="" style={{ width: 200 }}>
+      <div className="" style={{ width: 304 }}>
         <Listbox
           list={[
             { name: "Wade Cooper" },
@@ -25,7 +25,7 @@ export default function TestListbox() {
         />
       </div>
 
-      <div className="" style={{ width: 200 }}>
+      <div className="" style={{ width: 304 }}>
         <Listbox
           list={[
             { value: 0, label: "Female" },
