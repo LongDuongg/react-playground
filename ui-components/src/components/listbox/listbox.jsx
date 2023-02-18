@@ -32,7 +32,7 @@ export const Listbox = ({ list, getLabel, onChange, isSelected }) => {
           className="options-btn"
         >
           {/* {selected && truncateTextWithEllipsis(getLabel(item), 16)} */}
-          {selected && getLabel(selected)}
+          {selected ? getLabel(selected) : "Choose something..."}
           <i className="fa-solid fa-list icon"></i>
         </div>
       </div>
