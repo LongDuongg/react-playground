@@ -15,6 +15,9 @@
             color: #fff;
             background-color: #0e0b5e;
             position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
             &>.icon {
                 position: absolute;
@@ -34,13 +37,16 @@
             border-radius: 14px;
             background-color: #0e0b5e;
             padding: 13px 0px;
-
+            
             &>.option {
                 font-size: 17px;
                 color: #fff;
                 padding: 12px 10px 12px 41px;
                 cursor: pointer;
                 position: relative;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
 
                 &:hover {
                     background-color:#3734a0
