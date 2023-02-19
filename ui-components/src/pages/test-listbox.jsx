@@ -22,6 +22,7 @@ export default function TestListbox() {
           getLabel={(item) => item.name}
           onChange={(item) => setState({ ...state, name: item.name })}
           isSelected={(item) => item.name === state.name}
+          placeholder="Choose name..."
         />
       </div>
 
@@ -34,6 +35,7 @@ export default function TestListbox() {
           getLabel={(item) => item.label}
           onChange={(item) => setState({ ...state, gender: item.value })}
           isSelected={(item) => item.value === state.gender}
+          placeholder="Choose gender..."
         />
       </div>
     </>
