@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Dropdown from "../dropdown/dropdown";
 import "./listbox.scss";
 
@@ -9,8 +9,6 @@ export const Listbox = ({
   isSelected,
   placeholder = "Choose something...",
 }) => {
-  const [show, setShow] = useState();
-  const listboxRef = useRef();
   const selected = list.find((item) => isSelected(item));
 
   // const truncateTextWithEllipsis = (text, max) => {
@@ -25,15 +23,12 @@ export const Listbox = ({
 
   return (
     <Dropdown
-      showOptions={show}
-      componentName="listbox-select-asd"
-      componentRef={listboxRef}
-      eventListener={() => setShow(false)}
-      renderToggle={() => {
+      className="listbox-select-asd"
+      renderToggle={({ showExpand, expanding }) => {
         return (
           <div
             onClick={() => {
-              setShow(!show);
+              showExpand(!expanding);
               // console.log(
               //   truncateTextWithEllipsis("Durward Reynolds Durward Reynolds", 16)
               // );
@@ -46,7 +41,7 @@ export const Listbox = ({
           </div>
         );
       }}
-      renderExpand={() => {
+      renderExpand={({ close }) => {
         return (
           <div className="options-value">
             {list.map((item, i) => {
@@ -55,7 +50,7 @@ export const Listbox = ({
                   key={i}
                   className="option"
                   onClick={() => {
-                    setShow(!show);
+                    close();
                     onChange(item);
                   }}
                 >

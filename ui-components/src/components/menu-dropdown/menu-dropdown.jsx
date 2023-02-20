@@ -1,28 +1,22 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import Dropdown from "../dropdown/dropdown";
 import "./menu-dropdown.scss";
 
 export const MenuDropdown = ({ title, options }) => {
-  const [show, setShow] = useState();
-  const menuRef = useRef();
-
   return (
     <Dropdown
-      showOptions={show}
-      componentName="menu-dropdown-lkj"
-      componentRef={menuRef}
-      eventListener={() => setShow(false)}
-      renderToggle={() => {
+      className="menu-dropdown-lkj"
+      renderToggle={({ showExpand, expanding }) => {
         return (
           <button
             className="options-btn"
             onClick={() => {
-              setShow(!show);
+              showExpand(!expanding);
             }}
           >
             {title}
             <div className="icon">
-              {show ? (
+              {expanding ? (
                 <i className="fa-solid fa-angle-up"></i>
               ) : (
                 <i className="fa-solid fa-angle-down"></i>
@@ -31,7 +25,7 @@ export const MenuDropdown = ({ title, options }) => {
           </button>
         );
       }}
-      renderExpand={() => {
+      renderExpand={({ close }) => {
         return (
           <div className="options-value">
             {options.map((option, i) => {
@@ -40,7 +34,7 @@ export const MenuDropdown = ({ title, options }) => {
                   key={i}
                   className="option"
                   onClick={() => {
-                    setShow(!show);
+                    close();
                     alert(option.text);
                   }}
                 >

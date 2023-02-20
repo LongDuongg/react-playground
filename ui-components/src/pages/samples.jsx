@@ -13,9 +13,9 @@ export default function Samples() {
         <OptionsMenu />
         <MoreMenu />
       </div>
-      {/* <div className="line listbox">
+      <div className="line listbox">
         <TestListbox />
-      </div> */}
+      </div>
     </div>
   );
 }
