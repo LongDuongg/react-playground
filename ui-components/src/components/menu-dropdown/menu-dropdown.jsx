@@ -1,35 +1,38 @@
 import React, { useRef, useState } from "react";
-import { useClickOutside } from "../../hooks/useClickOutside";
+import Dropdown from "../dropdown/dropdown";
 import "./menu-dropdown.scss";
 
 export const MenuDropdown = ({ title, options }) => {
   const [show, setShow] = useState();
   const menuRef = useRef();
 
-  useClickOutside({ ref: menuRef, handler: () => setShow(false) });
-
   return (
-    <div ref={menuRef} className="menu-dropdown-lkj">
-      <div className="toggle">
-        <button
-          className="options-btn"
-          onClick={() => {
-            setShow(!show);
-          }}
-        >
-          {title}
-          <div className="icon">
-            {show ? (
-              <i className="fa-solid fa-angle-up"></i>
-            ) : (
-              <i className="fa-solid fa-angle-down"></i>
-            )}
-          </div>
-        </button>
-      </div>
-
-      {show && (
-        <div className="expand">
+    <Dropdown
+      showOptions={show}
+      componentName="menu-dropdown-lkj"
+      componentRef={menuRef}
+      eventListener={() => setShow(false)}
+      renderToggle={() => {
+        return (
+          <button
+            className="options-btn"
+            onClick={() => {
+              setShow(!show);
+            }}
+          >
+            {title}
+            <div className="icon">
+              {show ? (
+                <i className="fa-solid fa-angle-up"></i>
+              ) : (
+                <i className="fa-solid fa-angle-down"></i>
+              )}
+            </div>
+          </button>
+        );
+      }}
+      renderExpand={() => {
+        return (
           <div className="options-value">
             {options.map((option, i) => {
               return (
@@ -47,8 +50,8 @@ export const MenuDropdown = ({ title, options }) => {
               );
             })}
           </div>
-        </div>
-      )}
-    </div>
+        );
+      }}
+    />
   );
 };
