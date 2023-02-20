@@ -1,8 +1,18 @@
-export default function Dropdown({ renderToggle, renderExpand }) {
+import { useClickOutside } from "../../hooks/useClickOutside";
+export default function Dropdown({
+  renderToggle,
+  renderExpand,
+  showOptions,
+  componentName,
+  componentRef,
+  eventListener,
+}) {
+  useClickOutside({ ref: componentRef, handler: eventListener });
+
   return (
-    <div className="dropdown-g3y">
-      <div className="toggle">{renderExpand()}</div>
-      <div className="expand">{renderToggle()}</div>
+    <div ref={componentRef} className={componentName}>
+      <div className="toggle">{renderToggle()}</div>
+      {showOptions && <div className="expand">{renderExpand()}</div>}
     </div>
   );
 }
