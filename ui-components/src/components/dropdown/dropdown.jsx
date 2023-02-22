@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useClickOutside } from "../../hooks/useClickOutside";
 import "./dropdown.scss";
-import cn from "classnames";
+import clns from "classnames";
 
 export default function Dropdown({ renderToggle, renderExpand, className }) {
   const [show, setShow] = useState();
@@ -10,7 +10,7 @@ export default function Dropdown({ renderToggle, renderExpand, className }) {
   useClickOutside({ ref, handler: () => setShow(false) });
 
   return (
-    <div ref={ref} className={cn("dropdown-r32", className)}>
+    <div ref={ref} className={clns("dropdown-r32", className)}>
       <div className="toggle">
         {renderToggle({ showExpand: (v) => setShow(v), expanding: show })}
       </div>
