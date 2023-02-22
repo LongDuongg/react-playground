@@ -1,33 +1,63 @@
-@mixin toggle($class) {
-  @if $class == dropdown-r32 menu-dropdown-lkj {
-    width: auto;
-  } @else if $class == dropdown-r32 listbox-select-asd {
-    width: 100%;
-  }
-}
+// @mixin toggle($class) {
+//   @if $class == dropdown-r32 menu-dropdown-lkj {
+//     width: auto;
+//   } @else if $class == dropdown-r32 listbox-select-asd {
+//     width: 100%;
+//   }
+// }
 
-@mixin expand($class) {
-  @if $class == dropdown-r32 menu-dropdown-lkj {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
+// @mixin expand($class) {
+//   @if $class == dropdown-r32 menu-dropdown-lkj {
+//     position: absolute;
+//     top: calc(100% + 10px);
+//     right: 0;
 
-    width: 250px;
-  } @else if $class == dropdown-r32 listbox-select-asd {
-    position: absolute;
-    top: calc(100% + 3px);
-    width: 305px;
-  }
-}
+//     width: 250px;
+//   } @else if $class == dropdown-r32 listbox-select-asd {
+//     position: absolute;
+//     top: calc(100% + 3px);
+//     width: 305px;
+//   }
+// }
 
+
+// .dropdown-r32 {
+//   & > .toggle {
+//     @include toggle(dropdown-r32 menu-dropdown-lkj)
+//   }
+//   & > .expand {
+//     @include expand(dropdown-r32 menu-dropdown-lkj)
+//   }
+// }
 
 .dropdown-r32 {
-  & > .toggle {
-    @include toggle(dropdown-r32 menu-dropdown-lkj)
-  }
-  & > .expand {
-    @include expand(dropdown-r32 menu-dropdown-lkj)
+  &.menu-dropdown-lkj {
+    & > .toggle {
+      
+    }
+    & > .expand {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+  
+      width: 250px;
+    }
+
   }
 }
 
+.dropdown-r32 {
+  &.listbox-select-asd {
+    .toggle {
+      width: 100%;
+    }
+
+    .expand {
+      position: absolute;
+      top: calc(100% + 3px);
+      width: 305px;
+    }
+
+  }
+}
 
