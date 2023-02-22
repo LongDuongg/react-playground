@@ -33,7 +33,7 @@ export const Listbox = ({
               //   truncateTextWithEllipsis("Durward Reynolds Durward Reynolds", 16)
               // );
             }}
-            className="options-btn"
+            className="listbox-btn"
           >
             {/* {selected && truncateTextWithEllipsis(getLabel(item), 16)} */}
             {selected ? getLabel(selected) : placeholder}
@@ -43,7 +43,7 @@ export const Listbox = ({
       }}
       renderExpand={({ close }) => {
         return (
-          <div className="options-value">
+          <div className="listbox-list">
             {list.map((item, i) => {
               return (
                 <div
@@ -63,6 +63,8 @@ export const Listbox = ({
           </div>
         );
       }}
+      expandDistance={3}
+      expandWidth={305}
     />
   );
 };

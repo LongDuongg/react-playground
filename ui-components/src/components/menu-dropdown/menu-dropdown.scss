@@ -1,9 +1,6 @@
 .menu-dropdown-lkj {
-  position: relative;
-  width: max-content;
 
-  // & > .toggle {
-    & > .options-btn {
+  .menu-btn {
       background-color: #7630e6;
       color: #fff;
       font-weight: bold;
@@ -25,16 +22,8 @@
         background-color: #5e27b8;
       }
     }
-  // }
 
-  // & > .expand {
-  //   position: absolute;
-  //   top: calc(100% + 10px);
-  //   right: 0;
-
-  //   width: 250px;
-
-    & > .options-value {
+  .menu-list {
       background-color: #f242f5;
       border-radius: 10px;
       padding: 10px;
@@ -57,5 +46,4 @@
         }
       }
     }
-  // }
 }

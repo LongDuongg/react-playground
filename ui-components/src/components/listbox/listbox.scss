@@ -1,39 +1,27 @@
 .listbox-select-asd {
-    position: relative;
-    width: 100%;
 
-    // &>.toggle {
-    //   width: 100%;
-        
-        &>.options-btn{
-            width: 100%;
-            cursor: pointer;
-            padding: 13px 40px 13px 17px;
-            border: none;
-            border-radius: 14px;
-            font-size: 17px;
-            color: #fff;
-            background-color: #0e0b5e;
-            position: relative;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+    .listbox-btn {
+        width: 100%;
+        cursor: pointer;
+        padding: 13px 40px 13px 17px;
+        border: none;
+        border-radius: 14px;
+        font-size: 17px;
+        color: #fff;
+        background-color: #0e0b5e;
+        position: relative;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
 
-            &>.icon {
-                position: absolute;
-                top: 14px;
-                right: 19px;
-            }
+        &>.icon {
+            position: absolute;
+            top: 14px;
+            right: 19px;
         }
+    }
 
-    // }
-
-    // &>.expand {
-    //     position: absolute;
-    //     top: calc(100% + 3px);
-    //     width: 305px;
-        
-        &>.options-value{
+    .listbox-list {
             border-radius: 14px;
             background-color: #0e0b5e;
             padding: 13px 0px;
@@ -59,5 +47,4 @@
                 }
             }
         }
-    // }
 }

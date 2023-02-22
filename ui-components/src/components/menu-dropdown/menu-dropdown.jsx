@@ -9,7 +9,7 @@ export const MenuDropdown = ({ title, options }) => {
       renderToggle={({ showExpand, expanding }) => {
         return (
           <button
-            className="options-btn"
+            className="menu-btn"
             onClick={() => {
               showExpand(!expanding);
             }}
@@ -27,7 +27,7 @@ export const MenuDropdown = ({ title, options }) => {
       }}
       renderExpand={({ close }) => {
         return (
-          <div className="options-value">
+          <div className="menu-list">
             {options.map((option, i) => {
               return (
                 <div
@@ -46,6 +46,8 @@ export const MenuDropdown = ({ title, options }) => {
           </div>
         );
       }}
+      expandDistance={10}
+      expandWidth={250}
     />
   );
 };

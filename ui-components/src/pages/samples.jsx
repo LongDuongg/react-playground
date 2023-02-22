@@ -8,11 +8,11 @@ import TestListbox from "./test-listbox";
 export default function Samples() {
   return (
     <div className="samples-90f">
-      {/* <div className="line menu-dropdown">
+      <div className="line menu-dropdown">
         <ProfileMenu />
         <OptionsMenu />
         <MoreMenu />
-      </div> */}
+      </div>
       <div className="line listbox">
         <TestListbox />
       </div>
