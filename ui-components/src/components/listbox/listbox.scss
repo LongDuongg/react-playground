@@ -22,29 +22,29 @@
     }
 
     .listbox-list {
-            border-radius: 14px;
-            background-color: #0e0b5e;
-            padding: 13px 0px;
-            
-            &>.option {
-                font-size: 17px;
-                color: #fff;
-                padding: 12px 10px 12px 41px;
-                cursor: pointer;
-                position: relative;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+        border-radius: 14px;
+        background-color: #0e0b5e;
+        padding: 13px 0px;
+        
+        &>.option {
+            font-size: 17px;
+            color: #fff;
+            padding: 12px 10px 12px 41px;
+            cursor: pointer;
+            position: relative;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-                &:hover {
-                    background-color:#3734a0
-                }
+            &:hover {
+                background-color:#3734a0
+            }
 
-                & > i {
-                  position: absolute;
-                  top: 13px;
-                  left: 15px;
-                }
+            & > i {
+                position: absolute;
+                top: 13px;
+                left: 15px;
             }
         }
+    }
 }
