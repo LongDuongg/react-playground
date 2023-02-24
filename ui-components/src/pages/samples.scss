@@ -1,7 +1,8 @@
 .samples-90f {
   .line {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    // justify-content: space-between;
   }
 
   .menu-dropdown {
@@ -10,7 +11,8 @@
   }
 
   .listbox {
-    justify-content: space-around;
+    // justify-content: space-around;
+    // justify-content: center;
 
   }
 }

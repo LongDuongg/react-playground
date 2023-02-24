@@ -1,0 +1,56 @@
+.combobox-b22 {
+  .combobox-input {
+    width: 305px;
+    position: relative;
+    top: 13px;
+    left: 0;
+    padding: 13px 40px 13px 17px;
+    border-radius: 14px;
+    background-color: #0e0b5e;
+    
+    &> input {
+      width: 100%;
+      font-size: 17px;
+      border: none;
+      border-radius: 14px ;
+      background-color: #0e0b5e;
+      color: #fff;
+    }
+
+    &>.icon {
+      position: absolute;
+      top: 15px;
+      right: 4%;
+      color: #fff;
+      cursor: pointer;
+      font-size: 20px;
+    }
+  }
+
+  .combobox-list {
+    border-radius: 14px;
+    background-color: #0e0b5e;
+    padding: 13px 0px;
+
+    &>.option {
+      font-size: 17px;
+      color: #fff;
+      padding: 12px 10px 12px 53px;
+      cursor: pointer;
+      position: relative;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      &:hover {
+        background-color:#3734a0
+      }
+
+      & > i {
+        position: absolute;
+        top: 13px;
+        left: 20px;
+      }
+    }
+  }
+}
