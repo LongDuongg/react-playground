@@ -2,8 +2,15 @@ import React, { useRef } from "react";
 import Dropdown from "../dropdown/dropdown";
 import "./combobox.scss";
 
-export const Combobox = () => {
+export const Combobox = ({
+  list,
+  getLabel,
+  onChange,
+  isSelected,
+  placeholder,
+}) => {
   const inputRef = useRef();
+  const selected = list.find((item) => isSelected(item));
 
   return (
     <Dropdown
@@ -11,7 +18,12 @@ export const Combobox = () => {
       renderToggle={({ showExpand, expanding }) => {
         return (
           <div className="combobox-input">
-            <input ref={inputRef} type="text" placeholder="" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={"" || selected}
+              placeholder=""
+            />
             <i
               className="fa-solid fa-list icon"
               onClick={() => {
@@ -30,12 +42,13 @@ export const Combobox = () => {
                 <div
                   onClick={() => {
                     close();
+                    onChange(item);
                   }}
                   key={index}
                   className="option"
                 >
-                  <i className="fa-solid fa-check " />
-                  {item.name}
+                  {isSelected(item) && <i className="fa-solid fa-check " />}
+                  {getLabel(item)}
                 </div>
               );
             })}
@@ -47,11 +60,3 @@ export const Combobox = () => {
     />
   );
 };
-
-const list = [
-  { name: "Durward Reynolds" },
-  { name: "Kenton Towne" },
-  { name: "Therese Wunsch" },
-  { name: "Benedict Kessler" },
-  { name: "Katelyn Rohan" },
-];
