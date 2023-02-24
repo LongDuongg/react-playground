@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import Dropdown from "../dropdown/dropdown";
 import "./combobox.scss";
 
 export const Combobox = () => {
+  const inputRef = useRef();
+
   return (
     <Dropdown
       className="combobox-b22"
       renderToggle={({ showExpand, expanding }) => {
         return (
           <div className="combobox-input">
-            <input type="text" placeholder="" />
+            <input ref={inputRef} type="text" placeholder="" />
             <i
               className="fa-solid fa-list icon"
               onClick={() => {
                 showExpand(!expanding);
+                inputRef.current.focus();
               }}
             ></i>
           </div>
