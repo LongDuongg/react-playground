@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Dropdown from "../dropdown/dropdown";
 import "./combobox.scss";
 
@@ -11,6 +11,9 @@ export const Combobox = ({
 }) => {
   const inputRef = useRef();
   const selected = list.find((item) => isSelected(item));
+  const [state, setState] = useState({
+    text: "",
+  });
 
   return (
     <Dropdown
@@ -21,7 +24,8 @@ export const Combobox = ({
             <input
               ref={inputRef}
               type="text"
-              value={"" || selected}
+              value={state?.text}
+              onChange={() => {}}
               placeholder=""
             />
             <i
@@ -43,6 +47,7 @@ export const Combobox = ({
                   onClick={() => {
                     close();
                     onChange(item);
+                    setState({ ...state, text: getLabel(item) });
                   }}
                   key={index}
                   className="option"
