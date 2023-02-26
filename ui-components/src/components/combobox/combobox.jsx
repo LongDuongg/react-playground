@@ -15,12 +15,14 @@ export const Combobox = ({
     searchText: "",
     selected: "",
   });
-  const comboboxList =
+
+  const searchedList =
     state.searchText === null
       ? list
       : list.filter((item) =>
           item.name.toLowerCase().includes(state.searchText.toLowerCase())
         );
+
   return (
     <Dropdown
       className="combobox-b22"
@@ -54,7 +56,7 @@ export const Combobox = ({
       renderExpand={({ close }) => {
         return (
           <div className="combobox-list">
-            {comboboxList.map((item, index) => {
+            {searchedList.map((item, index) => {
               return (
                 <div
                   onClick={() => {
