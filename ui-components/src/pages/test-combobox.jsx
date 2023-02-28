@@ -4,6 +4,7 @@ import { Combobox } from "../components/combobox/combobox";
 export const TestCombobox = () => {
   const [state, setState] = useState({
     name: "",
+    selected: "",
   });
 
   return (
