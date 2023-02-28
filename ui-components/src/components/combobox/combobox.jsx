@@ -1,4 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { bindInput } from "../../common/bindInput";
+import { setKey } from "../../common/setKey";
 import Dropdown from "../dropdown/dropdown";
 import "./combobox.scss";
 
@@ -13,8 +15,13 @@ export const Combobox = ({
   const inputRef = useRef();
   const [state, setState] = useState({
     searchText: "",
-    selected: "",
   });
+
+  // useEffect(() => {
+  //   setState({
+  //     searchText: getLabel(selected),
+  //   });
+  // }, [getLabel(selected)]);
 
   const searchedList =
     state.searchText === null
@@ -30,18 +37,17 @@ export const Combobox = ({
         return (
           <div className="combobox-input">
             <input
-              ref={inputRef}
-              type="text"
-              value={state?.searchText || state?.selected}
-              onChange={(e) => {
-                setState({
-                  ...state,
-                  searchText: e.target.value,
-                  selected: "",
-                });
-                showExpand(!expanding);
+              {...{
+                ...bindInput({
+                  value: state?.searchText,
+                  onChange: (v) => {
+                    setState(setKey(state, "searchText", v));
+                    showExpand(!expanding);
+                  },
+                }),
+                placeholder: placeholder,
+                ref: inputRef,
               }}
-              placeholder={placeholder}
             />
             <i
               className="fa-solid fa-list icon"
@@ -62,7 +68,6 @@ export const Combobox = ({
                   onClick={() => {
                     close();
                     onChange(item);
-                    setState({ ...state, selected: getLabel(item) });
                   }}
                   key={index}
                   className="option"
