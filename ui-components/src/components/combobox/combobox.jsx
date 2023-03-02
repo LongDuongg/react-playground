@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { bindInput } from "../../common/bindInput";
 import { setKey } from "../../common/setKey";
 import Dropdown from "../dropdown/dropdown";
@@ -9,6 +9,8 @@ export const Combobox = ({
   getLabel,
   onChange,
   isSelected,
+  getSelected,
+  setSelected,
   placeholder = "Choose or search options...",
 }) => {
   const selected = list.find((item) => isSelected(item));
@@ -16,12 +18,6 @@ export const Combobox = ({
   const [state, setState] = useState({
     searchText: "",
   });
-
-  // useEffect(() => {
-  //   setState({
-  //     searchText: getLabel(selected),
-  //   });
-  // }, [getLabel(selected)]);
 
   const searchedList =
     state.searchText === null
@@ -39,8 +35,9 @@ export const Combobox = ({
             <input
               {...{
                 ...bindInput({
-                  value: state?.searchText,
+                  value: state.searchText || getSelected(),
                   onChange: (v) => {
+                    setSelected();
                     setState(setKey(state, "searchText", v));
                     showExpand(!expanding);
                   },
@@ -66,8 +63,9 @@ export const Combobox = ({
               return (
                 <div
                   onClick={() => {
-                    close();
                     onChange(item);
+                    // setSelected(item);
+                    close();
                   }}
                   key={index}
                   className="option"

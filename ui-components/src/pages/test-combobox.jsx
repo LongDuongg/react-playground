@@ -18,8 +18,12 @@ export const TestCombobox = () => {
           { name: "Katelyn Rohan" },
         ]}
         getLabel={(item) => item.name}
-        onChange={(item) => setState({ ...state, name: item.name })}
+        onChange={(item) =>
+          setState({ ...state, name: item.name, selected: item.name })
+        }
         isSelected={(item) => item.name === state.name}
+        getSelected={() => state.selected}
+        setSelected={() => setState({ ...state, selected: "" })}
       />
     </div>
   );
