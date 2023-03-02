@@ -1,7 +1,7 @@
 .combobox-b22 {
   
   .combobox-input {
-    padding: 0px 20px 0px 14px;
+    padding: 0px 45px 0px 0px;
     border-radius: 14px;
     background-color: #0e0b5e;
     
@@ -14,17 +14,26 @@
       color: #fff;
       outline: none;
       padding: 15px 2px 14px 14px;
-      margin: 1px 1px 1px -13px;
     }
 
-    &>.icon {
+    & > .icon-wrapper {
       position: absolute;
       top: 0;
       right: 0;
-      color: #fff;
+      height: 100%;
+      width: 45px;
       cursor: pointer;
-      font-size: 20px;
-      padding: 15.5px 14px 18px 0px;
+
+      &>.icon {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        color: #fff;
+        
+        font-size: 20px;
+      }
     }
   }
 

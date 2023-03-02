@@ -46,13 +46,15 @@ export const Combobox = ({
                 ref: inputRef,
               }}
             />
-            <i
-              className="fa-solid fa-list icon"
+            <div
+              className="icon-wrapper"
               onClick={() => {
                 showExpand(!expanding);
                 inputRef.current.focus();
               }}
-            ></i>
+            >
+              <i className="fa-solid fa-list icon"></i>
+            </div>
           </div>
         );
       }}
@@ -78,7 +80,7 @@ export const Combobox = ({
           </div>
         );
       }}
-      expandDistance={15}
+      expandDistance={5}
       expandWidth={305}
     />
   );
