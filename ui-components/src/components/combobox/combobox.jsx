@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { bindInput } from "../../common/bindInput";
-import { setKey } from "../../common/setKey";
 import Dropdown from "../dropdown/dropdown";
 import "./combobox.scss";
 
@@ -9,22 +8,18 @@ export const Combobox = ({
   getLabel,
   onChange,
   isSelected,
-  getSelected,
-  setSelected,
   placeholder = "Choose or search options...",
 }) => {
   const selected = list.find((item) => isSelected(item));
   const inputRef = useRef();
-  const [state, setState] = useState({
-    searchText: "",
-  });
 
-  const searchedList =
-    state.searchText === null
-      ? list
-      : list.filter((item) =>
-          item.name.toLowerCase().includes(state.searchText.toLowerCase())
-        );
+  const [searchText, setSearchText] = useState();
+
+  const searchedList = !searchText
+    ? list
+    : list.filter((item) =>
+        item.name.toLowerCase().includes(searchText.toLowerCase())
+      );
 
   return (
     <Dropdown
@@ -35,17 +30,21 @@ export const Combobox = ({
             <input
               {...{
                 ...bindInput({
-                  value: state.searchText || getSelected(),
+                  // why ?? not ||
+                  value: searchText ?? (selected && getLabel(selected)),
                   onChange: (v) => {
-                    setSelected();
-                    setState(setKey(state, "searchText", v));
-                    showExpand(!expanding);
+                    setSearchText(v);
+                    // why
+                    if (!expanding) {
+                      showExpand(true);
+                    }
                   },
                 }),
                 placeholder: placeholder,
                 ref: inputRef,
               }}
             />
+            {/* why use wrapper */}
             <div
               className="icon-wrapper"
               onClick={() => {
@@ -66,7 +65,8 @@ export const Combobox = ({
                 <div
                   onClick={() => {
                     onChange(item);
-                    // setSelected(item);
+                    // why
+                    setSearchText(null);
                     close();
                   }}
                   key={index}
@@ -80,6 +80,8 @@ export const Combobox = ({
           </div>
         );
       }}
+      // why
+      onPassiveClose={() => setSearchText(null)}
       expandDistance={5}
       expandWidth={305}
     />

@@ -4,7 +4,6 @@ import { Combobox } from "../components/combobox/combobox";
 export const TestCombobox = () => {
   const [state, setState] = useState({
     name: "",
-    selected: "",
   });
 
   return (
@@ -18,12 +17,8 @@ export const TestCombobox = () => {
           { name: "Katelyn Rohan" },
         ]}
         getLabel={(item) => item.name}
-        onChange={(item) =>
-          setState({ ...state, name: item.name, selected: item.name })
-        }
+        onChange={(item) => setState({ ...state, name: item.name })}
         isSelected={(item) => item.name === state.name}
-        getSelected={() => state.selected}
-        setSelected={() => setState({ ...state, selected: "" })}
       />
     </div>
   );

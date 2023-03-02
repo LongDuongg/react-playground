@@ -9,11 +9,18 @@ export default function Dropdown({
   className,
   expandDistance,
   expandWidth,
+  onPassiveClose,
 }) {
   const [show, setShow] = useState();
   const ref = useRef();
 
-  useClickOutside({ ref, handler: () => setShow(false) });
+  useClickOutside({
+    ref,
+    handler: () => {
+      setShow(false);
+      onPassiveClose?.();
+    },
+  });
 
   return (
     <div ref={ref} className={clns("dropdown-r32", className)}>
