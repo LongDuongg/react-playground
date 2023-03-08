@@ -1,13 +1,13 @@
 .switch-toggle-abc {
   width: 100%;
 
-  &>.switch-btn {
+  &>.switch-btn  {
     position: relative;
     width: 100%;
     cursor: pointer;
     height: 39px;
-    border-radius: 20px;
-    background-color: #6b7280;
+    border-radius: 25px;
+    background-color: #9197a3;
     border: none;
 
     &>.white-circle {
@@ -19,7 +19,7 @@
       border-radius: 50%;
       height: 33px;
       width: 33px;
-      
+      transition: all 1s;
     }
   }
 }
