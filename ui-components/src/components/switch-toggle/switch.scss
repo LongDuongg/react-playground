@@ -1,0 +1,25 @@
+.switch-toggle-abc {
+  width: 100%;
+
+  &>.switch-btn {
+    position: relative;
+    width: 100%;
+    cursor: pointer;
+    height: 39px;
+    border-radius: 20px;
+    background-color: #6b7280;
+    border: none;
+
+    &>.white-circle {
+      position: absolute;
+      bottom: 3px;
+      right: 63px;
+      background-color: #fff;
+      color: #fff;
+      border-radius: 50%;
+      height: 33px;
+      width: 33px;
+      
+    }
+  }
+}
