@@ -19,19 +19,7 @@ export const Switch = () => {
       >
         <span
           className="white-circle"
-          style={
-            check
-              ? {
-                  left: "63px",
-                  // transitionProperty: "transform",
-                  // transitionDuration: "1s",
-                }
-              : {
-                  right: "63px",
-                  // transitionProperty: "transform",
-                  // transitionDuration: "1s",
-                }
-          }
+          style={check ? { left: "53px" } : { right: "5px" }}
         >
           Se
         </span>

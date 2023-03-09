@@ -1,5 +1,5 @@
 .switch-toggle-abc {
-  width: 100%;
+  width: 90px;
 
   &>.switch-btn  {
     position: relative;
@@ -8,18 +8,19 @@
     height: 39px;
     border-radius: 25px;
     background-color: #9197a3;
+    transition: all 600ms;
     border: none;
 
     &>.white-circle {
       position: absolute;
       bottom: 3px;
-      right: 63px;
+      left: 5px;
       background-color: #fff;
       color: #fff;
       border-radius: 50%;
       height: 33px;
       width: 33px;
-      transition: all 1s;
+      transition: all 600ms;
     }
   }
 }
