@@ -10,8 +10,8 @@ export const Switch = () => {
         className="switch-btn"
         style={
           check
-            ? { backgroundColor: "#6b7280" }
-            : { backgroundColor: "#9197a3" }
+            ? { backgroundColor: "#0e0b5e" }
+            : { backgroundColor: "#3734a0" }
         }
         onClick={() => {
           setCheck(!check);
