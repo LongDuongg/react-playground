@@ -30,11 +30,10 @@ export const Combobox = ({
             <input
               {...{
                 ...bindInput({
-                  // why ?? not ||
-                  // answer: According to the theory, the logical or || operator take the right-hand side operand
+                  // According to the theory, the logical or || operator take the right-hand side operand
                   // when the left-hand side is in the case of falsy value such as : "", 0, NaN,
                   // null, undefined. Whereas, the nullish coalescing ?? operator take the right-hand side operand
-                  // only when the left-hand side is in null and undefined
+                  // only when the left-hand side is null and undefined
 
                   // in this case the searchText has no initial value, that means you can understand it can be anything
                   // you want it to be. It might be a string, a number, an object, undefined, null. Beside, the value
@@ -44,11 +43,12 @@ export const Combobox = ({
                   value: searchText ?? (selected && getLabel(selected)),
                   onChange: (v) => {
                     setSearchText(v);
-                    // why
-                    // answer : if we don't have condition in this case, the showExpand function will be called many times,
+                    // if we don't have condition in this case, the showExpand function will be called many times,
                     // that means the expand-part will open, close continuously whenever we press every single word creating
                     // the inconvenience for users. Therefore, we have to add a condition so that the showExpand function will
                     // work only once time
+
+                    // to open the dropdown on typing
                     if (!expanding) {
                       showExpand(true);
                     }
@@ -58,12 +58,11 @@ export const Combobox = ({
                 ref: inputRef,
               }}
             />
-            {/* why use wrapper */}
-            {/* answer : the first reason is we can take advantage of height of the input to set the same height of the wrapper
+            {/* the first reason is we can take advantage of height of the input to set the same height of the wrapper
                 and cover all area by width without using padding. The second is when we move the computer mouse slowly to the 
-                edge of the icon wrapper, it  will become hand cursor rightaway after touching the edge, just like the input next 
-                to it, the mouse becomes caretafter touching the edge of input. the third is whenever we click on the wrapper, the
-                showExpand function is still called finely
+                edge of the icon wrapper, it  will become hand cursor right away after touching the edge, just like the input next 
+                to it, the mouse becomes caret after touching the edge of input. the third is whenever we click on the wrapper, the
+                showExpand function is still called
             */}
             <div
               className="icon-wrapper"
@@ -85,10 +84,9 @@ export const Combobox = ({
                 <div
                   onClick={() => {
                     onChange(item);
-                    // why
-                    // answer : The reason why we use setSearchText(null) in this case, because when we type to search, click to choose
+                    // The reason why we use setSearchText(null) in this case, because when we type to search, click to choose
                     // the selected item is not shown on input. Like we said about the example above : ("" || "aaa" = "aaa") and ("" ?? "aaa" = "")
-                    // we use nullish coalescing ?? operator, that means if we want the selected item is shown on input, we have to set the searchText
+                    // we use nullish coalescing ?? operator, that means if we want the selected item to be shown on input, we have to set the searchText
                     // null or undefined after we choose
                     setSearchText(null);
                     close();
@@ -104,11 +102,10 @@ export const Combobox = ({
           </div>
         );
       }}
-      // why
-      // answer : The reason why we have onPassiveClose and setSearchText(null) here because when there is selected item on input, we type to search, then click
-      // outside to close dropdown, but the selected item is'nt shown again, to solve this issue we add a new function called onPassiveClose in the Dropdown
-      // component, particularly in useClickOutside. Whenever we type and click outside, the onPassviveClose function is called and it manipulate the setSearchText(null)
-      // to keep the selected item on the input
+      // The reason why we have onPassiveClose and setSearchText(null) here because when there is selected item on input, we type to search, then click
+      // outside to close dropdown, but the selected item isn't shown again. to solve this issue we add a new function called onPassiveClose to the Dropdown
+      // component, particularly in useClickOutside. Whenever we type and click outside, the onPassviveClose function is called to setSearchText(null)
+      // to show the selected item on the input
       onPassiveClose={() => setSearchText(null)}
       expandDistance={5}
       expandWidth={305}

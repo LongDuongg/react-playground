@@ -4,7 +4,7 @@ import { OptionsMenu } from "../components/menu-dropdown/options-menu";
 import ProfileMenu from "../components/menu-dropdown/profile-menu";
 import { TestCombobox } from "./test-combobox";
 import TestListbox from "./test-listbox";
-import { TestSwitchToggle } from "./test-switchToggle";
+import { TestSwitch } from "./test-switch";
 import "./samples.scss";
 
 export default function Samples() {
@@ -24,7 +24,7 @@ export default function Samples() {
       </div> */}
 
       <div className="line switch-toggle">
-        <TestSwitchToggle />
+        <TestSwitch />
       </div>
     </div>
   );

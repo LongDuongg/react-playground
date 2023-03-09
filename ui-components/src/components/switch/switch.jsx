@@ -6,24 +6,18 @@ export const Switch = () => {
 
   return (
     <div className="switch-toggle-abc">
-      <button
+      <div
         className="switch-btn"
-        style={
-          check
-            ? { backgroundColor: "#0e0b5e" }
-            : { backgroundColor: "#3734a0" }
-        }
+        style={{ backgroundColor: check ? "#0e0b5e" : "#3734a0" }}
         onClick={() => {
           setCheck(!check);
         }}
       >
-        <span
+        <div
           className="white-circle"
-          style={check ? { left: "53px" } : { right: "5px" }}
-        >
-          Se
-        </span>
-      </button>
+          style={{ left: check ? "54px" : "5px" }}
+        />
+      </div>
     </div>
   );
 };

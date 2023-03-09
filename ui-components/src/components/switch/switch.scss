@@ -5,22 +5,22 @@
     position: relative;
     width: 100%;
     cursor: pointer;
-    height: 39px;
+    height: 40px;
     border-radius: 25px;
     background-color: #3734a0;
-    transition: all 600ms;
+    transition: background-color 600ms;
     border: none;
 
     &>.white-circle {
       position: absolute;
-      bottom: 3px;
-      left: 5px;
+      top: 50%;
+      transform: translateY(-50%);
       background-color: #fff;
       color: #fff;
       border-radius: 50%;
-      height: 33px;
-      width: 33px;
-      transition: all 600ms;
+      height: 32px;
+      width: 32px;
+      transition: left 600ms;
     }
   }
 }
