@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import "./switch.scss";
 
-export const Switch = () => {
-  const [check, setCheck] = useState();
-
+export const Switch = ({
+  check,
+  onChange,
+  mainBGColor,
+  extraBGColor,
+  x1Coordinate,
+  x2Coordinate,
+}) => {
   return (
     <div className="switch-toggle-abc">
       <div
         className="switch-btn"
-        style={{ backgroundColor: check ? "#0e0b5e" : "#3734a0" }}
+        style={{ backgroundColor: check ? mainBGColor : extraBGColor }}
         onClick={() => {
-          setCheck(!check);
+          onChange();
         }}
       >
         <div
           className="white-circle"
-          style={{ left: check ? "54px" : "5px" }}
+          style={{ left: check ? x1Coordinate : x2Coordinate }}
         />
       </div>
     </div>
