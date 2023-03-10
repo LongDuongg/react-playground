@@ -11,10 +11,12 @@ export const TestSwitch = () => {
         onChange={() => {
           setEnabled(!enabled);
         }}
+        switchHeight={"40px"}
+        circleHeight={"32px"}
+        circleWidth={"32px"}
         mainBGColor={"#0e0b5e"}
         extraBGColor={"#3734a0"}
-        x1Coordinate={"54px"}
-        x2Coordinate={"5px"}
+        transitionDuration={"200ms"}
       />
     </div>
   );

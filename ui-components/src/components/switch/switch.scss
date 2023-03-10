@@ -5,9 +5,7 @@
     position: relative;
     width: 100%;
     cursor: pointer;
-    height: 40px;
     border-radius: 25px;
-    transition: background-color 600ms;
     border: none;
 
     &>.white-circle {
@@ -15,11 +13,7 @@
       top: 50%;
       transform: translateY(-50%);
       background-color: #fff;
-      color: #fff;
       border-radius: 50%;
-      height: 32px;
-      width: 32px;
-      transition: left 600ms;
     }
   }
 }
