@@ -1,38 +1,25 @@
 import React from "react";
 import "./switch.scss";
+import cn from "classnames";
 
 export const Switch = ({
-  check,
+  checked,
   onChange,
-  switchHeight,
-  circleHeight,
-  circleWidth,
-  mainBGColor,
-  extraBGColor,
-  transitionDuration,
+  activeBackgroundColor = "#0e0b5e",
+  inactiveBackgroundColor = "#3734a0",
 }) => {
   return (
     <div className="switch-toggle-abc">
       <div
         className="switch-btn"
         style={{
-          backgroundColor: check ? mainBGColor : extraBGColor,
-          transition: `background-color ${transitionDuration}`,
-          height: switchHeight,
+          background: checked ? activeBackgroundColor : inactiveBackgroundColor,
         }}
         onClick={() => {
           onChange();
         }}
       >
-        <div
-          className="white-circle"
-          style={{
-            left: check ? "54px" : "5px",
-            transition: `left ${transitionDuration}`,
-            height: circleHeight,
-            width: circleWidth,
-          }}
-        />
+        <div className={cn("white-circle", { checked })} />
       </div>
     </div>
   );
