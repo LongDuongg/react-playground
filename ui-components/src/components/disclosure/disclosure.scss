@@ -10,17 +10,16 @@
     &>.toggle {
       position: relative;
       background-color: #dd95ed;
-      margin-bottom: 10px;
       margin-left: 10px;
       margin-right: 10px;
-      padding: 10px 0px 10px 22px;
+      padding: 10px 0px 10px 14px;
       border-radius: 10px;
       cursor: pointer;
       color: #fff;
 
       &>.icon {
         position: absolute;
-        bottom: 26%;
+        bottom: 24%;
         left: 93%;
       }
 
@@ -31,7 +30,8 @@
 
     &>.expand {
       color: #fff;
-
+      width: 444px;
+      margin: 16px 24px;
     }
   }
 }
