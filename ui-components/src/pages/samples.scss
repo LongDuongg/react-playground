@@ -11,16 +11,19 @@
   }
 
   .listbox {
-    // justify-content: space-around;
-    // justify-content: center;
-
+    justify-content: space-around;
+    justify-content: center;
   }
 
   .combobox {
     margin-top: 20px;
   }
 
-  .switch-toggle{
+  .switch-toggle {
+    margin-top: 20px;
+  }
+
+  .disclosure{
     margin-top: 20px;
   }
 }

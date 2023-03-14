@@ -6,6 +6,7 @@ import { TestCombobox } from "./test-combobox";
 import TestListbox from "./test-listbox";
 import { TestSwitch } from "./test-switch";
 import "./samples.scss";
+import { TestDisclosure } from "./test-disclosure";
 
 export default function Samples() {
   return (
@@ -23,8 +24,12 @@ export default function Samples() {
         <TestCombobox />
       </div> */}
 
-      <div className="line switch-toggle">
+      {/* <div className="line switch-toggle">
         <TestSwitch />
+      </div> */}
+
+      <div className="line disclosure">
+        <TestDisclosure />
       </div>
     </div>
   );
