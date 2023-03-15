@@ -1,37 +1,24 @@
-.disclosure-wrapper-bnm {
-  background-color: #a6a5a4;
+.disclosure-bnm {
   width: 100%;
-  border-radius: 22px;
+  padding-bottom: 13px;
 
-  &>.disclosure-group {
-    padding-top: 10px;
-    padding-bottom: 13px;
+  &>.toggle {
+    position: relative;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px 0px 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
 
-    &>.toggle {
-      position: relative;
-      background-color: #dd95ed;
-      margin-left: 10px;
-      margin-right: 10px;
-      padding: 10px 0px 10px 14px;
-      border-radius: 10px;
-      cursor: pointer;
-      color: #fff;
-
-      &>.icon {
-        position: absolute;
-        bottom: 24%;
-        left: 93%;
-      }
-
-      &:hover {
-        background-color: #c479d4;
-      }
+    &>.icon {
+      position: absolute;
+      bottom: 24%;
+      left: 93%;
     }
+  }
 
-    &>.expand {
-      color: #fff;
-      width: 444px;
-      margin: 15px 24px 0px 24px;
-    }
+  &>.expand {
+    width: 444px;
+    margin: 15px 24px 0px 24px;
   }
 }

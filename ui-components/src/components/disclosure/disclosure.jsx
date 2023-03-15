@@ -1,30 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import "./disclosure.scss";
 
-export const Disclosure = () => {
+export const Disclosure = ({
+  toggleText = "Question ?",
+  expandText = "Answer...",
+  toggleColor = "#fff",
+  toggleBackGround = "#dd95ed",
+  toggleBackGroundHover = "#c479d4",
+  expandColor = "#fff",
+}) => {
+  const [show, setShow] = useState();
+  const [hover, setHover] = useState();
+
   return (
-    <div className="disclosure-wrapper-bnm">
-      <div className="disclosure-group">
-        <div className="toggle">
-          What is your refund policy ?
-          <div className="icon">
-            <i className="fa-solid fa-angle-up"></i>
-          </div>
-        </div>
-        <div className="expand">
-          If you're unhappy with your purchase for any reason, email us within
-          90 days and we'll refund you in full, no questions asked.
+    <div className="disclosure-bnm">
+      <div
+        className="toggle"
+        onClick={() => {
+          setShow(!show);
+        }}
+        style={{
+          backgroundColor: hover ? toggleBackGroundHover : toggleBackGround,
+          color: toggleColor,
+        }}
+        onMouseOver={() => {
+          setHover(!hover);
+        }}
+        onMouseOut={() => {
+          setHover(false);
+        }}
+      >
+        {toggleText}
+        <div className="icon">
+          {show ? (
+            <i className="fa-solid fa-angle-down" />
+          ) : (
+            <i className="fa-solid fa-angle-up" />
+          )}
         </div>
       </div>
-      <div className="disclosure-group">
-        <div className="toggle">
-          Do you offer technical support ?
-          <div className="icon">
-            <i className="fa-solid fa-angle-up"></i>
-          </div>
+      {show && (
+        <div className="expand" style={{ color: expandColor }}>
+          {expandText}
         </div>
-        <div className="expand">No.</div>
-      </div>
+      )}
     </div>
   );
 };
