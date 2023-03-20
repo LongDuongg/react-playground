@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import clns from "classnames";
 import "./disclosure.scss";
 
 export const Disclosure = ({
+  className,
   toggleText = "Question ?",
-  expandText = "Answer...",
+  renderExpand,
   toggleColor = "#fff",
   toggleBackGround = "#dd95ed",
   toggleBackGroundHover = "#c479d4",
@@ -13,7 +15,7 @@ export const Disclosure = ({
   const [hover, setHover] = useState();
 
   return (
-    <div className="disclosure-bnm">
+    <div className={clns("disclosure-bnm", className)}>
       <div
         className="toggle"
         onClick={() => {
@@ -41,7 +43,7 @@ export const Disclosure = ({
       </div>
       {show && (
         <div className="expand" style={{ color: expandColor }}>
-          {expandText}
+          {renderExpand()}
         </div>
       )}
     </div>
