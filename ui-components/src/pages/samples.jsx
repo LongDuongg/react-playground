@@ -5,8 +5,9 @@ import ProfileMenu from "../components/menu-dropdown/profile-menu";
 import { TestCombobox } from "./test-combobox";
 import TestListbox from "./test-listbox";
 import { TestSwitch } from "./test-switch";
-import "./samples.scss";
 import { TestDisclosure } from "./test-disclosure";
+import { Testmodal } from "./test-modal";
+import "./samples.scss";
 
 export default function Samples() {
   return (
@@ -28,8 +29,12 @@ export default function Samples() {
         <TestSwitch />
       </div> */}
 
-      <div className="line disclosure">
+      {/* <div className="line disclosure">
         <TestDisclosure />
+      </div> */}
+
+      <div className="line modal">
+        <Testmodal />
       </div>
     </div>
   );

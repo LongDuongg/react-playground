@@ -1,0 +1,19 @@
+.modal-uio {
+
+  &>.toggle {
+    background-color: #3659d9;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    border-radius: 0.375rem;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #2244bf
+    }
+  }
+
+  &>.expand {
+    
+  }
+}
