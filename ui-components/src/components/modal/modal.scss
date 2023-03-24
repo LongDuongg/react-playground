@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-las {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -7,41 +7,12 @@
   background: rgba(0, 0, 0, 0.75);
 
   &>.modal-container {
-    width: 100%;
-    background-color: #bbbec7;
-    padding: 1.5rem;
-    border-radius: 1rem;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: fit-content;
     max-height: 80vh;
-    width: fit-content;
-
-    &>.title {
-      font-weight: bold;
-      font-size: 23px;
-      color: #2244bf;
-    }
-  
-    &>.content {
-      padding: 0.9rem 0rem;
-      color: #fff;
-    }
-  
-    &>.btn {
-      background-color: #3659d9;
-      cursor: pointer;
-      padding: 0.5rem 1rem;
-      color: #fff;
-      border-radius: 0.375rem;
-      font-weight: bold;
-      border: none;
-  
-      &:hover {
-        background-color: #2244bf
-      }
-    }
+    width: fit-content;    
   }
 }
