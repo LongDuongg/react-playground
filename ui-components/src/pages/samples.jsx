@@ -6,7 +6,7 @@ import { TestCombobox } from "./test-combobox";
 import TestListbox from "./test-listbox";
 import { TestSwitch } from "./test-switch";
 import { TestDisclosure } from "./test-disclosure";
-import { Testmodal } from "./test-modal";
+import { TestModal } from "./test-modal";
 import "./samples.scss";
 
 export default function Samples() {
@@ -34,7 +34,7 @@ export default function Samples() {
       </div> */}
 
       <div className="line modal">
-        <Testmodal />
+        <TestModal />
       </div>
     </div>
   );

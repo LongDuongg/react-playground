@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { Modal } from "../components/modal/modal";
 import "./test-modal.scss";
 
-export const Testmodal = () => {
+export const TestModal = () => {
   const [show, setShow] = useState();
 
   return (
     <div style={{ width: "505px" }}>
-      <button onClick={() => setShow(!show)} className="btn">
+      <button onClick={() => setShow(true)} className="btn">
         Buy product
       </button>
       <Modal
         isOpen={show}
         onClose={() => setShow(false)}
         className={"payment-abc"}
-        renderModal={({ close }) => {
+        renderContent={({ close }) => {
           return (
             <>
               <div className="title">
