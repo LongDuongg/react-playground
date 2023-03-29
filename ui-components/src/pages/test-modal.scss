@@ -14,32 +14,32 @@
 
 .payment-abc {
   width: 100%;
-  background-color: #bbbec7;
+  background-color: #fff;
   padding: 1.5rem;
   border-radius: 1rem;
 
   &>.title {
     font-weight: bold;
     font-size: 23px;
-    color: #2244bf;
+    color: #3d434f;
   }
 
   &>.content {
     padding: 0.9rem 0rem;
-    color: #fff;
+    color: #6c7381;
   }
 
   &>.btn {
-    background-color: #3659d9;
+    background-color: #dbeafe;
     cursor: pointer;
     padding: 0.5rem 1rem;
-    color: #fff;
+    color: #4a63a5;
     border-radius: 0.375rem;
     font-weight: bold;
     border: none;
 
     &:hover {
-      background-color: #2244bf
+      background-color: #94b5e0;
     }
   }
 }
