@@ -6,7 +6,8 @@
 // import TestListbox from "./test-listbox";
 // import { TestSwitch } from "./test-switch";
 // import { TestDisclosure } from "./test-disclosure";
-import { TestModal } from "./test-modal";
+// import { TestModal } from "./test-modal";
+import { TestPopover } from "./test-popover";
 import "./samples.scss";
 
 export default function Samples() {
@@ -34,8 +35,12 @@ export default function Samples() {
         <TestDisclosure />
       </div> */}
 
-      <div className="line modal">
+      {/* <div className="line modal">
         <TestModal />
+      </div> */}
+
+      <div className="line popover">
+        <TestPopover />
       </div>
     </div>
   );
