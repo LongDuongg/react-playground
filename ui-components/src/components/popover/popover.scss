@@ -1,5 +1,6 @@
 .popover-fgh {
   position: relative;
+
   .toggle {
 
     .btn {
@@ -28,5 +29,68 @@
 
   .expand {
     position: absolute;
+    background-color: #dd3071;
+    width: 24rem;
+    top: calc(100% + 10px);
+    border-radius: 10px;
+
+    .list {
+
+      &>.content {
+        margin: 25px 20px;
+        cursor: pointer;
+        position: relative;
+        padding: 10px 0px 10px 60px;
+
+        &>.small-image {
+          position: absolute;
+          bottom: 2px;
+          right: 83%;
+          
+        }
+
+        &>.sub-content {
+          font-size: 17px;
+          margin-left: 10px;
+
+          &>.title {
+            color: #fff;
+            font-weight: bold;
+          }
+
+          &>.text {
+            color: #cec2bd;
+          }
+        }
+
+        &:hover {
+          background-color: #ec6256;
+          border-radius: 10px;
+        }
+      }
+    }
+
+    &>.foot {
+      background-color: #c2410c;
+      padding: 22px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      font-size: 17px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #ec6256;
+        // border-radius: 10px;
+      }
+
+      &>.title {
+        color: #fff;
+        font-weight: bold;
+      }
+
+      &>.text {
+        color: #cec2bd;
+      }
+    }
   }
 }
