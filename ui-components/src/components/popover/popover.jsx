@@ -25,19 +25,18 @@ export const Popover = ({
       <div className="toggle">
         {renderToggle({ showExpand: (v) => setShow(v), expanding: show })}
       </div>
-      {show && (
-        <div
-          className={clns("expand", { show })}
-          style={{
-            top: show ? `calc(100% + ${expandDistance})` : "30px",
-            left: `calc(0% - ${expandPosition})`,
-            transition: "top 500ms",
-            opacity: show ? "1" : "0",
-          }}
-        >
-          {renderExpand({ close: () => setShow(false) })}
-        </div>
-      )}
+      <div
+        className="expand"
+        style={{
+          top: show ? `calc(100% + ${expandDistance})` : "10px",
+          left: `calc(0% - ${expandPosition})`,
+          opacity: show ? "1" : "0",
+          visibility: show ? "visible" : "hidden",
+          transition: "all 500ms ease",
+        }}
+      >
+        {renderExpand({ close: () => setShow(false) })}
+      </div>
     </div>
   );
 };

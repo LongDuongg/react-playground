@@ -133,7 +133,7 @@ export const TestPopover = () => {
             </div>
           );
         }}
-        expandDistance={"10px"}
+        expandDistance={"50px"}
         expandPosition={"100px"}
       />
     </div>
