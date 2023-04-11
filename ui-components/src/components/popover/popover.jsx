@@ -8,7 +8,8 @@ export const Popover = ({
   renderExpand,
   className,
   expandDistance,
-  expandPosition,
+  leftDistance,
+  rightDistance,
 }) => {
   const [show, setShow] = useState();
   const ref = useRef();
@@ -29,7 +30,11 @@ export const Popover = ({
         className="expand"
         style={{
           top: show ? `calc(100% + ${expandDistance})` : "calc(100% + 10px)",
-          left: `calc(0% - ${expandPosition})`,
+          ...(leftDistance
+            ? { left: `calc(0% - ${leftDistance})` }
+            : rightDistance
+            ? { right: `calc(0% - ${rightDistance})` }
+            : { left: "50px" }),
           opacity: show ? "1" : "0",
           visibility: show ? "visible" : "hidden",
           transition: "all 500ms ease",
