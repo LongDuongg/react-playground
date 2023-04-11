@@ -28,7 +28,7 @@ export const Popover = ({
       <div
         className="expand"
         style={{
-          top: show ? `calc(100% + ${expandDistance})` : "10px",
+          top: show ? `calc(100% + ${expandDistance})` : "calc(100% + 10px)",
           left: `calc(0% - ${expandPosition})`,
           opacity: show ? "1" : "0",
           visibility: show ? "visible" : "hidden",
