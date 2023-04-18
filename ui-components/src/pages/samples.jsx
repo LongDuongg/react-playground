@@ -39,9 +39,9 @@ export default function Samples() {
         <TestPopover />
       </div>
 
-      <div className="line modal">
+      {/* <div className="line modal">
         <TestModal />
-      </div>
+      </div> */}
     </div>
   );
 }
