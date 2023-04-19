@@ -1,0 +1,28 @@
+.radio-lag {
+  position: relative;
+  
+  &>.content {
+    background-color: #0e658d;
+    padding: 20px 200px 20px 20px;
+    border-radius: 0.5rem/0.5rem;
+    border: 6px solid #7dd6e6;
+    cursor: pointer;
+    color: #fff;
+    
+    &>.name {
+      font-weight: bold;
+    }
+  
+    &>.info {
+      margin-top: 4px;
+    }
+  
+    &>.icon {
+      position: absolute;
+      right: 5%;
+      bottom: 33%;
+      font-size: 24px;
+      
+    }
+  }
+}

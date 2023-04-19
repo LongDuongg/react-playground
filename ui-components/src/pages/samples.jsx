@@ -6,8 +6,9 @@
 // import TestListbox from "./test-listbox";
 // import { TestSwitch } from "./test-switch";
 // import { TestDisclosure } from "./test-disclosure";
-import { TestModal } from "./test-modal";
-import { TestPopover } from "./test-popover";
+// import { TestModal } from "./test-modal";
+// import { TestPopover } from "./test-popover";
+import { ComputerRadio } from "../components/radio-group/computer-radio";
 import "./samples.scss";
 
 export default function Samples() {
@@ -35,13 +36,17 @@ export default function Samples() {
         <TestDisclosure />
       </div> */}
 
-      <div className="line popover">
+      {/* <div className="line popover">
         <TestPopover />
-      </div>
+      </div> */}
 
       {/* <div className="line modal">
         <TestModal />
       </div> */}
+
+      <div className="line radio">
+        <ComputerRadio />
+      </div>
     </div>
   );
 }
