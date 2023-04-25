@@ -8,7 +8,7 @@
 // import { TestDisclosure } from "./test-disclosure";
 // import { TestModal } from "./test-modal";
 // import { TestPopover } from "./test-popover";
-import { ComputerRadio } from "../components/radio-group/computer-radio";
+import { ComputerRadio } from "../components/radio/computer-radio";
 import "./samples.scss";
 
 export default function Samples() {

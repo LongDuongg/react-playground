@@ -1,0 +1,25 @@
+.computer-group-mvb {
+  position: relative;
+
+  .computer-alm {
+    color: #fff;
+
+    .content { 
+      
+      &>.name {
+        font-weight: bold;
+      }
+    
+      &>.info {
+        margin-top: 4px;
+      }
+
+      &>.icon {
+        position: absolute;
+        right: 5%;
+        bottom: 33%;
+        font-size: 24px;
+      }
+    }
+  }
+}
