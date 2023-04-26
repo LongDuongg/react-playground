@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import clns from "classnames";
 import "./radio.scss";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
 export const Radio = ({
   choice,
@@ -10,9 +11,16 @@ export const Radio = ({
   inactiveBG,
 }) => {
   const [checked, setChecked] = useState();
+  const ref = useRef();
+
+  useClickOutside({
+    ref: ref,
+    handler: () => setChecked(false),
+  });
 
   return (
     <div
+      ref={ref}
       style={{
         ...(checked && {
           border: "4px solid #91d9e6",
@@ -24,7 +32,9 @@ export const Radio = ({
       <div
         className={clns("radio-lag", className)}
         onClick={(e) => {
-          setChecked(!checked);
+          if (ref.current.contains(e.target)) {
+            setChecked(true);
+          }
           console.log(e);
         }}
         style={{

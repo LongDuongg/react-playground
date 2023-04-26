@@ -6,7 +6,7 @@ export const ComputerRadio = () => {
   const computerInfo = [
     { name: "Startup", info: "12GB/6 CPUs - 160 GB SSD disk" },
     { name: "Business", info: "16GB/8 CPUs · 512 GB SSD disk" },
-    { name: "Enterprise", info: "32GB/12 CPUs · 1024 GB SSD disk" },
+    // { name: "Enterprise", info: "32GB/12 CPUs · 1024 GB SSD disk" },
   ];
 
   return (

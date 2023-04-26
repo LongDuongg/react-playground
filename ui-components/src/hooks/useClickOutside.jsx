@@ -5,6 +5,7 @@ export const useClickOutside = ({ ref, handler }) => {
     const listener = (e) => {
       if (!ref?.current?.contains(e.target)) {
         handler();
+        console.log(e);
       }
     };
 
