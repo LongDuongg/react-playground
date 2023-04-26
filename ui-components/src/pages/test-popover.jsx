@@ -135,7 +135,42 @@ export const TestPopover = () => {
         }}
         expandDistance={"30px"}
         // leftDistance={"30px"}
-        rightDistance={"100px"}
+        // rightDistance={"100px"}
+      />
+    </div>
+  );
+};
+
+export const TestPopover2 = () => {
+  return (
+    <div>
+      <Popover
+        className={"solution-mnj"}
+        renderToggle={({ showExpand, expanding }) => {
+          return (
+            <button
+              onClick={() => {
+                showExpand(!expanding);
+              }}
+              className="btn"
+            >
+              Solutions
+              <div className="icon">
+                {expanding ? (
+                  <i className="fa-solid fa-angle-up" />
+                ) : (
+                  <i className="fa-solid fa-angle-down" />
+                )}
+              </div>
+            </button>
+          );
+        }}
+        renderExpand={() => {
+          return <div className="expand-2">aaaa aaaa aaaa</div>;
+        }}
+        expandDistance={"30px"}
+        // leftDistance={"30px"}
+        // rightDistance={"100px"}
       />
     </div>
   );
