@@ -1,8 +1,11 @@
 import React from "react";
 import { Radio } from "./radio";
 import "./computer-radio.scss";
+import { useState } from "react";
 
 export const ComputerRadio = () => {
+  const [selected, setSelected] = useState();
+
   const computerInfo = [
     { name: "Startup", info: "12GB/6 CPUs - 160 GB SSD disk" },
     { name: "Business", info: "16GB/8 CPUs · 512 GB SSD disk" },
