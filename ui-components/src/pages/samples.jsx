@@ -36,10 +36,10 @@ export default function Samples() {
         <TestDisclosure />
       </div> */}
 
-      <div className="line popover">
+      {/* <div className="line popover">
         <TestPopover />
         <TestPopover2 />
-      </div>
+      </div> */}
 
       {/* <div className="line modal">
         <TestModal />
