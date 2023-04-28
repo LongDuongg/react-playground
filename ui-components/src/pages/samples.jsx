@@ -7,7 +7,7 @@
 // import { TestSwitch } from "./test-switch";
 // import { TestDisclosure } from "./test-disclosure";
 // import { TestModal } from "./test-modal";
-import { TestPopover, TestPopover2 } from "./test-popover";
+// import { TestPopover, TestPopover2 } from "./test-popover";
 import { ComputerRadio } from "../components/radio/computer-radio";
 import "./samples.scss";
 
