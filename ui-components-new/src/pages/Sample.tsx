@@ -1,12 +1,13 @@
 import "./Sample.css";
-import MenuDropdown from "../components/Menu-Dropdown/Menu-Dropdown";
-import {options} from "../mockdata/mockdata";
+import MenuDropdown from "../components/menu-dropdown/menu-dropdown";
+import { options } from "../mockdata/mockdata";
+
 export default function Sample() {
-
-
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <MenuDropdown title="Options" options={options}/>
+    <div className="">
+      <div className="w-[150px] ml-auto mr-auto">
+        <MenuDropdown title="Options" options={options} />
+      </div>
     </div>
   );
 }
