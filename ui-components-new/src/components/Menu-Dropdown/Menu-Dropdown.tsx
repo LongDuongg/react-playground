@@ -1,4 +1,4 @@
-import Dropdown, { RenderToggle } from "../dropdown/dropdown";
+import Dropdown, { RenderToggle, RenderExpand } from "../dropdown/dropdown";
 
 type Props = {
   title: string;
@@ -32,7 +32,7 @@ export default function MenuDropdown({ title, options }: Props) {
     <Dropdown
       className="w-full relative"
       renderToggle={renderToggle}
-      renderExpand={({ close }: any) => {
+      renderExpand={({ close }) => {
         return (
           <>
             {options.map((option, index) => {
@@ -42,6 +42,7 @@ export default function MenuDropdown({ title, options }: Props) {
                   className="text-stone-50 font-bold hover:bg-indigo-600 hover:rounded cursor-pointer p-2"
                   onClick={() => {
                     console.log(option.text);
+                    close();
                   }}
                 >
                   <i
