@@ -10,11 +10,12 @@ export type RenderToggle = ({
   isOpen: boolean;
 }) => any;
 
+export type RenderExpand = ({ close }: { close: () => void }) => any;
+
 type Props = {
   className: string;
   renderToggle: RenderToggle;
-  // fix
-  renderExpand: any;
+  renderExpand: RenderExpand;
   expandWidth: number | string;
 };
 
