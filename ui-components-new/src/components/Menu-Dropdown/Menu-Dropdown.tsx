@@ -1,4 +1,4 @@
-import Dropdown from "../dropdown/dropdown";
+import Dropdown, { RenderToggle } from "../dropdown/dropdown";
 
 type Props = {
   title: string;
@@ -10,26 +10,28 @@ type Props = {
 
 // const MenuDropdown:FC<Props> = ({ title, options }) => {
 export default function MenuDropdown({ title, options }: Props) {
+  const renderToggle: RenderToggle = ({ showExpand, isOpen }) => {
+    return (
+      <button
+        onClick={() => {
+          showExpand(!isOpen);
+        }}
+        className="w-full bg-indigo-500 text-stone-50 p-2 rounded font-bold hover:bg-indigo-600 cursor-pointer"
+      >
+        {title}
+        {isOpen ? (
+          <i className="fa-solid fa-angle-up ml-3"></i>
+        ) : (
+          <i className="fa-solid fa-angle-down ml-3"></i>
+        )}
+      </button>
+    );
+  };
+
   return (
     <Dropdown
       className="w-full relative"
-      renderToggle={({ showExpand, isOpen }: any) => {
-        return (
-          <button
-            onClick={() => {
-              showExpand(!isOpen);
-            }}
-            className="w-full bg-indigo-500 text-stone-50 p-2 rounded font-bold hover:bg-indigo-600 cursor-pointer"
-          >
-            {title}
-            {isOpen ? (
-              <i className="fa-solid fa-angle-up ml-3"></i>
-            ) : (
-              <i className="fa-solid fa-angle-down ml-3"></i>
-            )}
-          </button>
-        );
-      }}
+      renderToggle={renderToggle}
       renderExpand={({ close }: any) => {
         return (
           <>
@@ -37,10 +39,10 @@ export default function MenuDropdown({ title, options }: Props) {
               return (
                 <div
                   key={index}
-                  className="text-stone-50 font-bold hover:bg-indigo-600 hover:rounded-[.5rem] cursor-pointer p-2"
+                  className="text-stone-50 font-bold hover:bg-indigo-600 hover:rounded cursor-pointer p-2"
                 >
                   <i
-                    className={`fa-solid ${option.iconClass} text-indigo-500 mr-[0.7rem]`}
+                    className={`fa-solid ${option.iconClass} text-indigo-500 mr-3`}
                   ></i>
                   <span>{option.text}</span>
                 </div>

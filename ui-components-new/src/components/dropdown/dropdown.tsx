@@ -2,11 +2,20 @@ import clns from "classnames";
 import { useState, useRef } from "react";
 import { useClickOutside } from "../../hook/useClickOutside";
 
+export type RenderToggle = ({
+  showExpand,
+  isOpen,
+}: {
+  showExpand: (v: boolean) => void;
+  isOpen: boolean;
+}) => any;
+
 type Props = {
   className: string;
-  renderToggle: any;
+  renderToggle: RenderToggle;
+  // fix
   renderExpand: any;
-  expandWidth: any;
+  expandWidth: number | string;
 };
 
 export default function Dropdown({
