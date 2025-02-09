@@ -40,6 +40,9 @@ export default function MenuDropdown({ title, options }: Props) {
                 <div
                   key={index}
                   className="text-stone-50 font-bold hover:bg-indigo-600 hover:rounded cursor-pointer p-2"
+                  onClick={() => {
+                    console.log(option.text);
+                  }}
                 >
                   <i
                     className={`fa-solid ${option.iconClass} text-indigo-500 mr-3`}
