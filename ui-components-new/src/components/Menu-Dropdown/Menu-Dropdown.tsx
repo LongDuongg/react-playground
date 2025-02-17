@@ -56,6 +56,11 @@ export default function MenuDropdown({ title, options }: Props) {
         );
       }}
       expandWidth={300}
+      top={"44px"}
+      bottom={""} 
+      left={""} 
+      right={0} 
+      toggleWidth={"100%"}    
     />
   );
 }
