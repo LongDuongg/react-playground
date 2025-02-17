@@ -20,3 +20,24 @@ export const options = [
     text: "Delete",
   },
 ];
+
+export const list = [
+  {
+    text: "Wade Cooper",
+  },
+  {
+    text: "Ariene Mccoy",
+  },
+  {
+    text: "Devon Webb",
+  },
+  {
+    text: "Tom Cook",
+  },
+  {
+    text: "Tanya Fox",
+  },
+  {
+    text: "Hellen Schmidt",
+  },
+];
