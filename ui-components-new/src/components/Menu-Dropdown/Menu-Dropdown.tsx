@@ -32,7 +32,7 @@ export default function MenuDropdown({ title, options }: Props) {
     <Dropdown
       className="w-full relative"
       renderToggle={renderToggle}
-      renderExpand={({ close }) => {
+      renderExpand={({close}) => {
         return (
           <>
             {options.map((option, index) => {
