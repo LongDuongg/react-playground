@@ -17,6 +17,11 @@ type Props = {
   renderToggle: RenderToggle;
   renderExpand: RenderExpand;
   expandWidth: number | string;
+  top: number | string;
+  bottom: number | string;
+  left: number | string;
+  right: number | string;
+  toggleWidth: number | string;
 };
 
 export default function Dropdown({
@@ -24,6 +29,11 @@ export default function Dropdown({
   renderToggle,
   renderExpand,
   expandWidth,
+  top,
+  bottom,
+  left,
+  right,
+  toggleWidth
 }: Props) {
   const [show, setShow] = useState(false);
 
@@ -36,7 +46,7 @@ export default function Dropdown({
 
   return (
     <div ref={ref} className={clns("dropdown", className)}>
-      <div className="toggle">
+      <div style={{width: toggleWidth}} className="toggle">
         {renderToggle({
           showExpand: (v: boolean) => setShow(v),
           isOpen: show,
@@ -44,8 +54,8 @@ export default function Dropdown({
       </div>
       {show && (
         <div
-          style={{ width: expandWidth }}
-          className="expand bg-blue-400 rounded p-2 absolute right-0 top-[50px]"
+          style={{ width: expandWidth, top: top, bottom: bottom, left: left, right: right }}
+          className="expand bg-blue-400 rounded p-2 absolute"
         >
           {renderExpand({
             close: () => setShow(false),
