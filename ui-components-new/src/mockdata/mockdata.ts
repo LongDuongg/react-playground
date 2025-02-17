@@ -40,4 +40,4 @@ export const list = [
   {
     text: "Hellen Schmidt",
   },
-];
+].map(({ text }) => ({ text, value: text }));
