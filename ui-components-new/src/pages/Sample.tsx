@@ -9,7 +9,11 @@ export default function Sample() {
     <div className="">
       <div className="w-[150px] ml-auto mr-auto">
         {/* <MenuDropdown title="Options" options={options} /> */}
-        <Listbox list={list} />
+        <Listbox 
+        list={list} 
+        getLabel={(item) => item.text}
+        isSelected={(item) => item.text === state.text}
+        />
       </div>
     </div>
   );
