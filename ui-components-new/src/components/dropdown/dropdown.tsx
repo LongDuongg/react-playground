@@ -14,6 +14,13 @@ type RenderExpand = ({ close }: { close: () => void }) => any;
 
 type onPassiveClose = () => void;
 
+type Position = {
+  top?: number | string;
+  right?: number | string;
+  bottom?: number | string;
+  left?: number | string;
+};
+
 type Props = {
   renderToggle: RenderToggle;
   renderExpand: RenderExpand;
@@ -21,6 +28,7 @@ type Props = {
   expandDistance?: number;
   expandWidth?: number | string;
   onPassiveClose?: onPassiveClose;
+  position: Position;
 };
 
 export default function Dropdown({
@@ -29,7 +37,8 @@ export default function Dropdown({
   className,
   expandDistance,
   expandWidth,
-  onPassiveClose
+  onPassiveClose,
+  position
 }: Props) {
   const [show, setShow] = useState(false);
 
@@ -56,6 +65,7 @@ export default function Dropdown({
           style={{
             width: expandWidth,
             top: `calc(100% + ${expandDistance}px)`,
+            right: position.right,
           }}
           className="expand bg-blue-400 rounded p-2 absolute"
         >
