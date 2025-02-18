@@ -2,7 +2,7 @@ import clns from "classnames";
 import { useState, useRef } from "react";
 import { useClickOutside } from "../../hook/useClickOutside";
 
-export type RenderToggle = ({
+type RenderToggle = ({
   showExpand,
   isOpen,
 }: {
@@ -10,30 +10,26 @@ export type RenderToggle = ({
   isOpen: boolean;
 }) => any;
 
-export type RenderExpand = ({ close }: { close: () => void }) => any;
+type RenderExpand = ({ close }: { close: () => void }) => any;
+
+type onPassiveClose = () => void;
 
 type Props = {
-  className: string;
   renderToggle: RenderToggle;
   renderExpand: RenderExpand;
+  className: string;
+  expandDistance?: number;
   expandWidth?: number | string;
-  top: number | string;
-  bottom: number | string;
-  left: number | string;
-  right: number | string;
-  toggleWidth?: number | string;
+  onPassiveClose?: onPassiveClose;
 };
 
 export default function Dropdown({
-  className,
   renderToggle,
   renderExpand,
-  expandWidth = 300,
-  top,
-  bottom,
-  left,
-  right,
-  toggleWidth,
+  className,
+  expandDistance,
+  expandWidth,
+  onPassiveClose
 }: Props) {
   const [show, setShow] = useState(false);
 
@@ -41,12 +37,15 @@ export default function Dropdown({
 
   useClickOutside({
     ref,
-    handler: () => setShow(false),
+    handler: () => {
+      setShow(false)
+      onPassiveClose?.()
+    },
   });
 
   return (
     <div ref={ref} className={clns("dropdown", className)}>
-      <div style={{ width: toggleWidth }} className="toggle">
+      <div className="toggle w-full">
         {renderToggle({
           showExpand: (v: boolean) => setShow(v),
           isOpen: show,
@@ -56,10 +55,7 @@ export default function Dropdown({
         <div
           style={{
             width: expandWidth,
-            top: top,
-            bottom: bottom,
-            left: left,
-            right: right,
+            top: `calc(100% + ${expandDistance}px)`,
           }}
           className="expand bg-blue-400 rounded p-2 absolute"
         >
