@@ -26,7 +26,6 @@ export default function Listbox({
 
   return (
     <Dropdown
-      className="w-full relative"
       renderToggle={({ showExpand, isOpen }) => {
         return (
           <button
@@ -65,7 +64,6 @@ export default function Listbox({
       }}
       expandDistance={5}
       expandWidth={300}
-      position={{ left: 0 }}
     />
   );
 }

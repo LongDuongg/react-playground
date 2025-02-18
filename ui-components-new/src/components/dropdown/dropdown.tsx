@@ -12,23 +12,14 @@ type RenderToggle = ({
 
 type RenderExpand = ({ close }: { close: () => void }) => any;
 
-type onPassiveClose = () => void;
-
-type Position = {
-  top?: number | string;
-  right?: number | string;
-  bottom?: number | string;
-  left?: number | string;
-};
-
 type Props = {
   renderToggle: RenderToggle;
   renderExpand: RenderExpand;
-  className: string;
+  className?: string;
   expandDistance?: number;
   expandWidth?: number | string;
-  onPassiveClose?: onPassiveClose;
-  position: Position;
+  onPassiveClose?: () => void;
+  expandPosition?: "left" | "right";
 };
 
 export default function Dropdown({
@@ -38,7 +29,7 @@ export default function Dropdown({
   expandDistance,
   expandWidth,
   onPassiveClose,
-  position
+  expandPosition = "left",
 }: Props) {
   const [show, setShow] = useState(false);
 
@@ -47,13 +38,13 @@ export default function Dropdown({
   useClickOutside({
     ref,
     handler: () => {
-      setShow(false)
-      onPassiveClose?.()
+      setShow(false);
+      onPassiveClose?.();
     },
   });
 
   return (
-    <div ref={ref} className={clns("dropdown", className)}>
+    <div ref={ref} className={clns("dropdown", "w-full relative", className)}>
       <div className="toggle w-full">
         {renderToggle({
           showExpand: (v: boolean) => setShow(v),
@@ -65,7 +56,7 @@ export default function Dropdown({
           style={{
             width: expandWidth,
             top: `calc(100% + ${expandDistance}px)`,
-            right: position.right,
+            ...(expandPosition === "left" ? { left: 0 } : { right: 0 }),
           }}
           className="expand bg-blue-400 rounded p-2 absolute"
         >

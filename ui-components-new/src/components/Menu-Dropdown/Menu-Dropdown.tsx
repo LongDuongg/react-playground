@@ -10,10 +10,8 @@ type Props = {
 
 // const MenuDropdown:FC<Props> = ({ title, options }) => {
 export default function MenuDropdown({ title, options }: Props) {
-
   return (
     <Dropdown
-      className="w-full relative"
       renderToggle={({ showExpand, isOpen }) => {
         return (
           <button
@@ -31,7 +29,7 @@ export default function MenuDropdown({ title, options }: Props) {
           </button>
         );
       }}
-      renderExpand={({close}) => {
+      renderExpand={({ close }) => {
         return (
           <>
             {options.map((option, index) => {
@@ -56,7 +54,7 @@ export default function MenuDropdown({ title, options }: Props) {
       }}
       expandWidth={300}
       expandDistance={3}
-      position={{ right: 0 }}
+      expandPosition="right"
     />
   );
 }
