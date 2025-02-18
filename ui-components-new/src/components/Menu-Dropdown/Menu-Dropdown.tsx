@@ -55,7 +55,8 @@ export default function MenuDropdown({ title, options }: Props) {
         );
       }}
       expandWidth={300}
-      expandDistance={10}
+      expandDistance={3}
+      position={{ right: 0 }}
     />
   );
 }
