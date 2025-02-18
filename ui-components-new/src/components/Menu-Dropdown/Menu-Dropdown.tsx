@@ -1,4 +1,4 @@
-import Dropdown, { RenderToggle, RenderExpand } from "../dropdown/dropdown";
+import Dropdown from "../dropdown/dropdown";
 
 type Props = {
   title: string;
@@ -10,28 +10,27 @@ type Props = {
 
 // const MenuDropdown:FC<Props> = ({ title, options }) => {
 export default function MenuDropdown({ title, options }: Props) {
-  const renderToggle: RenderToggle = ({ showExpand, isOpen }) => {
-    return (
-      <button
-        onClick={() => {
-          showExpand(!isOpen);
-        }}
-        className="w-full bg-indigo-500 text-stone-50 p-2 rounded font-bold hover:bg-indigo-600 cursor-pointer"
-      >
-        {title}
-        {isOpen ? (
-          <i className="fa-solid fa-angle-up ml-3"></i>
-        ) : (
-          <i className="fa-solid fa-angle-down ml-3"></i>
-        )}
-      </button>
-    );
-  };
 
   return (
     <Dropdown
       className="w-full relative"
-      renderToggle={renderToggle}
+      renderToggle={({ showExpand, isOpen }) => {
+        return (
+          <button
+            onClick={() => {
+              showExpand(!isOpen);
+            }}
+            className="w-full bg-indigo-500 text-stone-50 p-2 rounded font-bold hover:bg-indigo-600 cursor-pointer"
+          >
+            {title}
+            {isOpen ? (
+              <i className="fa-solid fa-angle-up ml-3"></i>
+            ) : (
+              <i className="fa-solid fa-angle-down ml-3"></i>
+            )}
+          </button>
+        );
+      }}
       renderExpand={({close}) => {
         return (
           <>
@@ -56,11 +55,7 @@ export default function MenuDropdown({ title, options }: Props) {
         );
       }}
       expandWidth={300}
-      top={"44px"}
-      bottom={""} 
-      left={""} 
-      right={0} 
-      toggleWidth={"100%"}    
+      expandDistance={10}
     />
   );
 }
