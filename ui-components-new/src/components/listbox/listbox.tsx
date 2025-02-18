@@ -63,11 +63,9 @@ export default function Listbox({
           </>
         );
       }}
-      // top={"44px"}
-      // bottom={""}
-      // left={"1%"}
-      // right={""}
-      // toggleWidth={300}
+      expandDistance={5}
+      expandWidth={300}
+      position={{ left: 0 }}
     />
   );
 }
