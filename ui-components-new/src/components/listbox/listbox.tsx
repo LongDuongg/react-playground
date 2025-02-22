@@ -35,7 +35,7 @@ export default function Listbox({
             className="w-full bg-indigo-500 text-stone-50 p-2 rounded font-bold hover:bg-indigo-600 cursor-pointer text-left pl-5"
           >
             {selected ? getLabel(selected) : ""}
-            <i className="fa-solid fa-list relative left-40"></i>
+            <i className="fa-solid fa-list relative left-34"></i>
           </button>
         );
       }}
