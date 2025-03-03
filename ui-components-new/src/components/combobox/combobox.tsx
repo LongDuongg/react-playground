@@ -1,6 +1,6 @@
 import Dropdown from "../dropdown/dropdown";
-import { useRef } from "react";
-
+import { useRef, useState } from "react";
+import { bindInput } from "../../common/bindInput";
 type Item = {
   text: string;
   value: string;
@@ -19,6 +19,7 @@ export default function Combobox({
   isSelected,
   onChange,
 }: Props) {
+  const [searchText, setSearchText] = useState(null);
   const selected = list.find((item) => isSelected(item)); // hỏi về find
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -28,6 +29,15 @@ export default function Combobox({
         return (
           <div className="w-full bg-indigo-500 text-stone-50 pt-2 pb-2 rounded font-bold hover:bg-indigo-600 text-left">
             <input
+              {...bindInput({
+                value: searchText ?? (selected && getLabel(selected)),
+                onChange: (e) => {
+                  setSearchText(e);
+                  if (!isOpen) {
+                    showExpand(true);
+                  }
+                },
+              })}
               type="text"
               value={selected ? getLabel(selected) : ""}
               className="w-67 pl-4 outline-0"
