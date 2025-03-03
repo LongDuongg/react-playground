@@ -21,7 +21,13 @@ export default function Combobox({
 }: Props) {
   const [searchText, setSearchText] = useState(null);
   const selected = list.find((item) => isSelected(item)); // hỏi về find
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef(null);
+
+  const searchList = !searchText
+    ? list
+    : list.filter((item) => {
+        return item.text.toLowerCase().includes(searchText.toLowerCase());
+      });
 
   return (
     <Dropdown
@@ -39,7 +45,6 @@ export default function Combobox({
                 },
               })}
               type="text"
-              value={selected ? getLabel(selected) : ""}
               className="w-67 pl-4 outline-0"
               ref={inputRef}
             />
@@ -47,7 +52,7 @@ export default function Combobox({
               className="absolute right-0 top-2 cursor-pointer pr-4 "
               onClick={() => {
                 showExpand(!isOpen);
-                inputRef.current?.focus();
+                inputRef.current.focus();
               }}
             >
               <i className="fa-solid fa-list"></i>
@@ -58,7 +63,7 @@ export default function Combobox({
       renderExpand={({ close }) => {
         return (
           <>
-            {list.map((item, index) => {
+            {searchList.map((item, index) => {
               return (
                 <div
                   key={index}
@@ -66,7 +71,8 @@ export default function Combobox({
                   onClick={() => {
                     close();
                     onChange(item);
-                    inputRef.current?.focus();
+                    // setSearchText(null);
+                    inputRef.current.focus();
                   }}
                 >
                   {isSelected(item) && (
@@ -79,6 +85,7 @@ export default function Combobox({
           </>
         );
       }}
+      onPassiveClose={() => setSearchText(null)}
       expandWidth={300}
       expandDistance={10}
     />
