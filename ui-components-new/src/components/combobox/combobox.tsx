@@ -1,6 +1,7 @@
 import Dropdown from "../dropdown/dropdown";
 import { useRef, useState } from "react";
 import { bindInput } from "../../common/bindInput";
+
 type Item = {
   text: string;
   value: string;
@@ -19,9 +20,10 @@ export default function Combobox({
   isSelected,
   onChange,
 }: Props) {
-  const [searchText, setSearchText] = useState(null);
-  const selected = list.find((item) => isSelected(item)); // hỏi về find
-  const inputRef = useRef(null);
+  const [searchText, setSearchText] = useState<string>("");
+  // const selected = list.find((item) => isSelected(item)); // hỏi về find
+  const selected = list.find(isSelected); // hỏi về find
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const searchList = !searchText
     ? list
@@ -32,11 +34,22 @@ export default function Combobox({
   return (
     <Dropdown
       renderToggle={({ showExpand, isOpen }) => {
+        // const { value, onChange } = bindInput({
+        //   value: searchText || (selected ? getLabel(selected) : ""),
+        //   onChange: (e) => {
+        //     setSearchText(e);
+        //     if (!isOpen) {
+        //       showExpand(true);
+        //     }
+        //   },
+        // });
         return (
           <div className="w-full bg-indigo-500 text-stone-50 pt-2 pb-2 rounded font-bold hover:bg-indigo-600 text-left">
             <input
+              // value={value}
+              // onChange={onChange}
               {...bindInput({
-                value: searchText ?? (selected && getLabel(selected)),
+                value: searchText || (selected ? getLabel(selected) : ""),
                 onChange: (e) => {
                   setSearchText(e);
                   if (!isOpen) {
@@ -52,7 +65,9 @@ export default function Combobox({
               className="absolute right-0 top-2 cursor-pointer pr-4 "
               onClick={() => {
                 showExpand(!isOpen);
-                inputRef.current.focus();
+                if (inputRef.current) {
+                  inputRef.current.focus();
+                }
               }}
             >
               <i className="fa-solid fa-list"></i>
@@ -71,8 +86,8 @@ export default function Combobox({
                   onClick={() => {
                     close();
                     onChange(item);
-                    // setSearchText(null);
-                    inputRef.current.focus();
+                    setSearchText("");
+                    inputRef.current?.focus();
                   }}
                 >
                   {isSelected(item) && (
@@ -85,7 +100,7 @@ export default function Combobox({
           </>
         );
       }}
-      onPassiveClose={() => setSearchText(null)}
+      onPassiveClose={() => setSearchText("")}
       expandWidth={300}
       expandDistance={10}
     />
