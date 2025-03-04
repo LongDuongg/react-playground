@@ -41,3 +41,21 @@ export const list = [
     text: "Hellen Schmidt",
   },
 ].map(({ text }) => ({ text, value: text }));
+
+export const solutions = [
+  {
+    title: "Insight",
+    text: "Measure actions your users tak",
+    iconclass: "fa-sharp fa-solid fa-eye",
+  },
+  {
+    title: "Automations",
+    text: "Create your own targeted automations",
+    iconclass: "fa-solid fa-robot",
+  },
+  {
+    title: "Reports",
+    text: "Keep track of your growth",
+    iconclass: "fa-solid fa-bug",
+  },
+];
