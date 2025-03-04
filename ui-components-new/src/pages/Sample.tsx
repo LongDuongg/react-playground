@@ -46,6 +46,7 @@ export default function Sample() {
             return (
               <div className="list ">
                 {solutions.map((item) => {
+                  // TODO
                   return (
                     <div className="content cursor-pointer relative flex justify-center align-middle">
                       <div className="image absolute left-0 top-3">
