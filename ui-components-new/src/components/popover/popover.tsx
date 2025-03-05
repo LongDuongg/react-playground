@@ -43,14 +43,13 @@ export default function Popover({
         {renderToggle({ showExpand: (v) => setShow(v), isOpen: show })}
       </div>
       <div
-        className="expand bg-stone-50 rounded p-2 absolute"
+        className="expand bg-stone-50 rounded p-2 absolute ease-in-out transition-all duration-300"
         // TODO
         style={{
           ...(expandPosition === "left" ? { left: 0 } : { right: 0 }),
           top: show ? `calc(100% + ${expandDistance})` : "calc(100% + 10px)",
           opacity: show ? "1" : "0",
           visibility: show ? "visible" : "hidden",
-          transition: "all 500ms ease",
           width: expandWidth,
         }}
       >
