@@ -60,6 +60,13 @@ export default function Sample() {
                   );
                 })}
               </div>
+                <div className="foot w-full p-4 rounded cursor-pointer bg-[#878787] text-stone-50">
+                  <div className="title">Documentation</div>
+                  <div className="text">
+                    Start integrating products and tools
+                  </div>
+                </div>
+              </>
             );
           }}
           expandWidth={450}
