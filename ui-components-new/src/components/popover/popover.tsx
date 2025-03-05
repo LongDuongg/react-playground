@@ -14,8 +14,7 @@ type Props = {
   className?: string;
   expandDistance?: number;
   expandWidth?: number | string;
-  leftDistance?: string;
-  rightDistance?: string;
+  expandPosition?: "left" | "right";
   onPassiveClose?: () => void;
 };
 
@@ -26,8 +25,6 @@ export default function Popover({
   expandDistance,
   expandWidth,
   onPassiveClose,
-  leftDistance,
-  rightDistance,
 }: Props) {
   const [show, setShow] = useState(false);
   const ref = useRef(null);
@@ -49,11 +46,7 @@ export default function Popover({
         className="expand bg-stone-50 rounded p-2 absolute"
         // TODO
         style={{
-          ...(leftDistance
-            ? { left: `calc(0% - ${leftDistance})` }
-            : rightDistance
-            ? { right: `calc(0% - ${rightDistance})` }
-            : { left: "calc(0% - 110px)" }),
+          ...(expandPosition === "left" ? { left: 0 } : { right: 0 }),
           top: show ? `calc(100% + ${expandDistance})` : "calc(100% + 10px)",
           opacity: show ? "1" : "0",
           visibility: show ? "visible" : "hidden",
