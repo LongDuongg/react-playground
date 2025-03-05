@@ -46,27 +46,27 @@ export default function Sample() {
           renderExpand={({ close }) => {
             return (
               <>
-              <div className="list ">
-                {solutions.map((item) => {
-                  // TODO
-                  return (
-                      <div className="container w-full cursor-pointer relative flex mt-2 mb-2 p-6 hover:bg-[#ffedd5] hover:rounded-2xl">
-                        <div className="image absolute left-4 top-3">
+                <div className="list ">
+                  {solutions.map((item) => {
+                    // TODO
+                    return (
+                      <div className="container w-full cursor-pointer relative mt-2 mb-2 py-6 pr-6 pl-26 hover:bg-[#ffedd5] hover:rounded-2xl">
+                        <div className="image absolute left-4 top-[50%] transform -translate-y-1/2">
                           <i
                             className={clsn(
                               item.iconclass,
-                              "p-7 bg-[#fb923c] rounded-2xl"
+                              "p-7 bg-[#fb923c] rounded-2xl",
                             )}
                           />
+                        </div>
+                        <div className="content">
+                          <div className="title">{item.title}</div>
+                          <div className="text">{item.text}</div>
+                        </div>
                       </div>
-                        <div className="content ml-20">
-                        <div className="title">{item.title}</div>
-                        <div className="text">{item.text}</div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
                 <div className="foot w-full p-4 rounded cursor-pointer bg-[#878787] text-stone-50">
                   <div className="title">Documentation</div>
                   <div className="text">

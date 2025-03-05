@@ -39,8 +39,8 @@ export default function Popover({
   });
 
   return (
-    <div ref={ref} className={clsn("popover relative", className)}>
-      <div className="toggle w-full">
+    <div ref={ref} className={clsn("popover relative w-fit", className)}>
+      <div className="toggle">
         {renderToggle({ showExpand: (v) => setShow(v), isOpen: show })}
       </div>
       <div
