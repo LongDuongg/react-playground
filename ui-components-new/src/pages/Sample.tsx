@@ -2,6 +2,7 @@
 // import Listbox from "../components/listbox/listbox";
 // import Combobox from "../components/combobox/combobox";
 import Popover from "../components/popover/popover";
+import clsn from "classnames";
 import { useState } from "react";
 import { options, list, solutions } from "../mockdata/mockdata";
 
@@ -44,15 +45,21 @@ export default function Sample() {
           }}
           renderExpand={({ close }) => {
             return (
+              <>
               <div className="list ">
                 {solutions.map((item) => {
                   // TODO
                   return (
-                    <div className="content cursor-pointer relative flex justify-center align-middle">
-                      <div className="image absolute left-0 top-3">
-                        <i className={item.iconclass} />
+                      <div className="container w-full cursor-pointer relative flex mt-2 mb-2 p-6 hover:bg-[#ffedd5] hover:rounded-2xl">
+                        <div className="image absolute left-4 top-3">
+                          <i
+                            className={clsn(
+                              item.iconclass,
+                              "p-7 bg-[#fb923c] rounded-2xl"
+                            )}
+                          />
                       </div>
-                      <div className="sub-content ml-10">
+                        <div className="content ml-20">
                         <div className="title">{item.title}</div>
                         <div className="text">{item.text}</div>
                       </div>
