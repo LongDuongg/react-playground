@@ -62,6 +62,8 @@ export default function Sample() {
               </div>
             );
           }}
+          expandWidth={450}
+          expandPosition="right"
         />
       </div>
     </div>

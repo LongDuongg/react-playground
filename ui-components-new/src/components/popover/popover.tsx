@@ -24,6 +24,7 @@ export default function Popover({
   className,
   expandDistance,
   expandWidth,
+  expandPosition,
   onPassiveClose,
 }: Props) {
   const [show, setShow] = useState(false);
