@@ -39,7 +39,7 @@ export const Radio = ({
       }}
     >
       <div
-        className={clns("radio-lag", className)}
+        className={clns("radio-lag rounded-[0.4rem]", className)}
         onClick={() => {
           // if (ref.current.contains(e.target)) {
           //   setChecked(true);
