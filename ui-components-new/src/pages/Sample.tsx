@@ -1,13 +1,21 @@
 // import MenuDropdown from "../components/menu-dropdown/menu-dropdown";
 // import Listbox from "../components/listbox/listbox";
 // import Combobox from "../components/combobox/combobox";
-import Popover from "../components/popover/popover";
+// import Popover from "../components/popover/popover";
+import { Radio } from "../components/radio-group/radio-group";
 import clsn from "classnames";
 import { useState } from "react";
 import { options, list, solutions } from "../mockdata/mockdata";
 
 export default function Sample() {
   const [listboxState, setListboxState] = useState("");
+  const [selected, setSelected] = useState(false);
+
+  // const computerInfo = [
+  //   { name: "Startup", info: "12GB/6 CPUs - 160 GB SSD disk" },
+  //   { name: "Business", info: "16GB/8 CPUs · 512 GB SSD disk" },
+  //   { name: "Enterprise", info: "32GB/12 CPUs · 1024 GB SSD disk" },
+  // ];
 
   return (
     <div className="">
@@ -25,7 +33,7 @@ export default function Sample() {
           isSelected={(item) => item.value === listboxState}
           onChange={(item) => setListboxState(item.value)}
         /> */}
-        <Popover
+        {/* <Popover
           renderToggle={({ showExpand, isOpen }) => {
             return (
               <button
@@ -78,7 +86,65 @@ export default function Sample() {
           }}
           expandWidth={450}
           expandPosition="right"
-        />
+        /> */}
+        <div className="computer">
+          <Radio
+            className={"startup-alm py-3 pl-3"}
+            renderRadio={() => {
+              return (
+                <div className="content relative cursor-pointer">
+                  <div className="name">Startup</div>
+                  <div className="info">12GB/6 CPUs - 160 GB SSD disk</div>
+                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
+                    {selected && <i className="fa-solid fa-circle-check" />}
+                  </div>
+                </div>
+              );
+            }}
+            checked={selected}
+            onChange={() => setSelected(!selected)}
+            activeBG={"#0e658d"}
+            inactiveBG={"#91d9e6"}
+          />
+
+          <Radio
+            className={"business-alm py-3 pl-3"}
+            renderRadio={() => {
+              return (
+                <div className="content relative cursor-pointer">
+                  <div className="name">Business</div>
+                  <div className="info">16GB/8 CPUs · 512 GB SSD disk</div>
+                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
+                    {selected && <i className="fa-solid fa-circle-check" />}
+                  </div>
+                </div>
+              );
+            }}
+            checked={selected}
+            onChange={() => setSelected(!selected)}
+            activeBG={"#0e658d"}
+            inactiveBG={"#91d9e6"}
+          />
+
+          <Radio
+            className={"enterprise-alm py-3 pl-3"}
+            renderRadio={() => {
+              return (
+                <div className="content relative cursor-pointer">
+                  <div className="name">Enterprise</div>
+                  <div className="info">32GB/12 CPUs · 1024 GB SSD disk</div>
+                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
+                    {selected && <i className="fa-solid fa-circle-check" />}
+                  </div>
+                </div>
+              );
+            }}
+            checked={selected}
+            onChange={() => setSelected(!selected)}
+            activeBG={"#0e658d"}
+            inactiveBG={"#91d9e6"}
+          />
+        </div>
       </div>
     </div>
   );
