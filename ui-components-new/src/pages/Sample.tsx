@@ -2,7 +2,8 @@
 // import Listbox from "../components/listbox/listbox";
 // import Combobox from "../components/combobox/combobox";
 // import Popover from "../components/popover/popover";
-import { Radio } from "../components/radio-group/radio-group";
+// import { Radio } from "../components/radio-group/radio-group";
+import Disclosure from "../components/disclosure/disclosure";
 import clsn from "classnames";
 import { useState } from "react";
 import { options, list, solutions } from "../mockdata/mockdata";
@@ -19,7 +20,7 @@ export default function Sample() {
 
   return (
     <div className="">
-      <div className="w-[300px] ml-auto mr-auto">
+      <div className="w-[350px] ml-auto mr-auto">
         {/* <MenuDropdown title="Options" options={options} /> */}
         {/* <Listbox
           list={list}
@@ -87,7 +88,7 @@ export default function Sample() {
           expandWidth={450}
           expandPosition="right"
         /> */}
-        <div className="computer">
+        {/* <div className="computer">
           <Radio
             className={"startup-alm py-3 pl-3"}
             renderRadio={() => {
@@ -144,7 +145,34 @@ export default function Sample() {
             activeBG={"#0e658d"}
             inactiveBG={"#91d9e6"}
           />
-        </div>
+        </div> */}
+        <Disclosure
+          toggleText="What is your refund policy"
+          renderExpand={() => {
+            return (
+              <div className="text px-2 pl-4 w-full">
+                If you're unhappy with your purchase for any reason, email us
+                within 90 days and we'll refund you in full, no questions asked.
+              </div>
+            );
+          }}
+          toggleColor="#fff"
+          toggleBackGround="#dd95ed"
+          toggleBackGroundHover="#c479d4"
+          expandColor="rgb(14 14 14)"
+          expandDistance={10}
+        />
+        <Disclosure
+          toggleText="Do you offer technical support?"
+          renderExpand={() => {
+            return <div className="text px-2 pl-4 w-full">No.</div>;
+          }}
+          toggleColor="#fff"
+          toggleBackGround="#dd95ed"
+          toggleBackGroundHover="#c479d4"
+          expandColor="rgb(14 14 14)"
+          expandDistance={10}
+        />
       </div>
     </div>
   );
