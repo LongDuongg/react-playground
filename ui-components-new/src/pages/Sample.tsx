@@ -148,34 +148,22 @@ export default function Sample() {
             inactiveBG={"#91d9e6"}
           />
         </div> */}
-        {/* <Disclosure
+        <Disclosure
           toggleText="What is your refund policy"
-          renderExpand={() => {
-            return (
-              <div className="text px-2 pl-4 w-full">
-                If you're unhappy with your purchase for any reason, email us
-                within 90 days and we'll refund you in full, no questions asked.
-              </div>
-            );
-          }}
-          toggleColor="#fff"
-          toggleBackGround="#dd95ed"
-          toggleBackGroundHover="#c479d4"
-          expandColor="rgb(14 14 14)"
-          expandDistance={10}
+          expandText="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
         />
         <Disclosure
           toggleText="Do you offer technical support?"
           renderExpand={() => {
-            return <div className="text px-2 pl-4 w-full">No.</div>;
+            return (
+              <div>
+                Yes! We have a dedicated support team ready to answer your
+                questions.
+              </div>
+            );
           }}
-          toggleColor="#fff"
-          toggleBackGround="#dd95ed"
-          toggleBackGroundHover="#c479d4"
-          expandColor="rgb(14 14 14)"
-          expandDistance={10}
-        /> */}
-        <div>
+        />
+        {/* <div>
           <button
             onClick={() => setShow(true)}
             className="btn mt-4 cursor-pointer rounded-2xl p-3 bg-blue-500 hover:bg-blue-700"
@@ -206,7 +194,7 @@ export default function Sample() {
               );
             }}
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

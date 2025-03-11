@@ -56,3 +56,7 @@ export const Radio = ({
     </div>
   );
 };
+
+export const RadioGroup = ({ list }: { list: any[] }) => {
+  // list map Radio
+};
