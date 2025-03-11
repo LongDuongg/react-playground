@@ -7,10 +7,12 @@ import Disclosure from "../components/disclosure/disclosure";
 import clsn from "classnames";
 import { useState } from "react";
 import { options, list, solutions } from "../mockdata/mockdata";
+import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
   const [listboxState, setListboxState] = useState("");
   const [selected, setSelected] = useState(false);
+  const [show, setShow] = useState(false);
 
   // const computerInfo = [
   //   { name: "Startup", info: "12GB/6 CPUs - 160 GB SSD disk" },
@@ -146,7 +148,7 @@ export default function Sample() {
             inactiveBG={"#91d9e6"}
           />
         </div> */}
-        <Disclosure
+        {/* <Disclosure
           toggleText="What is your refund policy"
           renderExpand={() => {
             return (
@@ -172,7 +174,39 @@ export default function Sample() {
           toggleBackGroundHover="#c479d4"
           expandColor="rgb(14 14 14)"
           expandDistance={10}
-        />
+        /> */}
+        <div>
+          <button
+            onClick={() => setShow(true)}
+            className="btn mt-4 cursor-pointer rounded-2xl p-3 bg-blue-500 hover:bg-blue-700"
+          >
+            Open dialog
+          </button>
+          <Dialog
+            isOpen={show}
+            onClose={() => setShow(false)}
+            className={"payment"}
+            renderContent={({ close }) => {
+              return (
+                <>
+                  <div className="title">
+                    <div>Payment successful</div>
+                  </div>
+                  <div className="content my-2.5">
+                    Your payment has been successfully submitted. We have sent
+                    you an email with all of the details of your order.
+                  </div>
+                  <button
+                    onClick={() => close()}
+                    className="btn cursor-pointer rounded-2xl p-3 bg-blue-500 hover:bg-blue-700"
+                  >
+                    Got it, thanks !
+                  </button>
+                </>
+              );
+            }}
+          />
+        </div>
       </div>
     </div>
   );
