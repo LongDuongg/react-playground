@@ -2,23 +2,16 @@
 // import Listbox from "../components/listbox/listbox";
 // import Combobox from "../components/combobox/combobox";
 // import Popover from "../components/popover/popover";
-// import { Radio } from "../components/radio-group/radio-group";
-import Disclosure from "../components/disclosure/disclosure";
+import { RadioGroup } from "../components/radio-group/radio-group";
+// import Disclosure from "../components/disclosure/disclosure";
 import clsn from "classnames";
 import { useState } from "react";
-import { options, list, solutions } from "../mockdata/mockdata";
-import Dialog from "../components/dialog/dialog";
+import { options, list, solutions, plans } from "../mockdata/mockdata";
+// import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
-  const [listboxState, setListboxState] = useState("");
-  const [selected, setSelected] = useState(false);
+  const [state, seState] = useState("");
   const [show, setShow] = useState(false);
-
-  // const computerInfo = [
-  //   { name: "Startup", info: "12GB/6 CPUs - 160 GB SSD disk" },
-  //   { name: "Business", info: "16GB/8 CPUs · 512 GB SSD disk" },
-  //   { name: "Enterprise", info: "32GB/12 CPUs · 1024 GB SSD disk" },
-  // ];
 
   return (
     <div className="">
@@ -90,65 +83,7 @@ export default function Sample() {
           expandWidth={450}
           expandPosition="right"
         /> */}
-        {/* <div className="computer">
-          <Radio
-            className={"startup-alm py-3 pl-3"}
-            renderRadio={() => {
-              return (
-                <div className="content relative cursor-pointer">
-                  <div className="name">Startup</div>
-                  <div className="info">12GB/6 CPUs - 160 GB SSD disk</div>
-                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
-                    {selected && <i className="fa-solid fa-circle-check" />}
-                  </div>
-                </div>
-              );
-            }}
-            checked={selected}
-            onChange={() => setSelected(!selected)}
-            activeBG={"#0e658d"}
-            inactiveBG={"#91d9e6"}
-          />
-
-          <Radio
-            className={"business-alm py-3 pl-3"}
-            renderRadio={() => {
-              return (
-                <div className="content relative cursor-pointer">
-                  <div className="name">Business</div>
-                  <div className="info">16GB/8 CPUs · 512 GB SSD disk</div>
-                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
-                    {selected && <i className="fa-solid fa-circle-check" />}
-                  </div>
-                </div>
-              );
-            }}
-            checked={selected}
-            onChange={() => setSelected(!selected)}
-            activeBG={"#0e658d"}
-            inactiveBG={"#91d9e6"}
-          />
-
-          <Radio
-            className={"enterprise-alm py-3 pl-3"}
-            renderRadio={() => {
-              return (
-                <div className="content relative cursor-pointer">
-                  <div className="name">Enterprise</div>
-                  <div className="info">32GB/12 CPUs · 1024 GB SSD disk</div>
-                  <div className="icon absolute right-0 top-[50%] transform -translate-1/2">
-                    {selected && <i className="fa-solid fa-circle-check" />}
-                  </div>
-                </div>
-              );
-            }}
-            checked={selected}
-            onChange={() => setSelected(!selected)}
-            activeBG={"#0e658d"}
-            inactiveBG={"#91d9e6"}
-          />
-        </div> */}
-        <Disclosure
+        {/* <Disclosure
           toggleText="What is your refund policy"
           expandText="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
         />
@@ -162,7 +97,7 @@ export default function Sample() {
               </div>
             );
           }}
-        />
+        /> */}
         {/* <div>
           <button
             onClick={() => setShow(true)}
@@ -195,6 +130,11 @@ export default function Sample() {
             }}
           />
         </div> */}
+        <RadioGroup
+          list={plans}
+          isSelected={(item) => item.value === state}
+          onChange={(item) => seState(item.value)}
+        />
       </div>
     </div>
   );
