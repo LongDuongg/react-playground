@@ -1,15 +1,13 @@
-import { useRef } from "react";
 import clns from "classnames";
 
-// import { useClickOutside } from "../../hooks/useClickOutside";
-
-type Props = {
+type RadioProps = {
   renderRadio: () => any;
   className?: string;
+  index: number;
   activeBG: string;
   inactiveBG: string;
   checked: boolean;
-  onChange: () => void;
+  onSelect: () => void;
 };
 
 export const Radio = ({
@@ -18,18 +16,11 @@ export const Radio = ({
   activeBG,
   inactiveBG,
   checked,
-  onChange,
-}: Props) => {
-  // const ref = useRef();
-
-  // useClickOutside({
-  //   ref: ref,
-  //   handler: () => setChecked(false),
-  // });
-
+  index,
+  onSelect,
+}: RadioProps) => {
   return (
     <div
-      // ref={ref}
       style={{
         ...(checked && {
           border: "4px solid #91d9e6",
@@ -39,13 +30,10 @@ export const Radio = ({
       }}
     >
       <div
+        key={index}
         className={clns("radio-lag rounded-[0.4rem]", className)}
         onClick={() => {
-          // if (ref.current.contains(e.target)) {
-          //   setChecked(true);
-          // }
-          // console.log(e);
-          onChange();
+          onSelect();
         }}
         style={{
           backgroundColor: checked ? `${activeBG}` : `${inactiveBG}`,
@@ -57,6 +45,43 @@ export const Radio = ({
   );
 };
 
-export const RadioGroup = ({ list }: { list: any[] }) => {
-  // list map Radio
+type RadioGroupProps = {
+  list: any[];
+  isSelected: (v: any) => boolean;
+  onChange: (v: any) => void;
+};
+
+export const RadioGroup = ({ list, isSelected, onChange }: RadioGroupProps) => {
+  return (
+    <>
+      {list.map((item, index) => {
+        return (
+          <Radio
+            index={index}
+            className={"startup-alm py-3 pl-3"}
+            renderRadio={() => {
+              return (
+                <div className="content relative cursor-pointer">
+                  <div className="name">{item.name}</div>
+                  <div className="info">{item.info}</div>
+                  <div className="icon absolute right-3.5 top-[50%] transform -translate-1/2">
+                    {isSelected(item) && (
+                      <i className="fa-solid fa-circle-check" />
+                    )}
+                  </div>
+                </div>
+              );
+            }}
+            checked={isSelected(item)}
+            activeBG={"#0e658d"}
+            inactiveBG={"#91d9e6"}
+            onSelect={() => {
+              onChange(item);
+              console.log(item);
+            }}
+          />
+        );
+      })}
+    </>
+  );
 };
