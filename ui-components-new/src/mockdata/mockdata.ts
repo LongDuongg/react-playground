@@ -63,20 +63,14 @@ export const solutions = [
 export const plans = [
   {
     name: "Startup",
-    ram: "12GB",
-    cpus: "6 CPUs",
-    disk: "160 GB SSD disk",
+    info: "12GB/6 CPUs - 160 GB SSD disk",
   },
   {
     name: "Business",
-    ram: "16GB",
-    cpus: "8 CPUs",
-    disk: "512 GB SSD disk",
+    info: "16GB/8 CPUs · 512 GB SSD disk",
   },
   {
     name: "Enterprise",
-    ram: "32GB",
-    cpus: "12 CPUs",
-    disk: "1024 GB SSD disk",
+    info: "32GB/12 CPUs · 1024 GB SSD disk",
   },
-];
+].map((item) => ({ ...item, value: item.name }));
