@@ -132,8 +132,8 @@ export default function Sample() {
         </div> */}
         <RadioGroup
           list={plans}
-          isSelected={(item) => item.value === state}
-          onChange={(item) => seState(item.value)}
+          isSelected={(item) => item.id === state}
+          onChange={(item) => seState(item.id)}
         />
       </div>
     </div>

@@ -73,4 +73,4 @@ export const plans = [
     name: "Enterprise",
     info: "32GB/12 CPUs · 1024 GB SSD disk",
   },
-].map((item) => ({ ...item, value: item.name }));
+].map((item, i) => ({ ...item, id: i }));

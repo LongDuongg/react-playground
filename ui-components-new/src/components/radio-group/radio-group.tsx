@@ -1,9 +1,8 @@
 import clns from "classnames";
 
 type RadioProps = {
-  renderRadio: () => any;
+  renderContent: () => any;
   className?: string;
-  index: number;
   activeBG: string;
   inactiveBG: string;
   checked: boolean;
@@ -11,16 +10,16 @@ type RadioProps = {
 };
 
 export const Radio = ({
-  renderRadio,
+  renderContent,
   className,
   activeBG,
   inactiveBG,
   checked,
-  index,
   onSelect,
 }: RadioProps) => {
   return (
     <div
+      // TODO fix shifted content when selected
       style={{
         ...(checked && {
           border: "4px solid #91d9e6",
@@ -30,7 +29,6 @@ export const Radio = ({
       }}
     >
       <div
-        key={index}
         className={clns("radio-lag rounded-[0.4rem]", className)}
         onClick={() => {
           onSelect();
@@ -39,7 +37,7 @@ export const Radio = ({
           backgroundColor: checked ? `${activeBG}` : `${inactiveBG}`,
         }}
       >
-        {renderRadio()}
+        {renderContent()}
       </div>
     </div>
   );
@@ -57,9 +55,9 @@ export const RadioGroup = ({ list, isSelected, onChange }: RadioGroupProps) => {
       {list.map((item, index) => {
         return (
           <Radio
-            index={index}
+            key={index}
             className={"startup-alm py-3 pl-3"}
-            renderRadio={() => {
+            renderContent={() => {
               return (
                 <div className="content relative cursor-pointer">
                   <div className="name">{item.name}</div>
