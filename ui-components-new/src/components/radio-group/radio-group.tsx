@@ -21,10 +21,8 @@ export const Radio = ({
     <div
       // TODO fix shifted content when selected
       style={{
-        ...(checked && {
-          border: "4px solid #91d9e6",
-          borderRadius: "0.6rem",
-        }),
+        border: "4px solid #91d9e6",
+        borderRadius: "0.6rem",
         margin: "10px 0px",
       }}
     >
