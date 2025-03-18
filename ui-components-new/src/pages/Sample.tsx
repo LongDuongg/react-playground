@@ -2,8 +2,9 @@
 // import Listbox from "../components/listbox/listbox";
 // import Combobox from "../components/combobox/combobox";
 // import Popover from "../components/popover/popover";
-import { RadioGroup } from "../components/radio-group/radio-group";
+// import { RadioGroup } from "../components/radio-group/radio-group";
 // import Disclosure from "../components/disclosure/disclosure";
+import { Switch } from "../components/switch/switch";
 import clsn from "classnames";
 import { useState } from "react";
 import { options, list, solutions, plans } from "../mockdata/mockdata";
@@ -12,6 +13,7 @@ import { options, list, solutions, plans } from "../mockdata/mockdata";
 export default function Sample() {
   const [state, seState] = useState("");
   const [show, setShow] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
   return (
     <div className="">
@@ -130,10 +132,16 @@ export default function Sample() {
             }}
           />
         </div> */}
-        <RadioGroup
+        {/* <RadioGroup
           list={plans}
           isSelected={(item) => item.id === state}
           onChange={(item) => seState(item.id)}
+        /> */}
+        <Switch
+          checked={enabled}
+          onChange={() => {
+            setEnabled(!enabled);
+          }}
         />
       </div>
     </div>
