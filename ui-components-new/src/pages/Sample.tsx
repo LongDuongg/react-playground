@@ -4,20 +4,27 @@
 // import Popover from "../components/popover/popover";
 // import { RadioGroup } from "../components/radio-group/radio-group";
 // import Disclosure from "../components/disclosure/disclosure";
-import { Switch } from "../components/switch/switch";
+// import { Switch } from "../components/switch/switch";
+import { Tab } from "../components/tab/tab";
 import clsn from "classnames";
 import { useState } from "react";
-import { options, list, solutions, plans } from "../mockdata/mockdata";
+import {
+  options,
+  list,
+  solutions,
+  plans,
+  categories,
+} from "../mockdata/mockdata";
 // import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
-  const [state, seState] = useState("");
+  const [state, seState] = useState<any>();
   const [show, setShow] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
   return (
     <div className="">
-      <div className="w-[350px] ml-auto mr-auto">
+      <div className="w-[590px] ml-auto mr-auto">
         {/* <MenuDropdown title="Options" options={options} /> */}
         {/* <Listbox
           list={list}
@@ -137,10 +144,18 @@ export default function Sample() {
           isSelected={(item) => item.id === state}
           onChange={(item) => seState(item.id)}
         /> */}
-        <Switch
+        {/* <Switch
           checked={enabled}
           onChange={() => {
             setEnabled(!enabled);
+          }}
+        /> */}
+        <Tab
+          list={categories}
+          contentDistance={10}
+          isActive={(item) => item.id === state}
+          onChange={(item) => {
+            seState(item.id);
           }}
         />
       </div>
