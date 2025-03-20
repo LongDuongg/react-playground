@@ -77,7 +77,8 @@ export const plans = [
 
 export const categories = [
   {
-    Recent: [
+    name: "Recent",
+    details: [
       {
         id: 1,
         title: "Does drinking coffee make you smarter?",
@@ -93,7 +94,10 @@ export const categories = [
         shareCount: 2,
       },
     ],
-    Popular: [
+  },
+  {
+    name: "Popular",
+    details: [
       {
         id: 1,
         title: "Is tech making coffee better or worse?",
@@ -109,7 +113,10 @@ export const categories = [
         shareCount: 12,
       },
     ],
-    Trending: [
+  },
+  {
+    name: "Trending",
+    details: [
       {
         id: 1,
         title: "Ask Me Anything: 10 answers to your questions about coffee",
