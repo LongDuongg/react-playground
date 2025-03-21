@@ -48,11 +48,14 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
             <div
               key={index}
               style={{
-                border: "4px solid #91d9e6",
+                border: `4px solid ${selected ? "#91d9e6" : "#51A7BF"}`,
                 borderRadius: "0.6rem",
                 margin: "10px 0px",
               }}
-              className="content p-3"
+              onClick={() => {
+                seSelected(!selected);
+              }}
+              className="content p-3 cursor-pointer"
             >
               <div className="title text-[20px] text-amber-50">
                 {detail.title}
