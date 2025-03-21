@@ -43,7 +43,7 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
         }}
         className="expand absolute left-0 right-0 bg-[#51A7BF] rounded-[10px] px-4 py-2"
       >
-        {state.details.map((detail: any, index: number) => {
+        {state?.details.map((detail: any, index: number) => {
           return (
             <div
               key={index}
@@ -58,7 +58,8 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
                 {detail.title}
               </div>
               <div className="detail">
-                {detail.date} - {detail.commentCount} - {detail.shareCount}
+                {detail.date} - {detail.commentCount} comments -{" "}
+                {detail.shareCount} shares
               </div>
             </div>
           );
