@@ -7,11 +7,12 @@ type Props = {
   onChange: (v: any) => void;
 };
 
+// TODO refactor to TabHeader and TabPanel
 export function Tab({ list, contentDistance, isActive, onChange }: Props) {
   const [state, seState] = useState<any>();
   const [selected, seSelected] = useState(false);
   useEffect(() => {
-    isActive(list[0].id);
+    // isActive(list[0].id);
     onChange(list[0]);
     if (list.length > 0) {
       seState({ ...list[0] });
@@ -20,6 +21,7 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
   return (
     <div className="tab mt-9 relative p-2 bg-[#51A7BF] flex space-x-4 rounded-[10px]">
       {list.map((item, index) => {
+        // TODO add hover state
         return (
           <button
             key={index}
@@ -44,6 +46,7 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
         className="expand absolute left-0 right-0 bg-[#51A7BF] rounded-[10px] px-4 py-2"
       >
         {state?.details.map((detail: any, index: number) => {
+          // TODO add item hover state
           return (
             <div
               key={index}
@@ -71,3 +74,15 @@ export function Tab({ list, contentDistance, isActive, onChange }: Props) {
     </div>
   );
 }
+
+type TabHeaderProps = {
+  tabs: any[];
+};
+
+export const TabHeader = () => {
+  return <div className="">tab header</div>;
+};
+
+export const TabPanel = ({ children }) => {
+  return <div className="">{children}</div>;
+};

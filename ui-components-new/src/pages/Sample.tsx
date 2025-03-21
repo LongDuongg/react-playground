@@ -4,8 +4,8 @@
 // import Popover from "../components/popover/popover";
 // import { RadioGroup } from "../components/radio-group/radio-group";
 // import Disclosure from "../components/disclosure/disclosure";
-// import { Switch } from "../components/switch/switch";
-import { Tab } from "../components/tab/tab";
+import { Switch } from "../components/switch/switch";
+import { Tab, TabHeader, TabPanel } from "../components/tab/tab";
 import clsn from "classnames";
 import { useState } from "react";
 import {
@@ -13,12 +13,12 @@ import {
   list,
   solutions,
   plans,
-  categories,
+  TABS_MOCK_DATA,
 } from "../mockdata/mockdata";
 // import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
-  const [state, seState] = useState<any>();
+  const [state, seState] = useState<any>(TABS_MOCK_DATA[0].id);
   const [show, setShow] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
@@ -151,13 +151,27 @@ export default function Sample() {
           }}
         /> */}
         <Tab
-          list={categories}
+          list={TABS_MOCK_DATA}
           contentDistance={10}
           isActive={(item) => item.id === state}
           onChange={(item) => {
             seState(item.id);
           }}
         />
+        <TabHeader
+          tabs={TABS_MOCK_DATA}
+          isSelected={() => {}}
+          onChange={() => {}}
+        />
+
+        <TabPanel>tab content</TabPanel>
+
+        <div className="">
+          bam nut nay de chuyen sang tab Recent
+          <button className="bg-red-300 p-2 border ml-4" onClick={() => {}}>
+            Recent
+          </button>
+        </div>
       </div>
     </div>
   );

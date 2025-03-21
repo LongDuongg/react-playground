@@ -24,7 +24,9 @@ export function Switch({
       >
         <i
           className={`fa-sharp-duotone fa-solid fa-circle absolute text-4xl shadow-md top-[50%] transform -translate-y-1/2 text-amber-50 transition-all duration-600 ease-in-out ${
-            checked ? "right-2" : "left-2"
+            checked
+              ? "left-[calc(100%-8px)] transform -translate-x-full"
+              : "left-2"
           }`}
         ></i>
       </div>

@@ -75,7 +75,7 @@ export const plans = [
   },
 ].map((item, i) => ({ ...item, id: i }));
 
-export const categories = [
+export const TABS_MOCK_DATA = [
   {
     id: 1,
     name: "Recent",
