@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Props = {
   list: any[];
@@ -9,7 +9,14 @@ type Props = {
 
 export function Tab({ list, contentDistance, isActive, onChange }: Props) {
   const [state, seState] = useState<any>();
-
+  const [selected, seSelected] = useState(false);
+  useEffect(() => {
+    isActive(list[0].id);
+    onChange(list[0]);
+    if (list.length > 0) {
+      seState({ ...list[0] });
+    }
+  }, [list]);
   return (
     <div className="tab mt-9 relative p-2 bg-[#51A7BF] flex space-x-4 rounded-[10px]">
       {list.map((item, index) => {
