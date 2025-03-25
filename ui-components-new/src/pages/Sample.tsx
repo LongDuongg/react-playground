@@ -18,7 +18,7 @@ import {
 // import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
-  const [state, seState] = useState<any>(TABS_MOCK_DATA[0].id);
+  const [state, seState] = useState<any>(TABS_MOCK_DATA[0]);
   const [show, setShow] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
@@ -150,28 +150,46 @@ export default function Sample() {
             setEnabled(!enabled);
           }}
         /> */}
-        <Tab
+        {/* <Tab
           list={TABS_MOCK_DATA}
           contentDistance={10}
           isActive={(item) => item.id === state}
           onChange={(item) => {
             seState(item.id);
           }}
-        />
+        /> */}
         <TabHeader
           tabs={TABS_MOCK_DATA}
-          isSelected={() => {}}
-          onChange={() => {}}
+          isActive={(item) => item.id === state.id}
+          onChange={(item) => {
+            seState({ ...item });
+          }}
+          className=" mt-9 p-2 bg-[#51A7BF] flex space-x-4 rounded-[10px]"
         />
 
-        <TabPanel>tab content</TabPanel>
-
-        <div className="">
-          bam nut nay de chuyen sang tab Recent
-          <button className="bg-red-300 p-2 border ml-4" onClick={() => {}}>
-            Recent
-          </button>
-        </div>
+        <TabPanel className=" w-[37rem] absolute top-27  bg-[#51A7BF] rounded-[10px] px-4 py-2">
+          {state?.details.map((detail: any, index: number) => {
+            return (
+              <div
+                key={index}
+                style={{
+                  border: `4px solid "#91d9e6"`,
+                  borderRadius: "0.6rem",
+                  margin: "10px 0px",
+                }}
+                className="content p-3 cursor-pointer"
+              >
+                <div className="title text-[20px] text-amber-50">
+                  {detail.title}
+                </div>
+                <div className="detail">
+                  {detail.date} - {detail.commentCount} comments -{" "}
+                  {detail.shareCount} shares
+                </div>
+              </div>
+            );
+          })}
+        </TabPanel>
       </div>
     </div>
   );
