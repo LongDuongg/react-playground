@@ -96,11 +96,17 @@ export const TabHeader = ({
             onClick={() => {
               onChange(item);
             }}
-            style={{
-              backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
-              color: isActive(item) ? "#51A7BF" : "#fff",
-            }}
-            className="tab-name text-[20px] py-2 px-14 cursor-pointer rounded-[10px]"
+            style={
+              {
+                // backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
+                // color: isActive(item) ? "#51A7BF" : "#fff",
+              }
+            }
+            className={`tab-name text-[20px] py-2 px-14 cursor-pointer bg-[${
+              isActive(item) ? "#fff" : "#51A7BF"
+            }] text-[${
+              isActive(item) ? "#51A7BF" : "#fff"
+            }] rounded-[10px] hover:bg-[#3E8E9E]`}
           >
             {item.name}
           </button>
