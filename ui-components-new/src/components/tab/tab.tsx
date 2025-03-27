@@ -88,7 +88,13 @@ export const TabHeader = ({
   className,
 }: TabHeaderProps) => {
   return (
-    <div className={clns("tab", className)}>
+    <div
+      className={clns(
+        "tab",
+        "bg-[#51A7BF] rounded-[10px] flex justify-between",
+        className,
+      )}
+    >
       {tabs.map((item, index) => {
         return (
           <button
@@ -102,7 +108,8 @@ export const TabHeader = ({
                 // color: isActive(item) ? "#51A7BF" : "#fff",
               }
             }
-            className={`tab-name text-[20px] py-2 px-14 cursor-pointer bg-[${
+            // TODO "tailwind dynamic classname not working"
+            className={`tab-name w-full text-[20px] py-2 px-14 cursor-pointer bg-[${
               isActive(item) ? "#fff" : "#51A7BF"
             }] text-[${
               isActive(item) ? "#51A7BF" : "#fff"
@@ -122,5 +129,15 @@ type TabPanelProps = {
 };
 
 export const TabPanel = ({ children, className }: TabPanelProps) => {
-  return <div className={clns("expand", className)}>{children}</div>;
+  return (
+    <div
+      className={clns(
+        "expand",
+        "bg-[#51A7BF] rounded-[10px] px-4 py-2",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 };

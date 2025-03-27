@@ -18,9 +18,11 @@ import {
 // import Dialog from "../components/dialog/dialog";
 
 export default function Sample() {
-  const [state, seState] = useState<any>(TABS_MOCK_DATA[0]);
+  const [state, seState] = useState<any>(TABS_MOCK_DATA[0].id);
   const [show, setShow] = useState(false);
   const [enabled, setEnabled] = useState(false);
+
+  const selectedTab = TABS_MOCK_DATA.find((item) => item.id === state);
 
   return (
     <div className="">
@@ -162,26 +164,26 @@ export default function Sample() {
           tabs={TABS_MOCK_DATA}
           isActive={(item) => item.id === state.id}
           onChange={(item) => {
-            seState({ ...item });
+            seState(item.id);
           }}
-          className=" mt-9 p-2 bg-[#51A7BF] flex space-x-4 rounded-[10px]"
+          className="mt-9"
         />
 
-        <TabPanel className=" w-[37rem] absolute top-27  bg-[#51A7BF] rounded-[10px] px-4 py-2">
-          {state?.details.map((detail: any, index: number) => {
+        <TabPanel className="mt-10">
+          {selectedTab?.details.map((detail: any, i: number) => {
             return (
               <div
-                key={index}
-                style={{
-                  border: `4px solid "#91d9e6"`,
-                  borderRadius: "0.6rem",
-                  margin: "10px 0px",
-                }}
+                key={i}
+                style={
+                  {
+                    // TODO selected, hover state
+                    // border: `4px solid "#91d9e6"`,
+                    // borderRadius: "0.6rem",
+                  }
+                }
                 className="content p-3 cursor-pointer"
               >
-                <div className="title text-[20px] text-amber-50">
-                  {detail.title}
-                </div>
+                <div className="title text-amber-50">{detail.title}</div>
                 <div className="detail">
                   {detail.date} - {detail.commentCount} comments -{" "}
                   {detail.shareCount} shares
@@ -191,13 +193,13 @@ export default function Sample() {
           })}
         </TabPanel>
 
-        <div className="mt-60 flex space-x-4">
-          {TABS_MOCK_DATA.map((item, index) => {
+        <div className="mt-10 flex space-x-4">
+          {TABS_MOCK_DATA.map((item, i) => {
             return (
               <button
-                key={index}
+                key={i}
                 onClick={() => {
-                  seState({ ...item });
+                  seState(item.id);
                 }}
                 className="bg-amber-700 cursor-pointer"
               >
