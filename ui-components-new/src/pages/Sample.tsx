@@ -190,6 +190,22 @@ export default function Sample() {
             );
           })}
         </TabPanel>
+
+        <div className="mt-60 flex space-x-4">
+          {TABS_MOCK_DATA.map((item, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => {
+                  seState({ ...item });
+                }}
+                className="bg-amber-700 cursor-pointer"
+              >
+                {item.name}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
