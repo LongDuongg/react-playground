@@ -92,33 +92,50 @@ export const TabHeader = ({
       className={clns(
         "tab",
         "bg-[#51A7BF] rounded-[10px] flex justify-between p-2",
-        className
+        className,
       )}
     >
       {tabs.map((item, index) => {
+        // google keyword "tailwind dynamic classname not working"
+
+        // this works since tailwind can read these clear classnames
+        const textColor = isActive(item) ? "text-[#51A7BF]" : "text-[#fff]";
+        const hoverTextColor = isActive(item)
+          ? "text-[#51A7BF]"
+          : "text-[#fff]";
+        const bgColor = isActive(item) ? "bg-[#fff]" : "bg-[#51A7BF]";
+        const hoverBgColor = isActive(item) ? "bg-[#fff]" : "bg-[#3E8E9E]";
+
+        // this does not work since tailwind cannot parse dynamic classnames
+        // const hoverTextColor = `text-[${isActive(item) ? "#51A7BF" : "#fff"}]`;
+        // const bgColor = `bg-[${isActive(item) ? "#fff" : "#51A7BF"}]`;
+
         return (
           <button
             key={index}
             onClick={() => {
               onChange(item);
             }}
-            style={{
-              backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
-              color: isActive(item) ? "#51A7BF" : "#fff",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = isActive(item)
-                ? "#fff"
-                : "#3E8E9E"; // Hover background color
-              e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Hover text color
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = isActive(item)
-                ? "#fff"
-                : "#51A7BF"; // Reset background color
-              e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Reset text color
-            }}
-            className="tab-name w-full text-[20px]  cursor-pointer rounded-[10px] "
+            // style={{
+            //   backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
+            //   color: isActive(item) ? "#51A7BF" : "#fff",
+            // }}
+
+            // research "declarative vs imperative"
+            // onMouseOver={(e) => {
+            //   e.currentTarget.style.backgroundColor = isActive(item)
+            //     ? "#fff"
+            //     : "#3E8E9E"; // Hover background color
+            //   e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Hover text color
+            // }}
+            // onMouseOut={(e) => {
+            //   e.currentTarget.style.backgroundColor = isActive(item)
+            //     ? "#fff"
+            //     : "#51A7BF"; // Reset background color
+            //   e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Reset text color
+            // }}
+
+            className={`tab-name w-full text-[20px] cursor-pointer rounded-[10px] ${bgColor} hover:${hoverBgColor} ${textColor} hover:${hoverTextColor}`}
           >
             {item.name}
           </button>
@@ -139,7 +156,7 @@ export const TabPanel = ({ children, className }: TabPanelProps) => {
       className={clns(
         "expand",
         "bg-[#51A7BF] rounded-[10px] px-4 py-2",
-        className
+        className,
       )}
     >
       {children}
