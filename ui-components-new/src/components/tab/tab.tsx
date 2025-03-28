@@ -91,8 +91,8 @@ export const TabHeader = ({
     <div
       className={clns(
         "tab",
-        "bg-[#51A7BF] rounded-[10px] flex justify-between",
-        className,
+        "bg-[#51A7BF] rounded-[10px] flex justify-between p-2",
+        className
       )}
     >
       {tabs.map((item, index) => {
@@ -102,18 +102,24 @@ export const TabHeader = ({
             onClick={() => {
               onChange(item);
             }}
-            style={
-              {
-                // backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
-                // color: isActive(item) ? "#51A7BF" : "#fff",
-              }
-            }
+            style={{
+              backgroundColor: isActive(item) ? "#fff" : "#51A7BF",
+              color: isActive(item) ? "#51A7BF" : "#fff",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = isActive(item)
+                ? "#fff"
+                : "#3E8E9E"; // Hover background color
+              e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Hover text color
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = isActive(item)
+                ? "#fff"
+                : "#51A7BF"; // Reset background color
+              e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Reset text color
+            }}
             // TODO "tailwind dynamic classname not working"
-            className={`tab-name w-full text-[20px] py-2 px-14 cursor-pointer bg-[${
-              isActive(item) ? "#fff" : "#51A7BF"
-            }] text-[${
-              isActive(item) ? "#51A7BF" : "#fff"
-            }] rounded-[10px] hover:bg-[#3E8E9E]`}
+            className="tab-name w-full text-[20px]  cursor-pointer rounded-[10px] "
           >
             {item.name}
           </button>
@@ -134,7 +140,7 @@ export const TabPanel = ({ children, className }: TabPanelProps) => {
       className={clns(
         "expand",
         "bg-[#51A7BF] rounded-[10px] px-4 py-2",
-        className,
+        className
       )}
     >
       {children}
