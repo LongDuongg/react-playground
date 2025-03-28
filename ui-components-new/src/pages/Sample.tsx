@@ -162,7 +162,7 @@ export default function Sample() {
         /> */}
         <TabHeader
           tabs={TABS_MOCK_DATA}
-          isActive={(item) => item.id === state.id}
+          isActive={(item) => item.id === state}
           onChange={(item) => {
             seState(item.id);
           }}
