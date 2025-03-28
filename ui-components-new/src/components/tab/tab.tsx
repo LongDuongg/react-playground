@@ -113,8 +113,10 @@ export const TabHeader = ({
               e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Hover text color
             }}
             onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = "#51A7BF"; // Reset background color
-              e.currentTarget.style.color = "#fff"; // Reset text color
+              e.currentTarget.style.backgroundColor = isActive(item)
+                ? "#fff"
+                : "#51A7BF"; // Reset background color
+              e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Reset text color
             }}
             // TODO "tailwind dynamic classname not working"
             className="tab-name w-full text-[20px]  cursor-pointer rounded-[10px] "
