@@ -19,6 +19,7 @@ import {
 
 export default function Sample() {
   const [state, seState] = useState<any>(TABS_MOCK_DATA[0].id);
+  const [selected, seSelected] = useState<any>();
   const [show, setShow] = useState(false);
   const [enabled, setEnabled] = useState(false);
 
@@ -174,14 +175,14 @@ export default function Sample() {
             return (
               <div
                 key={i}
-                style={
-                  {
-                    // TODO selected, hover state
-                    // border: `4px solid "#91d9e6"`,
-                    // borderRadius: "0.6rem",
-                  }
-                }
-                className="content p-3 cursor-pointer"
+                style={{
+                  border: detail.title === selected ? "4px solid #3E8E9E" : "",
+                }}
+                onClick={() => {
+                  seSelected(detail.title);
+                  console.log(detail);
+                }}
+                className="content rounded-[10px] p-3 cursor-pointer hover:bg-blue-700"
               >
                 <div className="title text-amber-50">{detail.title}</div>
                 <div className="detail">

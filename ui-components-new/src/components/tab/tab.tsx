@@ -118,7 +118,6 @@ export const TabHeader = ({
                 : "#51A7BF"; // Reset background color
               e.currentTarget.style.color = isActive(item) ? "#51A7BF" : "#fff"; // Reset text color
             }}
-            // TODO "tailwind dynamic classname not working"
             className="tab-name w-full text-[20px]  cursor-pointer rounded-[10px] "
           >
             {item.name}
