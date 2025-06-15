@@ -1,6 +1,15 @@
 export const Auth = ({ guestApis, next }) => {
+    const authToken = getCookie("auth_token");
+
+    if (!authToken) {
+        return null;
+    }
+
+    const userInfo = guestApis.user.getUser({ authToken });
+
     return {
         loading: userInfo.loading,
+
         user: userInfo.value?.user,
 
         updateUser: (user) => {
