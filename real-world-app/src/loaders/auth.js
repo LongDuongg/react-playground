@@ -19,23 +19,26 @@ export const Auth = ({ guestApis }) => {
 
         updateUser: (user) => {
             setUserInfo({
-                user: {
-                    ...userInfo.value.user,
-                    username: user.username,
-                    email: user.email,
-                    bio: user.bio,
-                    image: user.image,
+                ...userInfo,
+                value: {
+                    user: {
+                        ...userInfo.value.user,
+                        username: user.username,
+                        email: user.email,
+                        bio: user.bio,
+                        image: user.image,
+                    },
                 },
             });
         },
 
         login: (user) => {
-            setUserInfo(user);
+            setUserInfo({ ...userInfo, value: user });
             document.cookie = "auth_token=" + user.user.token;
         },
 
         logout: () => {
-            setUserInfo(null);
+            setUserInfo({ ...userInfo, value: null });
             deleteCookie("auth_token");
         },
     };
