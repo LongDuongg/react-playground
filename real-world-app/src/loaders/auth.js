@@ -1,11 +1,16 @@
-export const Auth = ({ guestApis, next }) => {
+import { useState } from "react";
+
+export const Auth = ({ guestApis }) => {
     const authToken = getCookie("auth_token");
 
     if (!authToken) {
         return null;
     }
 
-    const userInfo = guestApis.user.getUser({ authToken });
+    const [userInfo, setUserInfo] = useState({
+        loading: false,
+        value: guestApis.user.getUser({ authToken }),
+    });
 
     return {
         loading: userInfo.loading,
@@ -13,7 +18,7 @@ export const Auth = ({ guestApis, next }) => {
         user: userInfo.value?.user,
 
         updateUser: (user) => {
-            userInfo.onChange({
+            setUserInfo({
                 user: {
                     ...userInfo.value.user,
                     username: user.username,
@@ -25,12 +30,12 @@ export const Auth = ({ guestApis, next }) => {
         },
 
         login: (user) => {
-            userInfo.onChange(user);
+            setUserInfo(user);
             document.cookie = "auth_token=" + user.user.token;
         },
 
         logout: () => {
-            userInfo.onChange(null);
+            setUserInfo(null);
             deleteCookie("auth_token");
         },
     };
