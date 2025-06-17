@@ -5,7 +5,7 @@ import { Auth } from "../loaders/auth.js";
 
 const context = createContext({});
 
-export const provider = ({ children }: any) => {
+export const Provider = ({ children }: any) => {
     const guestApis = createGuestApis();
 
     const auth = Auth({ guestApis });
