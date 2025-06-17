@@ -4,7 +4,8 @@ export const createGuestApis = () => {
     const fetcher = createFetcher();
     return {
         user: {
-            getUser: async ({ authToken }) => {
+            // prettier-ignore
+            getUser: async ({ authToken } : { authToken: string }) => {
                 const res = await fetcher.get("/user", { authToken });
                 if (res.errors) {
                     return null;
@@ -13,14 +14,15 @@ export const createGuestApis = () => {
             },
 
             // prettier-ignore
-            login: ({ email, password }) => fetcher.post("/users/login", {
+            login: ({ email, password }: { email: string; password: string }) => fetcher.post("/users/login", {
                 user: {
                     email,
                     password,
                 },
             }),
 
-            signUp: async ({ username, email, password }) => {
+            // prettier-ignore
+            signUp: async ({ username, email, password }: { username: string; email: string; password: string }) => {
                 return fetcher.post("/users", {
                     user: {
                         username,
@@ -34,8 +36,8 @@ export const createGuestApis = () => {
 };
 
 const createFetcher = () => {
-    const makeRequest = (method, noPayload) => {
-        return async (url, payload, options) => {
+    const makeRequest = (method: string, noPayload: boolean) => {
+        return async (url: string, payload: any, options: any) => {
             if (noPayload) {
                 options = payload;
                 payload = null;
