@@ -3,7 +3,7 @@ import { createGuestApis } from "../apis/guest-apis.ts";
 import { createApis } from "../apis/apis.ts";
 import { Auth } from "../loaders/auth.ts";
 
-const context = createContext({});
+export const context = createContext({});
 
 export const Provider = ({ children }: any) => {
     const guestApis = createGuestApis();
@@ -16,7 +16,7 @@ export const Provider = ({ children }: any) => {
             // navigate("/login");
             window.alert(message);
         },
-        token: auth.user?.token,
+        token: auth?.user?.token,
     });
 
     return <context.Provider value={{ auth, guestApis, apis }}>{children}</context.Provider>;
