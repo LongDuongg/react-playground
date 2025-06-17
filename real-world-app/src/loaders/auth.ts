@@ -1,21 +1,25 @@
 import { useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const Auth = ({ guestApis }) => {
+    const queryClient = useQueryClient();
+
     const authToken = getCookie("auth_token");
 
     if (!authToken) {
         return null;
     }
 
-    const [userInfo, setUserInfo] = useState({
-        loading: false,
-        value: guestApis.user.getUser({ authToken }),
+    const userInfo = useQuery({
+        queryKey: ["user"],
+        queryFn: () => guestApis.user.getUser({ authToken }),
+        // onSuccess: (data) => queryClient.setQueryData(["user", authToken], data),
     });
 
     return {
-        loading: userInfo.loading,
+        loading: userInfo.isLoading,
 
-        user: userInfo.value?.user,
+        user: userInfo.data,
 
         updateUser: (user) => {
             setUserInfo({

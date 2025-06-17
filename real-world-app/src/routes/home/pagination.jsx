@@ -1,7 +1,3 @@
-import { cs } from "../../common/chain-services";
-import { keyed } from "../../common/react/keyed";
-import { cx1 } from "../../common/cx1";
-
 export const Pagination = ({ currentPage, onChange, totalPages }) => {
     const pages = getPages(totalPages, currentPage);
 

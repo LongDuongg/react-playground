@@ -1,7 +1,7 @@
 import { useState, createContext } from "react";
-import { createGuestApis } from "../apis/guest-apis,js";
-import { createApis } from "../apis/apis,js";
-import { Auth } from "../loaders/auth.js";
+import { createGuestApis } from "../apis/guest-apis.ts";
+import { createApis } from "../apis/apis.ts";
+import { Auth } from "../loaders/auth.ts";
 
 const context = createContext({});
 
