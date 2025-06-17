@@ -1,7 +1,7 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 
-import { FollowButton } from "../article/follow-button.jsx";
-import { ArticleTabs } from "./article-tabs.jsx";
+import { FollowButton } from "../article/follow-button.js";
+import { ArticleTabs } from "./article-tabs.js";
 
 export const Profile = () => {
     return (

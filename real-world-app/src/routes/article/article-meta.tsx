@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import { LikeButton } from "../home/like-button.jsx";
-import { FollowButton } from "./follow-button.jsx";
+import { LikeButton } from "../home/like-button.js";
+import { FollowButton } from "./follow-button.js";
 
 import { formatDate } from "../../common/utils/date.js";
 

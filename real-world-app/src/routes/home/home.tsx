@@ -1,6 +1,6 @@
-import { TagPanel } from "./tag-panel.jsx";
-import { Layout } from "../layout/layout.jsx";
-import { FeedPanel } from "./feed-panel.jsx";
+import { TagPanel } from "./tag-panel.js";
+import { Layout } from "../layout/layout.js";
+import { FeedPanel } from "./feed-panel.js";
 
 import { cs } from "../../common/chain-services.js";
 import { State } from "../../common/react/state.js";

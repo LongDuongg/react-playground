@@ -1,10 +1,10 @@
 import { useNavigate, useParams, Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
-import { Layout } from "../layout/layout.jsx";
-import { CommentSection } from "./comment-section.jsx";
+import { Layout } from "../layout/layout.js";
+import { CommentSection } from "./comment-section.js";
 
-import { ArticleMeta } from "./article-meta.jsx";
+import { ArticleMeta } from "./article-meta.js";
 
 export const Article = () => {
     if (article.loading) {
