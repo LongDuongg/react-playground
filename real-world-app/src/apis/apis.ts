@@ -1,4 +1,7 @@
 import { ARTICLES_PER_PAGE } from "../routes/home/article-preview-list.tsx";
+import { ArticleListPayload, ArticlePayload } from "../types/article.ts";
+import { ProfilePayload } from "../types/profile.ts";
+import { UpdateUserPayload } from "../types/user.ts";
 
 const API_HOST = "https://conduit-realworld-example-app.fly.dev";
 
@@ -7,117 +10,91 @@ type Props = {
     token: string;
 };
 
-type Payload = {
-    image: string;
-    username: string;
-    bio: string;
-    email: string;
-    password: string;
-};
-
 export const createApis = ({ onUnauthen, token }: Props) => {
     const fetcher = createFetcher({ onUnauthen, token });
     return {
         user: {
-            // prettier-ignore
-            updateUser: async ({ image, username, bio, email, password }: Payload) => await fetcher.put("/user", {
-                user: {
-                    image,
-                    username,
-                    bio,
-                    email,
-                    password,
-                },
-            }),
+            updateUser: async ({ image, username, bio, email, password }: UpdateUserPayload) =>
+                await fetcher.put("/user", {
+                    user: {
+                        image,
+                        username,
+                        bio,
+                        email,
+                        password,
+                    },
+                }),
         },
 
         profile: {
-            getProfile: async ({ username }: { username: string }) =>
+            getProfile: async ({ username }: ProfilePayload) =>
                 fetcher.get(`/profiles/${username}`),
 
-            followUser: async ({ username }: { username: string }) =>
+            followUser: async ({ username }: ProfilePayload) =>
                 fetcher.post(`/profiles/${username}/follow`),
 
-            unfollowUser: async ({ username }: { username: string }) =>
+            unfollowUser: async ({ username }: ProfilePayload) =>
                 fetcher.delete(`/profiles/${username}/follow`),
         },
 
         article: {
-            //prettier-ignore
-            getGlobalFeed: ({ page, limit = ARTICLES_PER_PAGE }: { page: number; limit: number }) =>
+            getGlobalFeed: ({ page, limit = ARTICLES_PER_PAGE }: ArticleListPayload) =>
                 fetcher.get(`/articles?limit=${limit}&offset=${page}`),
 
-            // prettier-ignore
-            getFeedByTag: ({ tag, page, limit = ARTICLES_PER_PAGE }: { tag: string; page: number; limit: number }) =>
+            getFeedByTag: ({ tag, page, limit = ARTICLES_PER_PAGE }: ArticleListPayload) =>
                 fetcher.get(`/articles?tag=${tag}&limit=${limit}&offset=${page}`),
 
-            //prettier-ignore
-            getMyFeed: async ({ username, page, limit = ARTICLES_PER_PAGE }: { 
-                username: string; 
-                page: number, 
-                limit: number 
-            }) => fetcher.get(`/articles?author=${username}&limit=${limit}&offset=${page}`),
+            getMyFeed: ({ username, page, limit = ARTICLES_PER_PAGE }: ArticleListPayload) =>
+                fetcher.get(`/articles?author=${username}&limit=${limit}&offset=${page}`),
 
-            // prettier-ignore
-            getFavoritedArticles: async ({ username, page, limit = ARTICLES_PER_PAGE }: { 
-                username: string; 
-                page: number;
-                limit: number; 
-            }) => fetcher.get(`/articles?favorited=${username}&limit=${limit}&offset=${page}`),
+            getFavoritedArticles: async ({
+                username,
+                page,
+                limit = ARTICLES_PER_PAGE,
+            }: ArticleListPayload) =>
+                fetcher.get(`/articles?favorited=${username}&limit=${limit}&offset=${page}`),
 
             getSingleArticle: async ({ slug }: { slug: string }) =>
                 fetcher.get(`/articles/${slug}`),
 
-            // prettier-ignore
-            createArticle: async ({title, description, body, tagList}: {
-                title: string;
-                description: string;
-                body: string;
-                tagList: Array<string>;
-            }) => fetcher.post("/articles", {
-                article: {
-                    title,
-                    description,
-                    body,
-                    tagList,
-                },
-            }),
+            createArticle: async ({ title, description, body, tagList }: ArticlePayload) =>
+                fetcher.post("/articles", {
+                    article: {
+                        title,
+                        description,
+                        body,
+                        tagList,
+                    },
+                }),
 
-            // prettier-ignore
-            updateArticle: async ({ slug, title, description, body, tagList }:{
-                slug: string;
-                title: string;
-                description: string;
-                body: string;
-                tagList: Array<string>;
-            }) => fetcher.put(`/articles/${slug}`, {
-                article: {
-                    slug,
-                    title,
-                    description,
-                    body,
-                    tagList,
-                }
-            }),
+            updateArticle: async ({ slug, title, description, body, tagList }: ArticlePayload) =>
+                fetcher.put(`/articles/${slug}`, {
+                    article: {
+                        slug,
+                        title,
+                        description,
+                        body,
+                        tagList,
+                    },
+                }),
 
-            deleteArticle: async ({ slug }: { slug: string }) =>
-                fetcher.delete(`/articles/${slug}`),
+            deleteArticle: async ({ slug }: ArticlePayload) => fetcher.delete(`/articles/${slug}`),
 
-            likeArticle: async ({ slug }: { slug: string }) =>
+            likeArticle: async ({ slug }: ArticlePayload) =>
                 fetcher.post(`/articles/${slug}/favorite`),
 
-            unlikeArticle: async ({ slug }: { slug: string }) =>
+            unlikeArticle: async ({ slug }: ArticlePayload) =>
                 fetcher.delete(`/articles/${slug}/favorite`),
 
-            getComments: async ({ slug }: { slug: string }) =>
+            getComments: async ({ slug }: ArticlePayload) =>
                 fetcher.get(`/articles/${slug}/comments`),
 
-            commentArticle: async ({ slug, body }: { slug: string; body: string }) =>
+            commentArticle: async ({ slug, body }: ArticlePayload) =>
                 fetcher.post(`/articles/${slug}/comments`, {
                     comment: { body },
                 }),
 
-            deleteComment: async ({ slug, id }: { slug: string; id: string }) =>
+            deleteComment: async ({ slug, id }: ArticlePayload) =>
                 fetcher.delete(`/articles/${slug}/comments/${id}`),
         },
 
@@ -129,7 +106,7 @@ export const createApis = ({ onUnauthen, token }: Props) => {
 
 const createFetcher = ({ onUnauthen, token }: { onUnauthen: any; token: string }) => {
     const makeRequest = (method: string) => {
-        return async (url: string, payload: any) => {
+        return async (url: string, payload?: any) => {
             const headers = new Headers();
             headers.append("Content-Type", "application/json");
 
