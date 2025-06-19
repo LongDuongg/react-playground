@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { consumeContext } from "../../provider/provider";
-import { getCookie } from "../../loaders/auth";
+import { deleteCookie, getCookie } from "../../loaders/auth";
 import { useState } from "react";
 
 export const Layout = ({ children }: any) => {
@@ -73,9 +73,9 @@ export const Layout = ({ children }: any) => {
                                     <div className="dropdown-divider"></div>
                                     <button
                                         className="dropdown-item"
-                                        // onClick={() => {
-                                        //     auth.logout();
-                                        // }}
+                                        onClick={() => {
+                                            deleteCookie("auth_token");
+                                        }}
                                     >
                                         <i className="ion-log-out"></i> Logout
                                     </button>
