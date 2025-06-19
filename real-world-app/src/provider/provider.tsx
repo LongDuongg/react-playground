@@ -3,11 +3,11 @@ import { createGuestApis } from "../apis/guest-apis.ts";
 import { createApis } from "../apis/apis.ts";
 import { Auth } from "../loaders/auth.ts";
 
-interface ContextType {
+type ContextType = {
     auth: ReturnType<typeof Auth>;
     guestApis: ReturnType<typeof createGuestApis>;
     apis: ReturnType<typeof createApis>;
-}
+};
 
 const context = createContext<ContextType | null>(null);
 
