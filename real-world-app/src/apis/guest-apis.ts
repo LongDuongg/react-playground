@@ -5,7 +5,7 @@ export const createGuestApis = () => {
     return {
         user: {
             // prettier-ignore
-            getUser: async ({ authToken } : { authToken: string }) => {
+            getUser: async ({ authToken } : { authToken: string | undefined}) => {
                 const res = await fetcher.get("/user", { authToken });
                 if (res.errors) {
                     return null;
