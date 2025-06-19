@@ -1,5 +1,4 @@
 import { Form, Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 
 import { consumeContext } from "../../provider/provider.tsx";
@@ -17,7 +16,9 @@ export const Signup = () => {
         mutationFn: guestApis.user.signUp,
     });
 
-    const navigate = useNavigate();
+    if (mutation.isSuccess) {
+        document.cookie = "auth_token=" + mutation.data.user.token;
+    }
 
     return (
         <div className="auth-page">
@@ -42,9 +43,7 @@ export const Signup = () => {
                             style={{ maxWidth: 600 }}
                             initialValues={{ remember: true }}
                             onFinish={(value: any) => {
-                                console.log(value);
                                 mutation.mutate(value);
-                                navigate("/");
                             }}
                             // onFinishFailed={onFinishFailed}
                             autoComplete="off"
