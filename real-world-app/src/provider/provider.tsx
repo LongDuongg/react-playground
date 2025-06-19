@@ -1,9 +1,15 @@
-import { useState, createContext } from "react";
+import { createContext, useContext } from "react";
 import { createGuestApis } from "../apis/guest-apis.ts";
 import { createApis } from "../apis/apis.ts";
 import { Auth } from "../loaders/auth.ts";
 
-export const context = createContext({});
+interface ContextType {
+    auth: ReturnType<typeof Auth>;
+    guestApis: ReturnType<typeof createGuestApis>;
+    apis: ReturnType<typeof createApis>;
+}
+
+const context = createContext<ContextType | null>(null);
 
 export const Provider = ({ children }: any) => {
     const guestApis = createGuestApis();
@@ -20,4 +26,12 @@ export const Provider = ({ children }: any) => {
     });
 
     return <context.Provider value={{ auth, guestApis, apis }}>{children}</context.Provider>;
+};
+
+export const consumeContext = (): ContextType => {
+    const ctx = useContext(context);
+    if (!ctx) {
+        throw new Error("Provider context is missing");
+    }
+    return ctx;
 };
