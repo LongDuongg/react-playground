@@ -1,4 +1,23 @@
+import { Form, Input, Button } from "antd";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+
+import { consumeContext } from "../../provider/provider.tsx";
+
+type Fields = {
+    email: string;
+    password: string;
+};
+
 export const Login = () => {
+    const { guestApis } = consumeContext();
+
+    const mutation = useMutation({
+        mutationFn: guestApis.user.login,
+    });
+
+    const navigate = useNavigate();
+
     return (
         <div className="auth-page">
             <div className="container page">
@@ -9,49 +28,46 @@ export const Login = () => {
                             <a href="/register">Need an account?</a>
                         </p>
 
-                        {/* {errors?.value && (
+                        {mutation.data?.errors && (
                             <ul className="error-messages">
-                                {errors?.value.map((error, i) => (
-                                    <li key={i}>{error}</li>
-                                ))}
+                                <li>{mutation.data.errors.body}</li>
                             </ul>
-                        )} */}
+                        )}
 
-                        <form>
-                            <fieldset className="form-group">
-                                <input
-                                    className="form-control form-control-lg"
-                                    type="text"
-                                    placeholder="Email"
-                                    // {...bindInput(scope(state, ["email"]))}
-                                />
-                            </fieldset>
-                            <fieldset className="form-group">
-                                <input
-                                    className="form-control form-control-lg"
-                                    type="password"
-                                    placeholder="Password"
-                                    // {...bindInput(scope(state, ["password"]))}
-                                />
-                            </fieldset>
-                            <button
-                                className="btn btn-lg btn-primary pull-xs-right"
-                                // onClick={async (e) => {
-                                //     e.preventDefault();
-                                //     isLoading.onChange(true);
-                                //     const user = await guestApis.user.login(state?.value);
-                                //     if (user.errors) {
-                                //         errors.onChange(user.errors.body);
-                                //         isLoading.onChange(false);
-                                //     } else {
-                                //         auth.login(user);
-                                //     }
-                                // }}
+                        <Form
+                            name="signup-form"
+                            labelCol={{ span: 8 }}
+                            wrapperCol={{ span: 16 }}
+                            style={{ maxWidth: 600 }}
+                            initialValues={{ remember: true }}
+                            onFinish={(value: any) => {
+                                console.log(value);
+                                mutation.mutate(value);
+                                navigate("/");
+                            }}
+                            // onFinishFailed={onFinishFailed}
+                            autoComplete="off"
+                        >
+                            <Form.Item<Fields>
+                                name="email"
+                                rules={[{ required: true, message: "Please input your email!" }]}
                             >
-                                {/* {isLoading.value ? "Loading..." : "Sign in"} */}
-                                Sign in
-                            </button>
-                        </form>
+                                <Input placeholder="Email" />
+                            </Form.Item>
+
+                            <Form.Item<Fields>
+                                name="password"
+                                rules={[{ required: true, message: "Please input your password!" }]}
+                            >
+                                <Input.Password placeholder="Password" />
+                            </Form.Item>
+
+                            <Form.Item label={null}>
+                                <Button type="primary" htmlType="submit">
+                                    {mutation.isPending ? "Loading..." : "Sign in"}
+                                </Button>
+                            </Form.Item>
+                        </Form>
                     </div>
                 </div>
             </div>
