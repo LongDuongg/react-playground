@@ -29,9 +29,11 @@ const ROUTES: Route[] = [
   {path: "/profile/:username/favorite", component: Profile, require: "Auth"},
 ];
 
+const queryClient = new QueryClient();
+
 export const App = () => {
   return (
-    <QueryClientProvider client={new QueryClient()}>
+    <QueryClientProvider client={queryClient}>
       <GuestApiContextProvider>
         <AuthContextProvider>
           <ApiContextProvider>

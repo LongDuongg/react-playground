@@ -1,32 +1,31 @@
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {QUERY_KEYS} from "../constant/query-keys";
-import {User} from "../types/user";
+import {User, UserRes} from "../types/user";
 import {createContext, useContext} from "react";
 import {useGuestApis} from "./apis";
 
 const AuthContext = createContext<any>(null);
 
 export const AuthContextProvider = ({children}: any) => {
-  const guestApis = useGuestApis();
+  const {guestApis} = useGuestApis();
   const queryClient = useQueryClient();
 
   const authToken = getCookie("auth_token");
 
-  if (!authToken) {
-    return null;
-  }
-
-  const userInfo = useQuery({
+  const {isLoading, data, error} = useQuery({
     queryKey: [QUERY_KEYS.auth.user],
-    queryFn: () => guestApis.user.getUser({authToken}),
+    queryFn: () => {
+      return guestApis.user.getUser({authToken}).then((res: UserRes) => res.user);
+    },
+    enabled: Boolean(authToken),
   });
 
   return (
     <AuthContext.Provider
       value={{
-        loading: userInfo.isLoading,
+        loading: isLoading,
 
-        user: userInfo.data,
+        user: data,
 
         updateUser: (user: User) => {
           queryClient.setQueryData([QUERY_KEYS.auth.user], user);
