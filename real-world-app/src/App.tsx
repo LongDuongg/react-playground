@@ -16,8 +16,8 @@ export const App = () => {
           <HashRouter>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Signup />} />
+              <Route path="/login" element={<RouteProtection children={<Login />} requireUnauth />} />
+              <Route path="/register" element={<RouteProtection children={<Signup />} requireUnauth />} />
             </Routes>
           </HashRouter>
         </AuthContextProvider>
