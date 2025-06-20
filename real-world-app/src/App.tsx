@@ -4,7 +4,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Login} from "./routes/login/login.tsx";
 import {Signup} from "./routes/signup/signup.tsx";
 import {Home} from "./routes/home/home.tsx";
-import {GuestApiContextProvider} from "./context/apis.tsx";
+import {ApiContextProvider, GuestApiContextProvider} from "./context/apis.tsx";
 import {AuthContextProvider, useAuth} from "./context/auth.tsx";
 import {RouteProtector} from "./types/route-protector.ts";
 import {Setting} from "./routes/setting/setting.tsx";
@@ -17,19 +17,21 @@ export const App = () => {
     <QueryClientProvider client={new QueryClient()}>
       <GuestApiContextProvider>
         <AuthContextProvider>
-          <HashRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<RouteProtection children={<Login />} requireUnauth />} />
-              <Route path="/register" element={<RouteProtection children={<Signup />} requireUnauth />} />
-              <Route path="/settings" element={<RouteProtection children={<Setting />} requireAuth />} />
-              <Route path="/editor" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
-              <Route path="/editor/:slug" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
-              <Route path="/article/:slug" element={<RouteProtection children={<Article />} requireAuth />} />
-              <Route path="/profile/:username" element={<RouteProtection children={<Profile />} requireAuth />} />
-              <Route path="/profile/:username/favorite" element={<RouteProtection children={<Profile />} requireAuth />} />
-            </Routes>
-          </HashRouter>
+          <ApiContextProvider>
+            <HashRouter>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<RouteProtection children={<Login />} requireUnauth />} />
+                <Route path="/register" element={<RouteProtection children={<Signup />} requireUnauth />} />
+                <Route path="/settings" element={<RouteProtection children={<Setting />} requireAuth />} />
+                <Route path="/editor" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
+                <Route path="/editor/:slug" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
+                <Route path="/article/:slug" element={<RouteProtection children={<Article />} requireAuth />} />
+                <Route path="/profile/:username" element={<RouteProtection children={<Profile />} requireAuth />} />
+                <Route path="/profile/:username/favorite" element={<RouteProtection children={<Profile />} requireAuth />} />
+              </Routes>
+            </HashRouter>
+          </ApiContextProvider>
         </AuthContextProvider>
       </GuestApiContextProvider>
     </QueryClientProvider>
