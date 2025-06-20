@@ -6,11 +6,28 @@ import {Signup} from "./routes/signup/signup.tsx";
 import {Home} from "./routes/home/home.tsx";
 import {ApiContextProvider, GuestApiContextProvider} from "./context/apis.tsx";
 import {AuthContextProvider, useAuth} from "./context/auth.tsx";
-import {RouteProtector} from "./types/route-protector.ts";
 import {Setting} from "./routes/setting/setting.tsx";
 import {ArticleForm} from "./routes/article/article-form.tsx";
 import {Article} from "./routes/article/article.tsx";
 import {Profile} from "./routes/profile/profile.tsx";
+
+type Route = {
+  path: string;
+  component: any;
+  require?: "Auth" | "Unauth";
+};
+
+const ROUTES: Route[] = [
+  {path: "/", component: Home},
+  {path: "/login", component: Login, require: "Unauth"},
+  {path: "/register", component: Signup, require: "Unauth"},
+  {path: "/settings", component: Setting, require: "Auth"},
+  {path: "/editor", component: ArticleForm, require: "Auth"},
+  {path: "/editor/:slug", component: ArticleForm, require: "Auth"},
+  {path: "/article/:slug", component: Article, require: "Auth"},
+  {path: "/profile/:username", component: Profile, require: "Auth"},
+  {path: "/profile/:username/favorite", component: Profile, require: "Auth"},
+];
 
 export const App = () => {
   return (
@@ -20,15 +37,17 @@ export const App = () => {
           <ApiContextProvider>
             <HashRouter>
               <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<RouteProtection children={<Login />} requireUnauth />} />
-                <Route path="/register" element={<RouteProtection children={<Signup />} requireUnauth />} />
-                <Route path="/settings" element={<RouteProtection children={<Setting />} requireAuth />} />
-                <Route path="/editor" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
-                <Route path="/editor/:slug" element={<RouteProtection children={<ArticleForm />} requireAuth />} />
-                <Route path="/article/:slug" element={<RouteProtection children={<Article />} requireAuth />} />
-                <Route path="/profile/:username" element={<RouteProtection children={<Profile />} requireAuth />} />
-                <Route path="/profile/:username/favorite" element={<RouteProtection children={<Profile />} requireAuth />} />
+                {ROUTES.map((route) => (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={
+                      <RouteProtection require={route.require}>
+                        <route.component />
+                      </RouteProtection>
+                    }
+                  />
+                ))}
               </Routes>
             </HashRouter>
           </ApiContextProvider>
@@ -38,24 +57,26 @@ export const App = () => {
   );
 };
 
-const RouteProtection = ({children, requireAuth, requireUnauth}: RouteProtector) => {
+const RouteProtection = ({children, require}: {children: any; require: Route["require"]}) => {
   const {loading, user} = useAuth();
 
   if (loading) {
     return "Loading...";
   }
 
-  if (requireAuth) {
+  if (require === "Auth") {
     if (user) {
       return children;
     }
     return <Navigate to="/login" />;
   }
 
-  if (requireUnauth) {
+  if (require === "Unauth") {
     if (!user) {
       return children;
     }
     return <Navigate to="/" />;
   }
+
+  return children;
 };
