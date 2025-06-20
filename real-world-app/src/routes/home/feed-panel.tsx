@@ -1,81 +1,75 @@
-import { Tabs } from "./tab";
-import { ArticlePreviewList } from "./article-preview-list";
+import {Tabs} from "./tab";
+import {ArticlePreviewList, ARTICLES_PER_PAGE} from "./article-preview-list.tsx";
+import {useState} from "react";
+import {useApis} from "../../context/apis.tsx";
+import {useAuth} from "../../context/auth.tsx";
+import {FeedPanelProps} from "../../types/feed-panel.ts";
 
-export const FeedPanel = ({ selectedTag }) => {
-    const tabs = [
-        auth.user && {
-            key: "your-feed",
-            label: "Your Feed",
-            // render: () => (
-            //   <ArticlePreviewList
-            //     key={"your-feed"}
-            //     getData={apis.article.getMyFeed}
-            //   />
-            // ),
-            render: () =>
-                ArticlePreviewList({
-                    getData: ({ page }) =>
-                        apis.article.getMyFeed({ username: auth.user.username, page }),
-                }),
-        },
-        {
-            key: "global-feed",
-            label: "Global Feed",
-            // render: () => (
-            //   <ArticlePreviewList
-            //     key={"global-feed"}
-            //     getData={apis.article.getGlobalFeed}
-            //   />
-            // ),
-            render: () =>
-                ArticlePreviewList({
-                    getData: apis.article.getGlobalFeed,
-                }),
-        },
-        selectedTag.value && {
-            key: `${selectedTag.value}`,
-            label: `#${selectedTag.value}`,
-            render: () =>
-                ArticlePreviewList({
-                    getData: ({ page }) =>
-                        apis.article.getFeedByTag({ page, tag: selectedTag.value }),
-                }),
-            forced: true,
-        },
-    ].filter((v) => v);
+export const FeedPanel = ({selectedTag, onChange}: FeedPanelProps) => {
+  const {apis} = useApis();
+  const {user} = useAuth();
 
-    return Tabs({
-        tabs,
+  const tabs = [
+    user && {
+      key: "your-feed",
+      label: "Your Feed",
 
-        isActive: (tab, index) => {
-            const activeIndex = forcedIndex || active.value;
-            return index === activeIndex;
-        },
-        onChange: (i) => {
-            if (forcedIndex && i === forcedIndex) {
-                return;
-            }
-            active.onChange(i);
-            selectedTag.onChange(null);
-        },
-    });
+      render: () =>
+        ArticlePreviewList({
+          getData: ({page}: {page: number}) =>
+            apis.article.getMyFeed({
+              username: user.username,
+              page,
+              limit: ARTICLES_PER_PAGE,
+            }),
+        }),
+    },
+    {
+      key: "global-feed",
+      label: "Global Feed",
 
-    // prettier-ignore
-    // return cs(
+      render: () =>
+        ArticlePreviewList({
+          getData: ({page}: {page: number}) =>
+            apis.article.getGlobalFeed({
+              page,
+              limit: ARTICLES_PER_PAGE,
+            }),
+        }),
+    },
+    selectedTag && {
+      key: `${selectedTag}`,
+      label: `#${selectedTag}`,
+      render: () =>
+        ArticlePreviewList({
+          getData: ({page}: {page: number}) =>
+            apis.article.getFeedByTag({
+              page,
+              tag: selectedTag,
+              limit: ARTICLES_PER_PAGE,
+            }),
+        }),
+      forced: true,
+    },
+  ].filter((v) => v);
 
-    //     [
-    //         "forcedIndex",
-    //         ({tabs}, next) => {
-    //             const forcedIndex = tabs.findIndex((tab) => tab.forced);
-    //             return next(forcedIndex > -1 ? forcedIndex : null);
-    //         },
-    //     ],
-    //     [
-    //         "active",
-    //         ({ forcedIndex, auth }, next) => State({ initValue: forcedIndex || auth.user ? 1 : 0, next }),
-    //     ],
-    //     ({  tabs, active, forcedIndex }) => {
+  const forcedIndex = tabs.findIndex((tab) => tab.forced);
 
-    //     }
-    // );
+  const [active, setActive] = useState<number>(forcedIndex || user ? 1 : 0);
+
+  return Tabs({
+    tabs,
+
+    isActive: (tab, index: number) => {
+      const activeIndex = forcedIndex || active;
+      return index === activeIndex;
+    },
+    onChange: (i: number) => {
+      if (forcedIndex && i === forcedIndex) {
+        return;
+      }
+      setActive(i);
+      onChange();
+    },
+  });
 };
