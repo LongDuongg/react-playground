@@ -12,14 +12,19 @@ import {ArticlePreviewListProps, SingleArticle} from "../../types/article.ts";
 
 export const ARTICLES_PER_PAGE = 3;
 
-export const ArticlePreviewList = ({getData}: ArticlePreviewListProps) => {
+export const ArticlePreviewList = ({
+  getData,
+  extraQueryKey,
+}: {
+  getData: ({page, limit}: {page: number; limit: number}) => Promise<any>;
+  extraQueryKey: string;
+}) => {
   const queryClient = useQueryClient();
 
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState(0);
 
-  // const feeds = getData({ page: page.value, limit: ARTICLES_PER_PAGE });
   const feeds = useQuery({
-    queryKey: [QUERY_KEYS.unAuth.feed],
+    queryKey: [QUERY_KEYS.unAuth.feed, extraQueryKey, page],
     queryFn: () => getData({page, limit: ARTICLES_PER_PAGE}),
   });
 
@@ -50,7 +55,7 @@ export const ArticlePreviewList = ({getData}: ArticlePreviewListProps) => {
                 </NavLink>
                 <span className="date">{formatDate(article.createdAt)}</span>
               </div>
-              <LikeButton
+              {/* <LikeButton
                 className={"pull-xs-right"}
                 article={article}
                 onChange={async (updatedArticle: SingleArticle) => {
@@ -59,7 +64,7 @@ export const ArticlePreviewList = ({getData}: ArticlePreviewListProps) => {
                     articles: feeds.data.articles.map((a: SingleArticle) => (a.slug === updatedArticle.slug ? updatedArticle : a)),
                   });
                 }}
-              />
+              /> */}
             </div>
             <NavLink to={`/article/${article.slug}`} className="preview-link">
               <h1>{article.title}</h1>
