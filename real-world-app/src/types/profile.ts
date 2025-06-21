@@ -3,5 +3,5 @@ export type ProfilePayload = {
   bio?: string;
   image?: string;
   following?: boolean;
-  followingCount?: number;
+  followersCount?: number;
 };
