@@ -8,7 +8,7 @@ import {LikeButton} from "./like-button.tsx";
 import {formatDate} from "../../common/utils/date";
 
 import {QUERY_KEYS} from "../../constant/query-keys.ts";
-import {ArticlePreviewListProps, SingleArticle} from "../../types/article.ts";
+import {Article} from "../../types/article.ts";
 
 export const ARTICLES_PER_PAGE = 3;
 
@@ -42,7 +42,7 @@ export const ArticlePreviewList = ({
 
   return (
     <>
-      {feeds.data.articles?.map((article: SingleArticle, i: number) => {
+      {feeds.data.articles?.map((article: Article, i: number) => {
         return (
           <div key={i} className="article-preview">
             <div className="article-meta">
@@ -55,16 +55,16 @@ export const ArticlePreviewList = ({
                 </NavLink>
                 <span className="date">{formatDate(article.createdAt)}</span>
               </div>
-              {/* <LikeButton
+              <LikeButton
                 className={"pull-xs-right"}
                 article={article}
-                onChange={async (updatedArticle: SingleArticle) => {
-                  queryClient.setQueryData([QUERY_KEYS.unAuth.feed], {
+                onChange={async (updatedArticle: Article) => {
+                  queryClient.setQueryData([QUERY_KEYS.unAuth.feed, extraQueryKey, page], {
                     ...feeds.data,
-                    articles: feeds.data.articles.map((a: SingleArticle) => (a.slug === updatedArticle.slug ? updatedArticle : a)),
+                    articles: feeds.data.articles.map((a: Article) => (a.slug === updatedArticle.slug ? updatedArticle : a)),
                   });
                 }}
-              /> */}
+              />
             </div>
             <NavLink to={`/article/${article.slug}`} className="preview-link">
               <h1>{article.title}</h1>

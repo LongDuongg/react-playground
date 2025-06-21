@@ -20,7 +20,7 @@ export type ArticlePreviewListProps = {
   getData: ({page, limit}: {page: number; limit: number}) => Promise<any>;
 };
 
-export type SingleArticle = {
+export type Article = {
   slug: string;
   title: string;
   description: string;
