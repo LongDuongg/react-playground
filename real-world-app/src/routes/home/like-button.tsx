@@ -36,8 +36,6 @@ export const LikeButton = ({
     },
   });
 
-  console.log(mutation.data);
-
   return (
     <button
       className={classNames("btn btn-sm btn-outline-primary", className)}

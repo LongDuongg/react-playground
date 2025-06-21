@@ -11,16 +11,20 @@ export const Profile = () => {
   const queryClient = useQueryClient();
 
   const params = useParams();
-  const {auth} = useAuth();
+  const {user} = useAuth();
   const {apis} = useApis();
 
   const profile = useQuery({
     queryKey: [QUERY_KEYS.auth.profile, params.username],
-    queryFn: () => apis.profile.getProfile(params.username!),
+    queryFn: () => apis.profile.getProfile({username: params.username}),
   });
 
   if (profile.isLoading) {
     return "Loading...";
+  }
+
+  if (profile.data.errors) {
+    return profile.data.errors.body[0];
   }
 
   return (
@@ -29,12 +33,12 @@ export const Profile = () => {
         <div className="container">
           <div className="row">
             <div className="col-xs-12 col-md-10 offset-md-1">
-              <img src={profile.data.profile?.image} className="user-img" />
-              {auth.user.username === profile.data.profile?.username ? (
+              <img src={profile.data.profile.image} className="user-img" />
+              {user.username === profile.data.profile.username ? (
                 <>
                   {" "}
-                  <h4>{auth.user.username}</h4>
-                  <p>{auth.user.bio}</p>
+                  <h4>{user.username}</h4>
+                  <p>{user.bio}</p>
                   <Link to={"/settings"}>
                     <button className="btn btn-sm btn-outline-secondary action-btn">
                       <i className="ion-gear-a"></i>
@@ -45,8 +49,8 @@ export const Profile = () => {
               ) : (
                 <>
                   {" "}
-                  <h4>{profile.data.profile?.username}</h4>
-                  <p>{profile.data.profile?.bio}</p>
+                  <h4>{profile.data.profile.username}</h4>
+                  <p>{profile.data.profile.bio}</p>
                   <FollowButton
                     userInfo={profile.data.profile}
                     className={"action-btn"}
@@ -64,7 +68,7 @@ export const Profile = () => {
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-10 offset-md-1">
-            <ArticleTabs profile={profile.data?.profile} />
+            <ArticleTabs profile={profile.data.profile} />
           </div>
         </div>
       </div>

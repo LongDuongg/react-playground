@@ -4,6 +4,7 @@ import {Fragment} from "react/jsx-runtime";
 type Tab = {
   key: string;
   label: string;
+  path?: string;
   renderLabel?: (children: any) => any;
   render: () => any;
 };
@@ -11,7 +12,7 @@ type Tab = {
 type Props = {
   isActive: (tab: Tab, index: number) => boolean;
   tabs: Tab[];
-  onChange: (v: number) => void;
+  onChange?: (v: number) => void;
 };
 
 export const Tabs = ({tabs, onChange, isActive}: Props) => {
