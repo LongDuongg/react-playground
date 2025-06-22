@@ -42,6 +42,7 @@ export const CommentSection = ({slug}: Props) => {
       ) : (
         comments.data.comments.map((comment: Comment, i: number) => (
           <CommentCard
+            key={i}
             comment={comment}
             slug={slug}
             onDelete={(id: number | undefined) => {
@@ -61,7 +62,8 @@ export const CommentForm = ({slug, onAdd}: Props) => {
   const {apis} = useApis();
 
   const mutation = useMutation({
-    mutationFn: async (body: any) => {
+    mutationFn: async ({body}: {body?: string}) => {
+      if (!body) throw new Error("No comment body provided");
       const res = await apis.article.commentArticle({
         slug: slug,
         body: body,
@@ -81,9 +83,7 @@ export const CommentForm = ({slug, onAdd}: Props) => {
       wrapperCol={{span: 16}}
       style={{maxWidth: 600}}
       onFinish={(value) => {
-        // mutation.mutate(value.body);
-        console.log(value);
-        mutation.reset();
+        mutation.mutate({body: value.comment});
       }}
       autoComplete="off"
     >
@@ -94,10 +94,10 @@ export const CommentForm = ({slug, onAdd}: Props) => {
       <Form.Item label={null}>
         <div className="card-footer">
           <img src={user.image} className="comment-author-img" />
-          <Button type="primary" htmlType="submit" disabled={mutation.isPending}>
-            Post Comment
-          </Button>
         </div>
+        <Button type="primary" htmlType="submit" disabled={mutation.isPending}>
+          Post Comment
+        </Button>
       </Form.Item>
     </Form>
   );
