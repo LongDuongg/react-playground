@@ -14,7 +14,7 @@ export const Article = () => {
   const {apis} = useApis();
   const article = useQuery({
     queryKey: [QUERY_KEYS.unAuth.article, params.slug],
-    queryFn: () => apis.article.getArticle({slug: params.slug}),
+    queryFn: () => apis.article.getSingleArticle({slug: params.slug}),
   });
 
   if (article.isLoading) {
@@ -40,8 +40,7 @@ export const Article = () => {
       </div>
     );
   }
-
-  if (article.data.article == null) {
+  if (article.data?.article == null) {
     return (
       <div className="article-page">
         <div className="banner">
@@ -52,8 +51,6 @@ export const Article = () => {
       </div>
     );
   }
-
-  // console.log(article.data.article);
 
   return (
     <Layout>
