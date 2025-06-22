@@ -46,7 +46,9 @@ export const ArticleMeta = ({article}: Props) => {
           <FollowButton
             userInfo={article.author}
             onFollow={(updatedProfile) => {
-              queryClient.setQueryData([QUERY_KEYS.auth.profile, article.author.username], {...article, author: updatedProfile});
+              queryClient.setQueryData([QUERY_KEYS.unAuth.article, article.slug], {
+                article: {...article, author: updatedProfile},
+              });
             }}
           />
           &nbsp;&nbsp;
