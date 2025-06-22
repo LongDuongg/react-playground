@@ -1,20 +1,36 @@
+import {Input, Form, Button} from "antd";
 import {useMutation} from "@tanstack/react-query";
+import {omit, isEqual} from "lodash";
+
 import {useApis} from "../../context/apis";
 import {useAuth} from "../../context/auth";
 import {Layout} from "../layout/layout";
+
 import {UserRes} from "../../types/user";
-import {Input, Form, Button} from "antd";
 
 export const Setting = () => {
+  const getFieldValue = (fieldName: string, form: any) => {
+    return Form.useWatch(fieldName, form);
+  };
+
+  const fieldNames = ["image", "username", "bio", "email", "password"];
+
+  const [form] = Form.useForm();
   const {user, updateUser, logout} = useAuth();
   const {apis} = useApis();
+
+  const oriValue = {...omit(user, ["token"]), password: ""};
 
   const mutation = useMutation<UserRes>({
     mutationFn: apis.user.updateUser,
     onSuccess: (data) => {
       updateUser(data.user);
+      form.setFieldsValue(oriValue);
     },
   });
+
+  const formValues = {...fieldNames.map((name) => getFieldValue(name, form))};
+  console.log(formValues);
 
   return (
     <Layout>
@@ -32,25 +48,27 @@ export const Setting = () => {
               )}
 
               <Form
+                form={form}
                 name="setting-form"
                 labelCol={{span: 8}}
                 wrapperCol={{span: 16}}
                 style={{maxWidth: 600}}
+                initialValues={oriValue}
                 onFinish={(value) => {
                   mutation.mutate(value);
                 }}
                 autoComplete="off"
               >
                 <Form.Item name="image">
-                  <Input placeholder="image" />
+                  <Input placeholder="Image" />
                 </Form.Item>
 
                 <Form.Item name="username">
-                  <Input placeholder="username" />
+                  <Input placeholder="Username" />
                 </Form.Item>
 
                 <Form.Item name="bio">
-                  <Input placeholder="bio" />
+                  <Input.TextArea placeholder="Bio" />
                 </Form.Item>
 
                 <Form.Item name="email">
@@ -62,7 +80,7 @@ export const Setting = () => {
                 </Form.Item>
 
                 <Form.Item label={null}>
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" htmlType="submit" disabled={isEqual(oriValue, formValues)}>
                     Update Settings
                   </Button>
                 </Form.Item>
