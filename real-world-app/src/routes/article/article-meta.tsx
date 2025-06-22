@@ -1,80 +1,96 @@
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
-import { LikeButton } from "../home/like-button.js";
-import { FollowButton } from "./follow-button.js";
+import {LikeButton} from "../home/like-button.js";
+import {FollowButton} from "./follow-button.js";
 
-import { formatDate } from "../../common/utils/date.js";
+import {formatDate} from "../../common/utils/date.js";
+import {Article} from "../../types/article.js";
+import {useAuth} from "../../context/auth.js";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {QUERY_KEYS} from "../../constant/query-keys.js";
+import {useApis} from "../../context/apis.js";
 
-export const ArticleMeta = ({ article }) => {
-    return (
-        <div className="article-meta">
-            <Link to={`/profile/${article.value.article?.author.username}`}>
-                <img src={article.value.article?.author.image} />
-            </Link>
-            <div className="info">
-                <Link to={`/profile/${article.value.article?.author.username}`} className="author">
-                    {article.value.article?.author?.username}
-                </Link>
-                <span className="date">{formatDate(article.value.article?.createdAt)}</span>
-            </div>
-
-            {article.value.article?.author?.username === auth.user?.username ? (
-                <>
-                    <Link to={`/editor/${article.value.article?.slug}`}>
-                        <button className="btn btn-sm btn-outline-secondary">
-                            <i className="ion-edit"></i> Edit Article
-                        </button>
-                    </Link>
-                    &nbsp;&nbsp;
-                    {DeleteButton({ article: article.value.article })}
-                </>
-            ) : (
-                <>
-                    {FollowButton({
-                        userInfo: article.value.article.author,
-
-                        onChange: (updatedProfile) => {
-                            article.onChange({
-                                article: { ...article.value.article, author: updatedProfile },
-                            });
-                        },
-                    })}
-                    &nbsp;&nbsp;
-                    {LikeButton({
-                        label: "Favorite Post",
-                        article: article.value.article,
-                        onChange: (updatedArticle) => {
-                            article.onChange({
-                                article: updatedArticle,
-                            });
-                        },
-                    })}
-                    &nbsp;&nbsp;
-                </>
-            )}
-        </div>
-    );
+type Props = {
+  article: Article;
 };
 
-const DeleteButton = ({ article }) => {
-    return (
-        <button
-            className="btn btn-sm btn-outline-danger"
-            disabled={isLoading.value}
-            onClick={async () => {
-                isLoading.onChange(true);
-                const res = await apis.article.deleteArticle({
-                    slug: article?.slug,
-                });
+export const ArticleMeta = ({article}: Props) => {
+  const queryClient = useQueryClient();
 
-                if (!res.errors) {
-                    navigate("/");
-                }
+  const {user} = useAuth();
 
-                isLoading.onChange(false);
+  return (
+    <div className="article-meta">
+      <Link to={`/profile/${article.author.username}`}>
+        <img src={article.author.image} />
+      </Link>
+      <div className="info">
+        <Link to={`/profile/${article.author.username}`} className="author">
+          {article.author?.username}
+        </Link>
+        <span className="date">{formatDate(article.createdAt)}</span>
+      </div>
+
+      {article.author?.username === user?.username ? (
+        <>
+          <Link to={`/editor/${article.slug}`}>
+            <button className="btn btn-sm btn-outline-secondary">
+              <i className="ion-edit"></i> Edit Article
+            </button>
+          </Link>
+          &nbsp;&nbsp;
+          {DeleteButton({article: article})}
+        </>
+      ) : (
+        <>
+          <FollowButton
+            userInfo={article.author}
+            onFollow={(updatedProfile) => {
+              queryClient.setQueryData([QUERY_KEYS.auth.profile, article.author.username], {...article, author: updatedProfile});
             }}
-        >
-            <i className="ion-trash-a"></i> Delete Article
-        </button>
-    );
+          />
+          &nbsp;&nbsp;
+          <LikeButton
+            label={"Favorite Post"}
+            article={article}
+            onChange={(updatedArticle) => {
+              queryClient.setQueryData([QUERY_KEYS.unAuth.article, article.slug], {
+                article: updatedArticle,
+              });
+            }}
+          />
+          &nbsp;&nbsp;
+        </>
+      )}
+    </div>
+  );
+};
+
+const DeleteButton = ({article}: Props) => {
+  const {apis} = useApis();
+  const navigate = useNavigate();
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const res = await apis.article.deleteArticle({
+        slug: article?.slug,
+      });
+
+      if (!res.errors) {
+        navigate("/");
+      }
+    },
+  });
+
+  return (
+    <button
+      className="btn btn-sm btn-outline-danger"
+      disabled={mutation.isPending}
+      onClick={async () => {
+        mutation.mutate();
+      }}
+    >
+      <i className="ion-trash-a"></i> Delete Article
+    </button>
+  );
 };
