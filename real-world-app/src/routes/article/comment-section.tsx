@@ -58,12 +58,11 @@ export const CommentSection = ({slug}: Props) => {
 };
 
 export const CommentForm = ({slug, onAdd}: Props) => {
+  const [form] = Form.useForm();
   const {user} = useAuth();
   const {apis} = useApis();
-
   const mutation = useMutation({
     mutationFn: async ({body}: {body?: string}) => {
-      if (!body) throw new Error("No comment body provided");
       const res = await apis.article.commentArticle({
         slug: slug,
         body: body,
@@ -71,13 +70,14 @@ export const CommentForm = ({slug, onAdd}: Props) => {
 
       if (!res.errors) {
         onAdd?.(res.comment);
-        // state.onChange("");
+        form.setFieldsValue({comment: ""});
       }
     },
   });
 
   return (
     <Form
+      form={form}
       name="comment-form"
       labelCol={{span: 8}}
       wrapperCol={{span: 16}}
@@ -87,7 +87,7 @@ export const CommentForm = ({slug, onAdd}: Props) => {
       }}
       autoComplete="off"
     >
-      <Form.Item name="comment  ">
+      <Form.Item name="comment">
         <Input.TextArea placeholder="Write a comment..." />
       </Form.Item>
 
@@ -106,6 +106,7 @@ export const CommentForm = ({slug, onAdd}: Props) => {
 export const CommentCard = ({comment, slug, onDelete}: Props) => {
   const {user} = useAuth();
   const {apis} = useApis();
+
   const mutation = useMutation({
     mutationFn: async () => {
       const res = await apis.article.deleteComment({
@@ -118,6 +119,7 @@ export const CommentCard = ({comment, slug, onDelete}: Props) => {
       }
     },
   });
+
   return (
     <div className="card">
       <div className="card-block">
