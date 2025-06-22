@@ -21,16 +21,18 @@ export const Setting = () => {
 
   const oriValue = {...omit(user, ["token"]), password: ""};
 
+  const formValues = fieldNames.reduce((acc, name) => {
+    acc[name] = getFieldValue(name, form);
+    return acc;
+  }, {} as any);
+
   const mutation = useMutation<UserRes>({
     mutationFn: apis.user.updateUser,
     onSuccess: (data) => {
       updateUser(data.user);
-      form.setFieldsValue(oriValue);
+      form.setFieldsValue({...omit(data.user, ["token"]), password: ""});
     },
   });
-
-  const formValues = {...fieldNames.map((name) => getFieldValue(name, form))};
-  console.log(formValues);
 
   return (
     <Layout>
@@ -86,71 +88,6 @@ export const Setting = () => {
                 </Form.Item>
               </Form>
 
-              {/* <form>
-                <fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="URL of profile picture"
-                      // {...bindInput(scope(state, ["image"]))}
-                    />
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Your Name"
-                      // {...bindInput(scope(state, ["username"]))}
-                    />
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <textarea
-                      className="form-control form-control-lg"
-                      rows="8"
-                      placeholder="Short bio about you"
-                      // {...bindInput(scope(state, ["bio"]))}
-                    ></textarea>
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="text"
-                      placeholder="Email"
-                      // {...bindInput(scope(state, ["email"]))}
-                    />
-                  </fieldset>
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="New Password"
-                      // {...bindInput(scope(state, ["password"]))}
-                    />
-                  </fieldset>
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    // disabled={equalDeep(oriValue, state?.value)}
-                    // onClick={async (e) => {
-                    //     e.preventDefault();
-
-                    //     const res = await apis.user.updateUser(state?.value);
-
-                    //     if (res.errors) {
-                    //         errors.onChange(res.errors.body);
-                    //     } else {
-                    //         auth.updateUser(res.user);
-                    //         state.onChange({
-                    //             ...omit(res.user, ["token"]),
-                    //             password: "",
-                    //         });
-                    //     }
-                    // }}
-                  >
-                    Update Settings
-                  </button>
-                </fieldset>
-              </form> */}
               <hr />
               <button className="btn btn-outline-danger" onClick={() => logout()}>
                 Or click here to logout.
