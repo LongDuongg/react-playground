@@ -10,6 +10,7 @@ import {Setting} from "./routes/setting/setting.tsx";
 import {ArticleForm} from "./routes/article/article-form.tsx";
 import {Article} from "./routes/article/article.tsx";
 import {Profile} from "./routes/profile/profile.tsx";
+import Layout from "antd/es/layout/layout";
 
 type Route = {
   path: string;
