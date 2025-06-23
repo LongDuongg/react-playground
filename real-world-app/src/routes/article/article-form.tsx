@@ -7,6 +7,7 @@ import {Layout} from "../layout/layout";
 import {useApis} from "../../context/apis";
 import {QUERY_KEYS} from "../../constant/query-keys";
 import {Article, ArticleRes} from "../../types/article";
+import {isEmpty} from "lodash";
 
 export const ArticleForm = () => {
   const [form] = Form.useForm();
@@ -14,20 +15,14 @@ export const ArticleForm = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  let article = null;
+  // let article;
 
-  if (params.slug) {
-    article = useQuery({
-      queryKey: [QUERY_KEYS.article.bySlug, params.slug],
-      queryFn: () => apis.article.getSingleArticle({slug: params.slug}).then((res: any) => res.article),
-    });
-  } else {
-    const fieldNames = ["title", "description", "body", "tagList"];
-    article = fieldNames.reduce((acc, name) => {
-      acc[name] = "";
-      return {data: {article: {...acc}}};
-    }, {} as any);
-  }
+  // if (params.slug) {
+  //   article = useQuery({
+  //     queryKey: [QUERY_KEYS.article.bySlug, params.slug],
+  //     queryFn: () => apis.article.getSingleArticle({slug: params.slug}).then((res: any) => res.article),
+  //   });
+  // }
 
   const mutation = useMutation<ArticleRes>({
     mutationFn: (data) => {
@@ -43,19 +38,21 @@ export const ArticleForm = () => {
     },
   });
 
-  console.log(mutation.data);
+  // console.log(mutation.data);
 
-  if (article?.isLoading) {
-    return (
-      <div className="editor-page">
-        <div className="container page">
-          <div className="row">
-            <div className="col-md-10 offset-md-1 col-xs-12">Loading....</div>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  // if (article?.isLoading) {
+  //   return (
+  //     <div className="editor-page">
+  //       <div className="container page">
+  //         <div className="row">
+  //           <div className="col-md-10 offset-md-1 col-xs-12">Loading....</div>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // console.log(article);
 
   return (
     <Layout>
@@ -74,13 +71,9 @@ export const ArticleForm = () => {
                 labelCol={{span: 8}}
                 wrapperCol={{span: 16}}
                 style={{maxWidth: 600}}
-                initialValues={article.data?.article}
+                // initialValues={article || {}}
                 onFinish={(value) => {
-                  let payload = {
-                    ...value,
-                    tagList: value.tagList?.split(",").filter((v: string) => v) || [],
-                  };
-                  mutation.mutate(payload);
+                  mutation.mutate(value);
                 }}
                 autoComplete="off"
               >
@@ -99,10 +92,10 @@ export const ArticleForm = () => {
                 <Form.Item name="tagList">
                   <Input
                     placeholder="Enter tags"
-                    value={article?.value?.tagList?.join(",")}
-                    // onChange={(e) => {
-                    //   return e.target.value.split(",");
-                    // }}
+                    // value={article.data.tagList?.join(",")}
+                    onChange={(e) => {
+                      form.setFieldsValue({tagList: e.target.value.split(",")});
+                    }}
                   />
                 </Form.Item>
 
@@ -112,50 +105,6 @@ export const ArticleForm = () => {
                   </Button>
                 </Form.Item>
               </Form>
-              {/* <fieldset className="form-group">
-                                    {(() => {
-                                        const { value, onChange } = scope(article, ["tagList"]);
-                                        return (
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="Enter tags"
-                                                {...bindInput({
-                                                    value: value?.join(","),
-                                                    onChange: (v) => onChange(v.split(",")),
-                                                })}
-                                                // value={value ? value.join(",") : ""}
-                                                // onChange={(e) =>
-                                                //     onChange(e.target.value.split(","))
-                                                // }
-                                            />
-                                        );
-                                    })()}
-
-                                    <div className="tag-list">
-                                        {article.value?.tagList
-                                            ?.filter((v) => v)
-                                            .map((tag, i) => (
-                                                <span key={i} className="tag-default tag-pill">
-                                                    {" "}
-                                                    <i
-                                                        className="ion-close-round"
-                                                        onClick={() => {
-                                                            console.log(tag);
-                                                            article.onChange({
-                                                                ...article.value,
-                                                                tagList:
-                                                                    article.value.tagList.filter(
-                                                                        (v) => v !== tag
-                                                                    ),
-                                                            });
-                                                        }}
-                                                    />{" "}
-                                                    {tag}{" "}
-                                                </span>
-                                            ))}
-                                    </div>
-                                </fieldset> */}
             </div>
           </div>
         </div>
