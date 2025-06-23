@@ -1,4 +1,4 @@
 export const QUERY_KEYS = {
   auth: {user: "user", profile: "profile"},
-  unAuth: {tags: "tags", feed: "feed", article: "article", comments: "comments"},
+  article: {feed: "article.feed", bySlug: "article.bySlug", tag: "article.tag", comments: "article.comments"},
 };

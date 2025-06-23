@@ -13,7 +13,7 @@ export const Article = () => {
   const params = useParams();
   const {apis} = useApis();
   const article = useQuery({
-    queryKey: [QUERY_KEYS.unAuth.article, params.slug],
+    queryKey: [QUERY_KEYS.article.bySlug, params.slug],
     queryFn: () => apis.article.getSingleArticle({slug: params.slug}),
   });
 
@@ -82,7 +82,7 @@ export const Article = () => {
 
           <div className="row">
             <div className="col-xs-12 col-md-8 offset-md-2">
-              <CommentSection slug={params.slug} />
+              <CommentSection slug={params.slug as string} />
             </div>
           </div>
         </div>

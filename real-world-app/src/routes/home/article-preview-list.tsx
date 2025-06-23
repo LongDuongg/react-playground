@@ -24,7 +24,7 @@ export const ArticlePreviewList = ({
   const [page, setPage] = useState(0);
 
   const feeds = useQuery({
-    queryKey: [QUERY_KEYS.unAuth.feed, extraQueryKey, page],
+    queryKey: [QUERY_KEYS.article.feed, extraQueryKey, page],
     queryFn: () => getData({page, limit: ARTICLES_PER_PAGE}),
   });
 
@@ -59,7 +59,7 @@ export const ArticlePreviewList = ({
                 className={"pull-xs-right"}
                 article={article}
                 onChange={async (updatedArticle: Article) => {
-                  queryClient.setQueryData([QUERY_KEYS.unAuth.feed, extraQueryKey, page], {
+                  queryClient.setQueryData([QUERY_KEYS.article.feed, extraQueryKey, page], {
                     ...feeds.data,
                     articles: feeds.data.articles.map((a: Article) => (a.slug === updatedArticle.slug ? updatedArticle : a)),
                   });

@@ -30,7 +30,7 @@ export const Signup = () => {
 
               {mutation.data?.errors && (
                 <ul className="error-messages">
-                  <li>{mutation.data.errors.body}</li>
+                  <li>{mutation.data.errors.body[0]}</li>
                 </ul>
               )}
 
@@ -39,7 +39,6 @@ export const Signup = () => {
                 labelCol={{span: 8}}
                 wrapperCol={{span: 16}}
                 style={{maxWidth: 600}}
-                initialValues={{remember: true}}
                 onFinish={(value: any) => {
                   mutation.mutate(value);
                 }}
@@ -57,8 +56,8 @@ export const Signup = () => {
                   <Input.Password placeholder="Password" />
                 </Form.Item>
 
-                <Form.Item label={null}>
-                  <Button type="primary" htmlType="submit">
+                <Form.Item>
+                  <Button type="primary" htmlType="submit" disabled={mutation.isPending}>
                     {mutation.isPending ? "Loading..." : "Sign up"}
                   </Button>
                 </Form.Item>

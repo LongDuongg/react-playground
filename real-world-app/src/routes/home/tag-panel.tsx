@@ -6,7 +6,7 @@ export const TagPanel = ({title, onSelect}: {title: string; onSelect: (v: string
   const {apis} = useApis();
 
   const tags = useQuery({
-    queryKey: [QUERY_KEYS.unAuth.tags],
+    queryKey: [QUERY_KEYS.article.tag],
     queryFn: () => apis.tag.getTags(),
   });
 

@@ -6,22 +6,21 @@ import {Comment} from "../../types/comment";
 import {Form, Button, Input} from "antd";
 import {useAuth} from "../../context/auth";
 
-type Props = {
-  slug?: string | undefined;
-  onAdd?: (comment: Comment) => void;
-  onDelete?: (id: number | undefined) => void;
-  comment?: Comment;
-};
-
-export const CommentSection = ({slug}: Props) => {
+export const CommentSection = ({slug}: {slug: string}) => {
   const queryClient = useQueryClient();
 
   const {apis} = useApis();
 
   const comments = useQuery({
-    queryKey: [QUERY_KEYS.unAuth.comments, slug],
+    queryKey: [QUERY_KEYS.article.comments, slug],
     queryFn: () => apis.article.getComments({slug: slug}),
   });
+
+  const setComments = (value: Comment[]) => {
+    queryClient.setQueryData([QUERY_KEYS.article.comments, slug], {
+      comments: value,
+    });
+  };
 
   if (comments.isLoading) {
     return <div>Loading...</div>;
@@ -32,9 +31,7 @@ export const CommentSection = ({slug}: Props) => {
       <CommentForm
         slug={slug}
         onAdd={(comment: Comment) => {
-          queryClient.setQueryData([QUERY_KEYS.unAuth.comments, slug], {
-            comments: [comment, ...comments.data.comments],
-          });
+          setComments([comment, ...comments.data.comments]);
         }}
       />
       {!comments.data.comments.length ? (
@@ -45,10 +42,8 @@ export const CommentSection = ({slug}: Props) => {
             key={i}
             comment={comment}
             slug={slug}
-            onDelete={(id: number | undefined) => {
-              queryClient.setQueryData([QUERY_KEYS.unAuth.comments, slug], {
-                comments: comments.data.comments.filter((comment: Comment) => comment.id !== id),
-              });
+            onDelete={(id: number) => {
+              setComments(comments.data.comments.filter((comment: Comment) => comment.id !== id));
             }}
           />
         ))
@@ -57,7 +52,7 @@ export const CommentSection = ({slug}: Props) => {
   );
 };
 
-export const CommentForm = ({slug, onAdd}: Props) => {
+export const CommentForm = ({slug, onAdd}: {slug: string; onAdd: (comment: Comment) => void}) => {
   const [form] = Form.useForm();
   const {user} = useAuth();
   const {apis} = useApis();
@@ -103,7 +98,7 @@ export const CommentForm = ({slug, onAdd}: Props) => {
   );
 };
 
-export const CommentCard = ({comment, slug, onDelete}: Props) => {
+export const CommentCard = ({comment, slug, onDelete}: {comment: Comment; slug: string; onDelete: (id: number) => void}) => {
   const {user} = useAuth();
   const {apis} = useApis();
 
@@ -111,11 +106,11 @@ export const CommentCard = ({comment, slug, onDelete}: Props) => {
     mutationFn: async () => {
       const res = await apis.article.deleteComment({
         slug: slug,
-        id: comment?.id,
+        id: comment.id,
       });
 
       if (!res.errors) {
-        onDelete?.(comment?.id);
+        onDelete(comment.id);
       }
     },
   });
@@ -123,18 +118,18 @@ export const CommentCard = ({comment, slug, onDelete}: Props) => {
   return (
     <div className="card">
       <div className="card-block">
-        <p className="card-text">{comment?.body}</p>
+        <p className="card-text">{comment.body}</p>
       </div>
       <div className="card-footer">
-        <a href={`/profile/${comment?.author?.username}`} className="comment-author">
-          <img src={comment?.author?.image} className="comment-author-img" />
+        <a href={`/profile/${comment.author?.username}`} className="comment-author">
+          <img src={comment.author?.image} className="comment-author-img" />
         </a>
         &nbsp;
-        <a href={`/profile/${comment?.author?.username}`} className="comment-author">
-          {comment?.author?.username}
+        <a href={`/profile/${comment.author?.username}`} className="comment-author">
+          {comment.author?.username}
         </a>
-        <span className="date-posted">{formatDate(comment?.createdAt)}</span>
-        {comment?.author?.username === user?.username && (
+        <span className="date-posted">{formatDate(comment.createdAt)}</span>
+        {comment.author?.username === user?.username && (
           <span
             className="mod-options"
             onClick={async () => {

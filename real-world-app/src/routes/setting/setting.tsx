@@ -9,27 +9,21 @@ import {Layout} from "../layout/layout";
 import {UserRes} from "../../types/user";
 
 export const Setting = () => {
-  const getFieldValue = (fieldName: string, form: any) => {
-    return Form.useWatch(fieldName, form);
-  };
-
-  const fieldNames = ["image", "username", "bio", "email", "password"];
-
   const [form] = Form.useForm();
   const {user, updateUser, logout} = useAuth();
   const {apis} = useApis();
 
   const oriValue = {...omit(user, ["token"]), password: ""};
 
-  const formValues = fieldNames.reduce((acc, name) => {
-    acc[name] = getFieldValue(name, form);
-    return acc;
-  }, {} as any);
+  const formValues = Form.useWatch([], form);
+
+  console.log(formValues);
 
   const mutation = useMutation<UserRes>({
     mutationFn: apis.user.updateUser,
     onSuccess: (data) => {
       updateUser(data.user);
+      // reset password and remove token
       form.setFieldsValue({...omit(data.user, ["token"]), password: ""});
     },
   });

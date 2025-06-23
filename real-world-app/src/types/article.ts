@@ -1,3 +1,4 @@
+import {ApiRes} from "./api";
 import {ProfilePayload} from "./profile";
 
 export type ArticlePayload = {
@@ -32,3 +33,7 @@ export type Article = {
   favoritesCount: number;
   author: ProfilePayload;
 };
+
+export interface ArticleRes extends ApiRes {
+  article: Article;
+}

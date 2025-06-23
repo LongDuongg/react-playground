@@ -46,7 +46,7 @@ export const ArticleMeta = ({article}: Props) => {
           <FollowButton
             userInfo={article.author}
             onFollow={(updatedProfile) => {
-              queryClient.setQueryData([QUERY_KEYS.unAuth.article, article.slug], {
+              queryClient.setQueryData([QUERY_KEYS.article.bySlug, article.slug], {
                 article: {...article, author: updatedProfile},
               });
             }}
@@ -56,7 +56,7 @@ export const ArticleMeta = ({article}: Props) => {
             label={"Favorite Post"}
             article={article}
             onChange={(updatedArticle) => {
-              queryClient.setQueryData([QUERY_KEYS.unAuth.article, article.slug], {
+              queryClient.setQueryData([QUERY_KEYS.article.bySlug, article.slug], {
                 article: updatedArticle,
               });
             }}

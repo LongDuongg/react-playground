@@ -1,58 +1,118 @@
-import { useNavigate, useParams } from "react-router-dom";
+import {Form, Input, Button} from "antd";
+import {useQuery} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
+import {useNavigate, useParams} from "react-router-dom";
+
+import {Layout} from "../layout/layout";
+import {useApis} from "../../context/apis";
+import {QUERY_KEYS} from "../../constant/query-keys";
+import {Article, ArticleRes} from "../../types/article";
 
 export const ArticleForm = () => {
-    if (article.loading) {
-        return (
-            <div className="editor-page">
-                <div className="container page">
-                    <div className="row">
-                        <div className="col-md-10 offset-md-1 col-xs-12">Loading....</div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-    // console.log(article.value?.tagList);
-    return (
-        <div className="editor-page">
-            <div className="container page">
-                <div className="row">
-                    <div className="col-md-10 offset-md-1 col-xs-12">
-                        {/* {errors?.value && (
-                            <ul className="error-messages">
-                                {errors?.value.map((error, i) => (
-                                    <li key={i}>{error}</li>
-                                ))}
-                            </ul>
-                        )} */}
+  const [form] = Form.useForm();
+  const {apis} = useApis();
+  const params = useParams();
+  const navigate = useNavigate();
 
-                        <form>
-                            <fieldset>
-                                <fieldset className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control form-control-lg"
-                                        placeholder="Article Title"
-                                        // {...bindInput(scope(article, ["title"]))}
-                                    />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        placeholder="What's this article about?"
-                                        // {...bindInput(scope(article, ["description"]))}
-                                    />
-                                </fieldset>
-                                <fieldset className="form-group">
-                                    <textarea
-                                        className="form-control"
-                                        rows="8"
-                                        placeholder="Write your article (in markdown)"
-                                        // {...bindInput(scope(article, ["body"]))}
-                                    ></textarea>
-                                </fieldset>
-                                {/* <fieldset className="form-group">
+  let article = null;
+
+  if (params.slug) {
+    article = useQuery({
+      queryKey: [QUERY_KEYS.article.bySlug, params.slug],
+      queryFn: () => apis.article.getSingleArticle({slug: params.slug}).then((res: any) => res.article),
+    });
+  } else {
+    const fieldNames = ["title", "description", "body", "tagList"];
+    article = fieldNames.reduce((acc, name) => {
+      acc[name] = "";
+      return {data: {article: {...acc}}};
+    }, {} as any);
+  }
+
+  const mutation = useMutation<ArticleRes>({
+    mutationFn: (data) => {
+      console.log(data);
+      if (params.slug) {
+        return apis.article.updateArticle(data);
+      } else {
+        return apis.article.createArticle(data);
+      }
+    },
+    onSuccess: (data) => {
+      navigate(`/article/${data.article.slug}`);
+    },
+  });
+
+  console.log(mutation.data);
+
+  if (article?.isLoading) {
+    return (
+      <div className="editor-page">
+        <div className="container page">
+          <div className="row">
+            <div className="col-md-10 offset-md-1 col-xs-12">Loading....</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <Layout>
+      <div className="editor-page">
+        <div className="container page">
+          <div className="row">
+            <div className="col-md-10 offset-md-1 col-xs-12">
+              {mutation.data?.errors && (
+                <ul className="error-messages">
+                  <li>{mutation.data.errors.body}</li>
+                </ul>
+              )}
+              <Form
+                form={form}
+                name="signup-form"
+                labelCol={{span: 8}}
+                wrapperCol={{span: 16}}
+                style={{maxWidth: 600}}
+                initialValues={article.data?.article}
+                onFinish={(value) => {
+                  let payload = {
+                    ...value,
+                    tagList: value.tagList?.split(",").filter((v: string) => v) || [],
+                  };
+                  mutation.mutate(payload);
+                }}
+                autoComplete="off"
+              >
+                <Form.Item name="title">
+                  <Input placeholder="Article Title" />
+                </Form.Item>
+
+                <Form.Item name="description">
+                  <Input placeholder="What's this article about?" />
+                </Form.Item>
+
+                <Form.Item name="body">
+                  <Input placeholder="Write your article (in markdown)" />
+                </Form.Item>
+
+                <Form.Item name="tagList">
+                  <Input
+                    placeholder="Enter tags"
+                    value={article?.value?.tagList?.join(",")}
+                    // onChange={(e) => {
+                    //   return e.target.value.split(",");
+                    // }}
+                  />
+                </Form.Item>
+
+                <Form.Item label={null}>
+                  <Button type="primary" htmlType="submit">
+                    {mutation.isPending ? "Publishing..." : "Publish Article"}
+                  </Button>
+                </Form.Item>
+              </Form>
+              {/* <fieldset className="form-group">
                                     {(() => {
                                         const { value, onChange } = scope(article, ["tagList"]);
                                         return (
@@ -96,47 +156,10 @@ export const ArticleForm = () => {
                                             ))}
                                     </div>
                                 </fieldset> */}
-                                <button
-                                    className="btn btn-lg pull-xs-right btn-primary"
-                                    type="button"
-                                    // onClick={async (e) => {
-                                    //     e.preventDefault();
-                                    //     isLoading.onChange(true);
-                                    //     let res = null;
-                                    //     console.log(article.value);
-                                    //     let payload = {
-                                    //         ...article.value,
-                                    //         tagList: article.value.tagList?.filter((v) => v) || [],
-                                    //     };
-
-                                    //     console.log(article.value);
-
-                                    //     if (article.value.slug) {
-                                    //         // prettier-ignore
-                                    //         res = await apis.article.updateArticle(payload);
-                                    //     } else {
-                                    //         // prettier-ignore
-                                    //         res = await apis.article.createArticle(payload);
-                                    //     }
-
-                                    //     if (res.errors) {
-                                    //         errors.onChange(res.errors.body);
-                                    //         isLoading.onChange(false);
-                                    //     } else {
-                                    //         isLoading.onChange(false);
-                                    //         // prettier-ignore
-                                    //         navigate(`/article/${res.article.slug}`);
-                                    //     }
-                                    // }}
-                                >
-                                    {/* {isLoading.value ? "Publishing..." : "Publish Article"} */}
-                                    Publish Article
-                                </button>
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
             </div>
+          </div>
         </div>
-    );
+      </div>
+    </Layout>
+  );
 };
